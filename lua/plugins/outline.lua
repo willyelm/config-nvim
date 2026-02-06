@@ -8,9 +8,11 @@ return {
     end,
     -- Layout settings
     layout = {
-      min_width = 20,
       default_direction = "right",
+      placement = "window",
+      width = 30,
     },
+    attach_mode = "global",
     -- Use ASCII icons for symbols
     icons = {
       File          = "[f]",

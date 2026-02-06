@@ -8,7 +8,7 @@ vim.g.colors_name = "willyelm"
 
 -- Palette
 local s = {
-  black          = "#000000",
+  black          = "#0D0D0D", --"#000000",
   medium_gray    = "#767676",
   white          = "#F1F1F1",
   actual_white   = "#FFFFFF",
@@ -41,7 +41,7 @@ local s = {
 local bg, bg_subtle, bg_very_subtle, norm, norm_subtle, norm_strong, purple, cyan, green, red, visual, yellow
 
 if vim.o.background == "dark" then
-  bg              = s.black
+  bg              = "NONE" --s.black
   bg_subtle       = s.lighter_black
   bg_very_subtle  = s.subtle_black
   norm            = s.light_gray
@@ -54,7 +54,7 @@ if vim.o.background == "dark" then
   visual          = s.light_yellow
   yellow          = s.light_yellow
 else
-  bg              = s.actual_white
+  bg              = "NONE" --s.actual_white
   bg_subtle       = s.light_gray
   bg_very_subtle  = s.lightest_gray
   norm            = s.light_black
