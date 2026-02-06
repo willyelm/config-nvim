@@ -2,9 +2,7 @@ vim.cmd("highlight clear")
 if vim.fn.exists("syntax_on") then
   vim.cmd("syntax reset")
 end
-
 vim.g.colors_name = "willyelm"
-
 -- Colors
 local s = {
   black          = "#0D0D0D",  
@@ -35,7 +33,6 @@ local s = {
   light_yellow   = "#eadead",
   dark_yellow    = "#7d713f",
 }
-
 -- Contextual Logic (Dark Mode focus)
 local bg, bg_subtle, bg_very_subtle, norm, norm_subtle, norm_strong, purple, cyan, green, red, visual, yellow
 
@@ -53,7 +50,7 @@ if vim.o.background == "dark" then
   visual          = s.subtle_black
   yellow          = s.light_yellow
 else
-  bg              = "NONE" --s.actual_white
+  bg              = "NONE"   
   bg_subtle       = s.light_gray
   bg_very_subtle  = s.lightest_gray
   norm            = s.light_black
@@ -66,12 +63,10 @@ else
   visual          = s.dark_purple
   yellow          = s.dark_yellow
 end
-
 -- Helper Function
 local function hi(group, opts)
   vim.api.nvim_set_hl(0, group, opts)
 end
-
 -- Standard UI Highlights
 hi("Normal",       { fg = norm, bg = bg })
 hi("Cursor",       { fg = norm, bg = norm_strong })
@@ -104,7 +99,6 @@ hi("@tag.delimiter",      { link = "Normal" })
 hi("@keyword",            { link = "Keyword" })
 hi("@type",               { link = "Type" })
 hi("@tag.component.jsx",  { link = "Type" })
-
 -- Pmenu (Floating Windows/Completion)
 hi("NormalFloat", { bg = "NONE", fg = norm })
 hi("FloatBorder", { fg = bg_very_subtle, bg = "NONE" })
@@ -119,14 +113,11 @@ hi("CmpItemKindMethod",   { fg = purple })
 hi("CmpItemKindVariable", { fg = s.blue })
 hi("CmpItemKindKeyword",  { fg = norm_strong })
 hi("CmpItemKindType",     { fg = s.light_yellow })
-
 -- Tree
 hi("NvimTreeRootFolder", { fg = purple, bold = true })
 hi("NvimTreeIndentMarker", { fg = bg_subtle })
 hi("NvimTreeFolderIcon", { fg = norm_strong })
 hi("NvimTreeOpenedFolderName", { fg = purple, bold = true })
-
-
 -- Lualine
 hi("lualine_a_normal", { fg = s.black, bg = s.light_purple, bold = true })
 hi("lualine_a_insert", { fg = s.black, bg = s.blue, bold = true })

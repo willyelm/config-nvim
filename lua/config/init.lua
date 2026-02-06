@@ -19,10 +19,9 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Setup base settings
-require('config/set')
-
--- Setup theme
+require("config/set")
 require("config/theme")
+require("config/keymaps")
 
 -- Setup lazy.nvim
 require("lazy").setup({

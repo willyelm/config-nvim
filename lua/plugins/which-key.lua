@@ -8,10 +8,13 @@ return {
   opts = {
     -- Use ASCII borders to match your theme
     win = {
-      border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+      -- border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+      border = "rounded",
+      title = false
     },
     icons = {
-      mappings = false, -- Disables icons for a clean ASCII look
+      mappings = false,
+      rules = false
     },
   },
 }

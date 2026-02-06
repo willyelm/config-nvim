@@ -12,7 +12,6 @@ vim.opt.smarttab = true
 vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 
-
 vim.opt.wrap = true
 vim.opt.wrapmargin = 2
 vim.opt.textwidth = 80
@@ -22,8 +21,6 @@ vim.opt.backup = false
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
---vim.opt.scrolloff = 8
---vim.opt.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "100"
