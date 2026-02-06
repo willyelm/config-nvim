@@ -34,8 +34,8 @@ return {
     main = "nvim-treesitter",
     opts = {
       ensure_installed = { 
-        "typescript", "tsx", "javascript", 
-        "css", "html", "go", "lua", "markdown", "markdown_inline" 
+        "typescript", "tsx", "javascript", "css", "html", "go", "lua", 
+        "markdown", "markdown_inline" 
       },
       highlight = { 
         enable = true,
