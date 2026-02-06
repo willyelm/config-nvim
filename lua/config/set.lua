@@ -25,3 +25,22 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "100"
 vim.opt.termguicolors = true
+
+vim.opt.scrolloff = 8 
+vim.opt.sidescrolloff = 8
+vim.opt.cursorline = true 
+vim.opt.mouse = "a"
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.signcolumn = "yes"
+
+vim.opt.termguicolors = true
+vim.opt.laststatus = 3
+vim.opt.fillchars = {
+  vert = "│",      -- Solid thin line
+  horiz = "─",     -- Solid thin horizontal
+  msgsep = " ",    -- Clear message separator
+  eob = " ",       -- Hide the '~' at End Of Buffer
+  lastline = " ",
+}
+
+vim.cmd("colorscheme willyelm")

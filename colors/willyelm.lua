@@ -34,12 +34,13 @@ local s = {
   dark_yellow    = "#7d713f",
 }
 -- Contextual Logic (Dark Mode focus)
-local bg, bg_subtle, bg_very_subtle, norm, norm_subtle, norm_strong, purple, cyan, green, red, visual, yellow
+local bg, bg_subtle, bg_very_subtle, divider, norm, norm_subtle, norm_strong, purple, cyan, green, red, visual, yellow
 
 if vim.o.background == "dark" then
-  bg              = "NONE" --s.black
+  bg              = "NONE" 
   bg_subtle       = s.lighter_black
   bg_very_subtle  = s.subtle_black
+  divider         = s.subtle_black
   norm            = s.light_gray
   norm_subtle     = s.medium_gray
   norm_strong     = s.white
@@ -53,6 +54,7 @@ else
   bg              = "NONE"   
   bg_subtle       = s.light_gray
   bg_very_subtle  = s.lightest_gray
+  divider         = s.lightest_gray
   norm            = s.light_black
   norm_subtle     = s.medium_gray
   norm_strong     = s.black
@@ -63,14 +65,16 @@ else
   visual          = s.dark_purple
   yellow          = s.dark_yellow
 end
+
 -- Helper Function
 local function hi(group, opts)
   vim.api.nvim_set_hl(0, group, opts)
 end
+
 -- Standard UI Highlights
 hi("Normal",       { fg = norm, bg = bg })
 hi("Cursor",       { fg = norm, bg = norm_strong })
-hi("TermCursor", { fg = s.black, bg = norm_strong })
+hi("TermCursor",   { fg = s.black, bg = norm_strong })
 hi("Comment",      { fg = bg_subtle, italic = true })
 hi("String",       { fg = s.light_green })
 hi("Constant",     { fg = norm })
@@ -88,9 +92,12 @@ hi("Directory",    { fg = norm_strong })
 hi("LineNr",       { fg = bg_subtle })
 hi("CursorLineNr", { fg = purple, bg = bg_very_subtle })
 hi("Visual",       { fg = bg, bg = visual })
-hi("VertSplit",    { fg = bg_very_subtle, bg = bg_very_subtle })
-hi("WinSeparator", { fg = bg_very_subtle, bg = bg })
-hi("StatusLine",   { fg = s.light_gray, bg = "NONE" })
+hi("VertSplit",    { fg = divider, bg = "NONE" })
+hi("WinSeparator", { fg = divider, bg = "NONE" })
+hi("ColorColumn",  { fg = divider, bg = divider })
+hi("WinBar",       { bg = "NONE", sp = divider })
+hi("WinBarNC",     { bg = "NONE", sp = divider })
+hi("StatusLine",   { fg = s.light_gray, bg = "NONE", sp = divider, underline = true })
 hi("StatusLineNC", { fg = s.medium_gray, bg = "NONE" })
 -- Treesitter & Web Dev (TS/JSX/Go)
 hi("@tag",                { link = "Function" })
@@ -99,39 +106,51 @@ hi("@tag.delimiter",      { link = "Normal" })
 hi("@keyword",            { link = "Keyword" })
 hi("@type",               { link = "Type" })
 hi("@tag.component.jsx",  { link = "Type" })
+
 -- Pmenu (Floating Windows/Completion)
-hi("NormalFloat", { bg = "NONE", fg = norm })
-hi("FloatBorder", { fg = bg_very_subtle, bg = "NONE" })
-hi("Pmenu",      { fg = norm, bg = s.black }) 
-hi("PmenuSel",   { fg = s.black, bg = purple, bold = true })
-hi("PmenuSbar",  { bg = s.black })
-hi("PmenuThumb", { bg = bg_very_subtle })
+hi("NormalFloat",           { bg = "NONE", fg = norm })
+hi("FloatBorder",           { fg = bg_very_subtle, bg = "NONE" })
+hi("Pmenu",                 { fg = norm, bg = s.black }) 
+hi("PmenuSel",              { fg = s.black, bg = purple, bold = true })
+hi("PmenuSbar",             { bg = s.black })
+hi("PmenuThumb",            { bg = bg_very_subtle })
 hi("CmpItemAbbrMatch",      { fg = cyan, bold = true })
 hi("CmpItemAbbrMatchFuzzy", { fg = cyan, bold = true })
-hi("CmpItemKindFunction", { fg = purple })
-hi("CmpItemKindMethod",   { fg = purple })
-hi("CmpItemKindVariable", { fg = s.blue })
-hi("CmpItemKindKeyword",  { fg = norm_strong })
-hi("CmpItemKindType",     { fg = s.light_yellow })
+hi("CmpItemKindFunction",   { fg = purple })
+hi("CmpItemKindMethod",     { fg = purple })
+hi("CmpItemKindVariable",   { fg = s.blue })
+hi("CmpItemKindKeyword",    { fg = norm_strong })
+hi("CmpItemKindType",       { fg = s.light_yellow })
+
 -- Tree
-hi("NvimTreeRootFolder", { fg = purple, bold = true })
-hi("NvimTreeIndentMarker", { fg = bg_subtle })
-hi("NvimTreeFolderIcon", { fg = norm_strong })
-hi("NvimTreeOpenedFolderName", { fg = purple, bold = true })
+hi("NvimTreeRootFolder",        { fg = purple, bold = true })
+hi("NvimTreeIndentMarker",      { fg = bg_subtle })
+hi("NvimTreeFolderIcon",        { fg = norm_strong })
+hi("NvimTreeOpenedFolderName",  { fg = purple, bold = true })
+hi("NvimTreeWinSeparator",      { fg = divider, bg = "NONE" })
+
+-- Barbecue 
+hi("Barbecue", { bg = "NONE" })
+hi("barbecue_separator",  { fg = divider })
+
 -- Lualine
-hi("lualine_a_normal", { fg = s.black, bg = s.light_purple, bold = true })
-hi("lualine_a_insert", { fg = s.black, bg = s.blue, bold = true })
-hi("lualine_a_visual", { fg = s.black, bg = s.yellow, bold = true })
-hi("lualine_b_normal", { fg = s.white, bg = s.subtle_black })
-hi("lualine_b_insert", { fg = s.white, bg = s.subtle_black })
-hi("lualine_b_visual", { fg = s.white, bg = s.subtle_black })
-hi("lualine_c_normal", { fg = s.light_gray, bg = "NONE" })
-hi("lualine_c_insert", { fg = s.light_gray, bg = "NONE" })
-hi("lualine_c_visual", { fg = s.light_gray, bg = "NONE" })
-hi("lualine_a_inactive", { fg = s.medium_gray, bg = s.subtle_black })
-hi("lualine_b_inactive", { fg = s.medium_gray, bg = s.black })
-hi("lualine_c_inactive", { fg = s.medium_gray, bg = "NONE" })
-hi("lualine_x_normal", { fg = s.light_gray, bg = "NONE" })
-hi("lualine_y_normal", { fg = s.white, bg = s.subtle_black })
-hi("lualine_z_normal", { fg = s.black, bg = s.light_purple, bold = true })
+hi("LualineSeparator",    { fg = divider })
+hi("lualine_c_normal",  { link = "StatusLine" })
+hi("lualine_c_insert",  { link = "StatusLine" })
+hi("lualine_c_visual",  { link = "StatusLine" })
+-- hi("lualine_a_normal",    { fg = s.black, bg = s.light_purple, bold = true })
+-- hi("lualine_a_insert",    { fg = s.black, bg = s.blue, bold = true })
+-- hi("lualine_a_visual",    { fg = s.black, bg = s.yellow, bold = true })
+-- hi("lualine_b_normal",    { fg = s.white, bg = "NONE" })
+-- hi("lualine_b_insert",    { fg = s.white, bg = "NONE" })
+-- hi("lualine_b_visual",    { fg = s.white, bg = "NONE" })
+-- hi("lualine_c_normal",    { fg = s.light_gray, bg = "NONE" })
+-- hi("lualine_c_insert",    { fg = s.light_gray, bg = "NONE" })
+-- hi("lualine_c_visual",    { fg = s.light_gray, bg = "NONE" })
+-- hi("lualine_a_inactive",  { fg = s.medium_gray, bg = "NONE" })
+-- hi("lualine_b_inactive",  { fg = s.medium_gray, bg = "NONE" })
+-- hi("lualine_c_inactive",  { fg = s.medium_gray, bg = "NONE" })
+-- hi("lualine_x_normal",    { fg = s.light_gray, bg = "NONE" })
+-- hi("lualine_y_normal",    { fg = s.white, bg = "NONE" })
+-- hi("lualine_z_normal",    { fg = s.black, bg = s.light_purple, bold = true })
 

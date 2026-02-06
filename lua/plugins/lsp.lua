@@ -42,12 +42,14 @@ return {
       },
       indent = { enable = true },
     },
-  },  -- AutoTag
+  },  
+  -- AutoTag
   {
     "windwp/nvim-ts-autotag",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     opts = {}, 
-  },  -- Colorizer
+  },  
+  -- Colorizer
   {
     "NvChad/nvim-colorizer.lua",
     opts = {

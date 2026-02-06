@@ -20,7 +20,6 @@ vim.g.maplocalleader = "\\"
 
 -- Setup base settings
 require("config/set")
-require("config/theme")
 require("config/keymaps")
 
 -- Setup lazy.nvim
@@ -33,4 +32,11 @@ require("lazy").setup({
   install = { colorscheme = { "willyelm" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
+})
+
+vim.opt.fillchars:append({ 
+  --stl = '─', 
+  --stlnc = '─' 
+  -- horizdown = "─",
+  --statusline = "─"
 })

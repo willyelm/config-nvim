@@ -16,6 +16,8 @@ return {
     version = "*",
     dependencies = { "SmiteshP/nvim-navic", "nvim-tree/nvim-web-devicons" },
     opts = {
+      -- show_navic = true,
+      theme = "auto",
       show_modified = true, 
       show_dirname = true,
       show_basename = true,
@@ -27,9 +29,8 @@ return {
     'nvim-lualine/lualine.nvim',
     opts = {
       options = {
+        globalstatus = true,
         theme = "auto",
-        component_separators = "|",
-        section_separators = "",     
       },
       sections = {
         lualine_b = {'branch', 'diff', 'diagnostics'},

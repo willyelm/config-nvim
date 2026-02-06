@@ -7,12 +7,6 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
     },
     opts = {
-      -- defaults = {
-      --   theme = "ivy",
-      --   layout_strategy = "bottom_pane",
-      --   layout_config = { height = 25 },
-      --   border = true,
-      -- },
       defaults = {
         layout_strategy = "horizontal",
         layout_config = {
