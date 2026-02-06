@@ -1,4 +1,3 @@
--- Reset existing highlights
 vim.cmd("highlight clear")
 if vim.fn.exists("syntax_on") then
   vim.cmd("syntax reset")
@@ -6,9 +5,9 @@ end
 
 vim.g.colors_name = "willyelm"
 
--- Palette
+-- Colors
 local s = {
-  black          = "#0D0D0D", --"#000000",
+  black          = "#0D0D0D",  
   medium_gray    = "#767676",
   white          = "#F1F1F1",
   actual_white   = "#FFFFFF",
@@ -94,10 +93,9 @@ hi("LineNr",       { fg = bg_subtle })
 hi("CursorLineNr", { fg = purple, bg = bg_very_subtle })
 hi("Visual",       { fg = bg, bg = visual })
 hi("VertSplit",    { fg = bg_very_subtle, bg = bg_very_subtle })
-hi("WinSeparator", { fg = bg_very_subtle, bg = bg }) -- For modern splits
--- The active status line
-hi("StatusLine",   { fg = s.light_gray, bg = bg })
-hi("StatusLineNC", { fg = s.medium_gray, bg = bg })
+hi("WinSeparator", { fg = bg_very_subtle, bg = bg })
+hi("StatusLine",   { fg = s.light_gray, bg = "NONE" })
+hi("StatusLineNC", { fg = s.medium_gray, bg = "NONE" })
 -- Treesitter & Web Dev (TS/JSX/Go)
 hi("@tag",                { link = "Function" })
 hi("@tag.attribute",      { link = "Normal" })
@@ -107,10 +105,21 @@ hi("@type",               { link = "Type" })
 hi("@tag.component.jsx",  { link = "Type" })
 
 -- Pmenu (Floating Windows/Completion)
-hi("Pmenu",      { fg = norm, bg = bg_very_subtle })
-hi("PmenuSel",   { fg = norm, bg = purple })
+hi("NormalFloat", { bg = "NONE", fg = norm })
+hi("FloatBorder", { fg = bg_very_subtle, bg = "NONE" })
+hi("Pmenu",      { fg = norm, bg = s.black }) 
+hi("PmenuSel",   { fg = s.black, bg = purple, bold = true })
+hi("PmenuSbar",  { bg = s.black })
+hi("PmenuThumb", { bg = bg_very_subtle })
+hi("CmpItemAbbrMatch",      { fg = cyan, bold = true })
+hi("CmpItemAbbrMatchFuzzy", { fg = cyan, bold = true })
+hi("CmpItemKindFunction", { fg = purple })
+hi("CmpItemKindMethod",   { fg = purple })
+hi("CmpItemKindVariable", { fg = s.blue })
+hi("CmpItemKindKeyword",  { fg = norm_strong })
+hi("CmpItemKindType",     { fg = s.light_yellow })
 
--- Sidebar & ASCII UI Components
+-- Tree
 hi("NvimTreeRootFolder", { fg = purple, bold = true })
 hi("NvimTreeIndentMarker", { fg = bg_subtle })
 hi("NvimTreeFolderIcon", { fg = norm_strong })
