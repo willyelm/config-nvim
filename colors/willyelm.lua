@@ -50,7 +50,7 @@ if vim.o.background == "dark" then
   cyan            = s.light_cyan
   green           = s.light_green
   red             = s.light_red
-  visual          = s.light_yellow
+  visual          = s.subtle_black
   yellow          = s.light_yellow
 else
   bg              = "NONE" --s.actual_white
@@ -74,7 +74,8 @@ end
 
 -- Standard UI Highlights
 hi("Normal",       { fg = norm, bg = bg })
-hi("Cursor",       { fg = norm, bg = purple })
+hi("Cursor",       { fg = norm, bg = norm_strong })
+hi("TermCursor", { fg = s.black, bg = norm_strong })
 hi("Comment",      { fg = bg_subtle, italic = true })
 hi("String",       { fg = s.light_green })
 hi("Constant",     { fg = norm })
@@ -142,3 +143,4 @@ hi("lualine_c_inactive", { fg = s.medium_gray, bg = "NONE" })
 hi("lualine_x_normal", { fg = s.light_gray, bg = "NONE" })
 hi("lualine_y_normal", { fg = s.white, bg = s.subtle_black })
 hi("lualine_z_normal", { fg = s.black, bg = s.light_purple, bold = true })
+

@@ -21,22 +21,11 @@ return {
           },
         },
         icons = {
-          show = { file = false, folder = false, folder_arrow = false, git = false },
-          glyphs = {
-            folder = {
-              arrow_closed = "[+]", -- Modern state indicators
-              arrow_open = "[-]",
-            },
-            git = {
-              unstaged = "*",
-              staged = "+",
-              unmerged = "=",
-              renamed = ">",
-              untracked = "?",
-              deleted = "x",
-              ignored = ".",
-            },
-          },
+          webdev_colors = false, -- Disables icon colors
+          show = {
+            git = false,
+            folder_arrow = false,
+          },            
         },
       },
       filters = {

@@ -1,13 +1,21 @@
 return {    
+  -- Icons
+  {
+    "nvim-tree/nvim-web-devicons",
+    opts = {
+      default = true,
+      strict = true,
+      color_icons = false,
+    }
+  },
   -- Breadcrumbs (Winbar)
   {
     "utilyre/barbecue.nvim",
     name = "barbecue",
     version = "*",
-    dependencies = { "SmiteshP/nvim-navic" },
+    dependencies = { "SmiteshP/nvim-navic", "nvim-tree/nvim-web-devicons" },
     opts = {
-        show_modified = true, -- Crucial for tracking unsaved state
-	show_navic_icon = false,
+        show_modified = true, 
         symbols = { separator = "/", modified = "*", ellipsis = "..." },
     },
   },
