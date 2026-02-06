@@ -53,14 +53,18 @@ return {
   {
     "NvChad/nvim-colorizer.lua",
     opts = {
-      filetypes = { "css", "scss", "javascript", "typescriptreact", "html" },
+      filetypes = { "css", "scss", "javascript", "typescriptreact", "html", "json", "lua", "markdown" },
       user_default_options = {
-        RGB = true,          -- #RGB hex codes
-        RRGGBB = true,       -- #RRGGBB hex codes
-        names = false,       -- Disable "Blue" or "Red" text detection (cleaner)
-        RRGGBBAA = true,     -- Hex codes with alpha
-        tailwind = true,     -- PRO TIP: Enables color box previews for Tailwind classes
-        mode = "background", -- Set to "foreground" for a more subtle look
+        RGB = true,                  
+        RRGGBB = true,               
+        names = false,               
+        RRGGBBAA = true,             
+        tailwind = true,            
+        rgb_fn = true,
+        hsl_fn = true,
+        css = true,
+        css_fn = true,
+        mode = "background", 
       },
     },
   }
