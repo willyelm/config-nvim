@@ -61,6 +61,7 @@ return {
           },
           icons = {
             show = {
+              file = false,
               folder_arrow = false,
             },
             webdev_colors = false,
