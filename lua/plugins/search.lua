@@ -12,10 +12,10 @@ return {
         layout_config = {
           width = 0.6,    -- 60% of screen width
           height = 0.4,   -- 40% of screen height
-          preview_width = 0.5,         
+          -- preview_width = 0.5,
         },
-        sorting_strategy = "ascending",        
-        prompt_position = "top",               
+        sorting_strategy = "ascending",
+        prompt_position = "top",
         border = true,
       },
     },
@@ -26,7 +26,7 @@ return {
     end,
     keys = {
       { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Global Search (Grep)" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Search Grep" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
     }
   },

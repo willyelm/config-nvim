@@ -5,7 +5,7 @@ end
 vim.g.colors_name = "willyelm"
 -- Colors
 local s = {
-  black          = "#0D0D0D",  
+  black          = "#0D0D0D",
   medium_gray    = "#767676",
   white          = "#F1F1F1",
   actual_white   = "#FFFFFF",

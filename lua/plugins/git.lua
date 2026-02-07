@@ -11,5 +11,26 @@ return {
       },
       current_line_blame = true,    
     }
+  },
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim"
+    },
+    config = function()
+      require("neogit").setup({
+        integrations = {
+          diffview = true,
+          telescope = true,
+        },
+        kind = "floating",
+        popup = {
+          kind = "floating",
+        },
+        graph_style = "unicode",
+      })
+    end,
   }
 }

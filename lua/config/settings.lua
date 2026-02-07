@@ -43,4 +43,14 @@ vim.opt.fillchars = {
   lastline = " ",
 }
 
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = '» ',
+  trail = '·',
+  nbsp = '␣',
+  eol = '↴',
+  extends = '→',
+  precedes = '←',
+}
+
 vim.cmd("colorscheme willyelm")

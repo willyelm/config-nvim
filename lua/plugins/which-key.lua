@@ -8,11 +8,18 @@ return {
   opts = {
     win = {
       border = "rounded",
-      title = false
     },
     icons = {
       mappings = false,
       rules = false
     },
   },
+  config = function(_, opts)
+    local wk = require("which-key")
+    wk.setup(opts)
+    wk.add({
+      { "<leader>f", group = "Find & Replace", icon = " " },
+      { "<leader>g", group = "Git", icon = "󰊢 " },
+    })
+  end,
 }
