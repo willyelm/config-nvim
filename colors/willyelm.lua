@@ -75,7 +75,7 @@ end
 
 -- Standard UI Highlights
 hi("Normal",       { fg = norm, bg = transparent })
-hi("Cursor",       { fg = norm, bg = norm_strong })
+hi("Cursor",       { fg = norm, bg = actual_white })
 hi("TermCursor",   { fg = s.black, bg = norm_strong })
 hi("Comment",      { fg = bg_subtle, italic = true })
 hi("String",       { fg = s.light_green })
@@ -102,6 +102,19 @@ hi("WinBar",       { bg = transparent,  sp = divider })
 hi("WinBarNC",     { bg = transparent, sp = divider })
 hi("StatusLine",   { fg = s.light_gray, bg = transparent, sp = divider, underline = true })
 hi("StatusLineNC", { fg = s.medium_gray, bg = "NONE" })
+
+-- Diff
+hi("DiffAdd",    { fg = green, bg = bg_subtle })
+hi("DiffDelete", { fg = red,   bg = bg_subtle })
+hi("DiffChange", { fg = yellow, bg = bg_very_subtle })
+hi("DiffText",   { fg = s.black, bg = yellow, bold = true })
+
+-- Git
+hi("GitSignsAddPreview",    { link = "DiffAdd" })
+hi("GitSignsDeletePreview", { link = "DiffDelete" })
+hi("GitSignsAdd",    { fg = green, bg = transparent })
+hi("GitSignsChange", { fg = yellow, bg = transparent })
+hi("GitSignsDelete", { fg = red, bg = transparent })
 -- Treesitter & Web Dev (TS/JSX/Go)
 hi("@tag",                { link = "Function" })
 hi("@tag.attribute",      { link = "Normal" })

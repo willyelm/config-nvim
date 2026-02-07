@@ -46,6 +46,7 @@ return {
         side = "right",
       },
       renderer = {
+        highlight_git = true,
         highlight_opened_files = "all",
         add_trailing = true,
         indent_markers = {
@@ -68,13 +69,13 @@ return {
             git_placement = "after",
             glyphs = {
               git = {
-                unstaged = "(m)", -- Modified
-                staged = "(s)",   -- Staged
-                unmerged = "(!)", -- Conflict
-                renamed = "(r)",  -- Renamed
-                untracked = "(a)", -- Added
-                deleted = "(d)",   -- Deleted
-                ignored = "(i)",   -- Ignored
+                unstaged = "ᵐ",
+                staged = "ˢ",
+                unmerged = "!",
+                renamed = "ʳ",
+                untracked = "ᵁ",
+                deleted = "ˣ",
+                ignored = "◌",
               },
             },
           },
@@ -97,5 +98,5 @@ return {
       { "<leader>x", "<cmd>Bdelete<cr>", desc = "Close Buffer" },
       { "<leader>X", "<cmd>Bdelete!<cr>", desc = "Force Close Buffer" },
     },
-}
+  }
 }

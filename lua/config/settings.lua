@@ -46,15 +46,15 @@ vim.opt.fillchars = {
   lastline = " ",
 }
 
-vim.opt.list = true
-vim.opt.listchars = {
-  tab = '» ',
-  trail = '·',
-  nbsp = '␣',
-  eol = '↴',
-  extends = '→',
-  precedes = '←',
-}
+-- vim.opt.list = true
+-- vim.opt.listchars = {
+--   tab = '» ',
+--   trail = '·',
+--   nbsp = '␣',
+--   eol = '↴',
+--   extends = '→',
+--   precedes = '←',
+-- }
 
 vim.cmd("colorscheme willyelm")
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
