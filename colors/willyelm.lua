@@ -126,10 +126,15 @@ hi("CmpItemKindKeyword",    { fg = norm_strong })
 hi("CmpItemKindType",       { fg = s.light_yellow })
 
 -- Tree
+hi("NvimTreeNormal",            { fg = norm })
+hi("NvimTreeFile",              { fg = norm })
+hi("NvimTreeFolderName",        { fg = norm })
+
 hi("NvimTreeRootFolder",        { fg = purple, bold = true })
 hi("NvimTreeIndentMarker",      { fg = bg_subtle })
-hi("NvimTreeFolderIcon",        { fg = norm_strong })
-hi("NvimTreeOpenedFolderName",  { fg = purple, bold = true })
+hi("NvimTreeFolderIcon",        { fg = norm })
+hi("NvimTreeOpenedFolderName",  { fg = norm_strong, bold = true })
+hi("NvimTreeOpenedFile",        { fg = norm_strong, bold = true })
 hi("NvimTreeWinSeparator",      { fg = divider, bg = transparent })
 
 -- Barbecue 

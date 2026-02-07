@@ -26,7 +26,7 @@ return {
     end,
     keys = {
       { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Search Grep" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Search Global" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
     }
   },
@@ -36,7 +36,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = { is_live_replace = true },
     keys = {
-      { "<leader>sr", function() require("spectre").toggle() end, desc = "Search & Replace (Project)" },
+      { "<leader>fr", function() require("spectre").toggle() end, desc = "Search & Replace" },
     }
   },
   -- Quick Navigation
@@ -45,7 +45,8 @@ return {
     event = "VeryLazy",
     opts = {},
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash Jump" },
+      { "s", mode = { "n", "x", "o" }, "<cmd>lua require('flash').jump()<cr>", desc = "Jump" },
+      { "S", mode = { "n", "x", "o" }, "<cmd>lua require('flash').treesitter()<cr>", desc = "Jump (Treesitter)" },    
     },
   },
 }

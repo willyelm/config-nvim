@@ -46,29 +46,46 @@ return {
         side = "right",
       },
       renderer = {
-        add_trailing = true,       
+        highlight_opened_files = "all",
+        add_trailing = true,
         indent_markers = {
           enable = true,
-          inline_arrows = false,
+            inline_arrows = false,
+            icons = {
+              corner = "└ ",
+              edge = "│ ",
+              item = "├ ",
+              bottom = "─ ",
+              none = "  ",
+            },
+          },
           icons = {
-            corner = "└ ",
-            edge = "│ ",
-            item = "├ ",
-            bottom = "─ ",
-            none = "  ",
+            show = {
+              folder_arrow = false,
+            },
+            webdev_colors = false,
+            git_placement = "after",
+            glyphs = {
+              git = {
+                unstaged = "(m)", -- Modified
+                staged = "(s)",   -- Staged
+                unmerged = "(!)", -- Conflict
+                renamed = "(r)",  -- Renamed
+                untracked = "(a)", -- Added
+                deleted = "(d)",   -- Deleted
+                ignored = "(i)",   -- Ignored            
+              },
+            },
           },
         },
-        icons = {
-          webdev_colors = false,        
-          show = {
-            git = false,
-            folder_arrow = false,
-          },            
+        filters = {
+          dotfiles = false,
+          custom = { "^.git$" },
+          exclude = { ".env", ".gitignore" },
         },
-      },
-      filters = {
-        dotfiles = false      
-      }, 	
+        git = {
+          ignore = true,
+        }
     }) end,
   },	 
 }
