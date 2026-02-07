@@ -10,6 +10,10 @@ return {
         changedelete = { text = '~' },
       },
       current_line_blame = true,
+    },
+    keys = {
+      { "<leader>gd", "<cmd>Gitsigns diffthis<cr>",     desc = "Diff (Current)" },
+      { "<leader>gR", "<cmd>Gitsigns reset_buffer<cr>", desc = "Reset File" },
     }
   },
   {

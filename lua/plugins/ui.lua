@@ -1,4 +1,4 @@
-return {    
+return {
   -- Icons
   {
     "nvim-tree/nvim-web-devicons",
@@ -74,7 +74,7 @@ return {
                 renamed = "(r)",  -- Renamed
                 untracked = "(a)", -- Added
                 deleted = "(d)",   -- Deleted
-                ignored = "(i)",   -- Ignored            
+                ignored = "(i)",   -- Ignored
               },
             },
           },
@@ -86,7 +86,7 @@ return {
         },
         git = {
           ignore = true,
-        }
+        },
     }) end,
   },
   -- Buffer

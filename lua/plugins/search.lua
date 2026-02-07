@@ -29,9 +29,15 @@ return {
       telescope.load_extension("fzf")
     end,
     keys = {
+      -- Search
       { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
       { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Search Global" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
+      -- Git
+      { "<leader>gh", "<cmd>Telescope git_bcommits<cr>", desc = "File History" },
+      { "<leader>gH", "<cmd>Telescope git_commits<cr>",  desc = "Project History" },
+      { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
+      { "<leader>gs", "<cmd>Telescope git_stash<cr>",    desc = "Stash" },
     }
   },
   -- Find/Search
