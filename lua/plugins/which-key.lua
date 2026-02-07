@@ -18,8 +18,8 @@ return {
     local wk = require("which-key")
     wk.setup(opts)
     wk.add({
-      { "<leader>f", group = "Find & Replace", icon = " " },
-      { "<leader>g", group = "Git", icon = "󰊢 " },
+      { "<leader>f", group = "Find & Replace" },
+      { "<leader>g", group = "Git" },
     })
   end,
 }

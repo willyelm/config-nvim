@@ -21,6 +21,7 @@ vim.opt.backup = false
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
+vim.opt.selection = "exclusive"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "100"

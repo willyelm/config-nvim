@@ -3,10 +3,10 @@ return {
     'hrsh7th/nvim-cmp',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
-      'L3MON4D3/LuaSnip',       
+      'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-buffer',             
-      'hrsh7th/cmp-path',             
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
     },
     config = function()
       local cmp = require('cmp')
@@ -25,7 +25,7 @@ return {
 
         window = {
           completion = cmp.config.window.bordered({
-            border = "rounded",             
+            border = "rounded",
             winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
           }),
           documentation = cmp.config.window.bordered({
@@ -35,7 +35,7 @@ return {
         },
 
         mapping = cmp.mapping.preset.insert({
-          ['<C-Space>'] = cmp.mapping.complete(),          
+          ['<C-Space>'] = cmp.mapping.complete(),
           ['<CR>'] = cmp.mapping.confirm({ select = true }),
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then

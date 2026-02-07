@@ -20,7 +20,7 @@ return {
             return util.root_file({ "biome.json", "biome.jsonc", ".git" })(self, ctx)
           end,
           args = { "check", "--write", "--stdin-file-path", "$FILENAME" },
-        },      
+        },
       },
       format_on_save = {
         timeout_ms = 500,
