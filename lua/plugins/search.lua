@@ -10,12 +10,16 @@ return {
       defaults = {
         layout_strategy = "horizontal",
         layout_config = {
-          width = 0.6,    -- 60% of screen width
-          height = 0.4,   -- 40% of screen height
-          -- preview_width = 0.5,
+          horizontal = {
+            prompt_position = "top",
+            preview_width = 0.55,
+            results_width = 0.8,
+          },
+          width = 0.85,
+          height = 0.80,
+          preview_cutoff = 120,
         },
         sorting_strategy = "ascending",
-        prompt_position = "top",
         border = true,
       },
     },

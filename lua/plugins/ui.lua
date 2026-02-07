@@ -87,5 +87,14 @@ return {
           ignore = true,
         }
     }) end,
-  },	 
+  },
+  -- Buffer
+  {
+    "famiu/bufdelete.nvim",
+    event = "VeryLazy",
+    keys = {
+      { "<leader>x", "<cmd>Bdelete<cr>", desc = "Close Buffer" },
+      { "<leader>X", "<cmd>Bdelete!<cr>", desc = "Force Close Buffer" },
+    },
+}
 }
