@@ -116,5 +116,5 @@ return {
       { "<leader>x", "<cmd>Bdelete<cr>",  desc = "Close Buffer" },
       { "<leader>X", "<cmd>Bdelete!<cr>", desc = "Close Buffer (Force)" },
     },
-  }
+  },
 }

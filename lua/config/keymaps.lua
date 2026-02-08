@@ -1,6 +1,10 @@
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename Symbol" })
-
-
+--vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Documentation" })
+vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, { noremap = true, silent = true })
+vim.keymap.set('n', 'gl', vim.diagnostic.open_float, {
+  desc = "Show line diagnostics",
+  silent = true
+})
 -- Save
 vim.keymap.set({ "n", "i" }, "<C-s>", "<Esc>:write<CR>", { desc = "Save Changes" })
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save File" })

@@ -13,7 +13,7 @@ return {
       lsp.on_attach(function(client, bufnr)
         lsp.default_keymaps({ buffer = bufnr })
       end)
-      require('lspconfig.ui.windows').default_options.border = 'rounded'
+      -- require('lspconfig.ui.windows').default_options.border = 'rounded'
       require('mason').setup({})
       require('mason-lspconfig').setup({
         ensure_installed = {
@@ -49,11 +49,17 @@ return {
     main = "nvim-treesitter",
     opts = {
       ensure_installed = {
-        "typescript", "tsx", "javascript", "css", "postcss",
+        "tsx", "typescript", "javascript", "css", "postcss",
         "html", "go", "lua", "markdown", "markdown_inline"
       },
+      auto_install = true,
       highlight = {
         enable = true,
+        custom_captures = {
+          ["jsx_opening_element"] = "method",
+          ["jsx_closing_element"] = "method",
+          ["jsx_self_closing_element"] = "method",
+        },
       },
       indent = { enable = true },
     },

@@ -12,10 +12,12 @@ return {
           enabled = true,
           auto_trigger = true,
           keymap = {
-            accept = "<M-l>", -- Alt + l to accept suggestion
-            next = "<M-]>",
-            prev = "<M-[>",
-            dismiss = "<C-]>",
+            accept      = "<C-y>", -- "Yes" (Vim native confirm)
+            next        = "<C-n>", -- "Down" (Vim native move down)
+            prev        = "<C-p>", -- "Up" (Vim native move up)
+            dismiss     = "<C-e>", -- "Exit/End" (Vim native cancel)
+            accept_word = "<C-l>", -- "Right" (Move right one word)
+            accept_line = "<C-f>", -- "Forward" (Move forward one line)
           },
         },
       })

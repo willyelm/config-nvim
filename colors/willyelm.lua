@@ -163,3 +163,10 @@ hi("LualineSeparator", { fg = divider })
 hi("lualine_c_normal", { link = "StatusLine" })
 hi("lualine_c_insert", { link = "StatusLine" })
 hi("lualine_c_visual", { link = "StatusLine" })
+
+-- Aerial
+hi("AerialNormal", { fg = norm })
+hi("AerialError", { fg = red })
+hi("AerialWarning", { fg = yellow })
+hi("AerialInformation", { fg = cyan })
+hi("AerialHint", { fg = purple })
