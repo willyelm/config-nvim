@@ -46,6 +46,7 @@ return {
           width = 30,
           side = "right",
         },
+        hijack_netrw = true,
         renderer = {
           highlight_git = true,
           highlight_opened_files = "all",

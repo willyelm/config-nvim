@@ -17,8 +17,12 @@ return {
       require('mason').setup({})
       require('mason-lspconfig').setup({
         ensure_installed = {
-          'ts_ls', 'jsonls', 'yamlls', 'html', 'mdx_analyzer', 'cssls', 'lua_ls',
-          'tailwindcss', 'biome', 'gopls', 'dockerls', 'pyright', 'marksman'
+          'ts_ls', 'lua_ls', 'gopls', 'pyright',
+          'jsonls', 'yamlls',
+          'html', 'mdx_analyzer', 'marksman',
+          'cssls', 'tailwindcss',
+          'biome',
+          'dockerls',
         },
         handlers = {
           lsp.default_setup,
@@ -45,8 +49,8 @@ return {
     main = "nvim-treesitter",
     opts = {
       ensure_installed = {
-        "typescript", "tsx", "javascript", "css", "html", "go", "lua",
-        "markdown", "markdown_inline"
+        "typescript", "tsx", "javascript", "css", "postcss",
+        "html", "go", "lua", "markdown", "markdown_inline"
       },
       highlight = {
         enable = true,
