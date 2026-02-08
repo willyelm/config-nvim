@@ -18,7 +18,7 @@ return {
     opts = {
       -- show_navic = true,
       theme = "auto",
-      show_modified = true, 
+      show_modified = true,
       show_dirname = true,
       show_basename = true,
       symbols = { separator = "/", modified = "*", ellipsis = "..." },
@@ -33,24 +33,25 @@ return {
         theme = "auto",
       },
       sections = {
-        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_b = { 'branch', 'diff', 'diagnostics' },
       }
     }
   },
   -- File Explorer
   {
     "nvim-tree/nvim-tree.lua",
-    config = function() require("nvim-tree").setup({
-      view = {
-        width = 30,
-        side = "right",
-      },
-      renderer = {
-        highlight_git = true,
-        highlight_opened_files = "all",
-        add_trailing = true,
-        indent_markers = {
-          enable = true,
+    config = function()
+      require("nvim-tree").setup({
+        view = {
+          width = 30,
+          side = "right",
+        },
+        renderer = {
+          highlight_git = true,
+          highlight_opened_files = "all",
+          add_trailing = true,
+          indent_markers = {
+            enable = true,
             inline_arrows = false,
             icons = {
               corner = "└ ",
@@ -88,14 +89,15 @@ return {
         git = {
           ignore = true,
         },
-    }) end,
+      })
+    end,
   },
   -- Buffer
   {
     "famiu/bufdelete.nvim",
     event = "VeryLazy",
     keys = {
-      { "<leader>x", "<cmd>Bdelete<cr>", desc = "Close Buffer" },
+      { "<leader>x", "<cmd>Bdelete<cr>",  desc = "Close Buffer" },
       { "<leader>X", "<cmd>Bdelete!<cr>", desc = "Force Close Buffer" },
     },
   }

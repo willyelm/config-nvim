@@ -39,25 +39,18 @@ vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
 vim.opt.fillchars = {
-  vert = "│",      -- Solid thin line
-  horiz = "─",     -- Solid thin horizontal
-  msgsep = " ",    -- Clear message separator
-  eob = " ",       -- Hide the '~' at End Of Buffer
+  vert = "│", -- Solid thin line
+  horiz = "─", -- Solid thin horizontal
+  msgsep = " ", -- Clear message separator
+  eob = " ", -- Hide the '~' at End Of Buffer
   lastline = " ",
 }
-
--- vim.opt.list = true
--- vim.opt.listchars = {
---   tab = '» ',
---   trail = '·',
---   nbsp = '␣',
---   eol = '↴',
---   extends = '→',
---   precedes = '←',
--- }
 
 vim.cmd("colorscheme willyelm")
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
   command = "if mode() != 'c' | checktime | endif",
   pattern = { "*" },
+})
+vim.diagnostic.config({
+  float = { border = "rounded" }
 })

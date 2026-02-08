@@ -26,12 +26,17 @@ return {
         window = {
           completion = cmp.config.window.bordered({
             border = "rounded",
-            winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+            winblend = 10,
+            winhighlight = "Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None",
           }),
           documentation = cmp.config.window.bordered({
-            border = "rounded",
-            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-          }),        
+            --border = "rounded",
+            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+            winblend = 10,
+            max_width = 50,
+            max_height = 20,
+            winhighlight = "Normal:PmenuDoc,FloatBorder:PmenuDocBorder,CursorLine:PmenuSel,Search:None",
+          }),
         },
 
         mapping = cmp.mapping.preset.insert({
