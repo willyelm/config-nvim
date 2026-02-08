@@ -30,9 +30,9 @@ return {
     end,
     keys = {
       -- Search
-      { "<leader>ff", "<cmd>Telescope find_files<cr>",   desc = "Find Files" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>",    desc = "Search Global" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>",      desc = "Find Buffers" },
+      { "<leader>sf", "<cmd>Telescope find_files<cr>",   desc = "Find Files" },
+      { "<leader>sg", "<cmd>Telescope live_grep<cr>",    desc = "Search Global" },
+      { "<leader>sb", "<cmd>Telescope buffers<cr>",      desc = "Find Buffers" },
       -- Git
       { "<leader>gh", "<cmd>Telescope git_bcommits<cr>", desc = "File History" },
       { "<leader>gH", "<cmd>Telescope git_commits<cr>",  desc = "Project History" },
@@ -52,13 +52,13 @@ return {
       },
     }
   },
-  -- Find/Search
+  -- Search/Replace
   {
     "nvim-pack/nvim-spectre",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = { is_live_replace = true },
     keys = {
-      { "<leader>fr", function() require("spectre").toggle() end, desc = "Search & Replace" },
+      { "<leader>sr", function() require("spectre").toggle() end, desc = "Search & Replace" },
     }
   },
   -- Quick Navigation

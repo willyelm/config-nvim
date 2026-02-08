@@ -18,7 +18,7 @@ return {
     local wk = require("which-key")
     wk.setup(opts)
     wk.add({
-      { "<leader>f", group = "Find & Replace" },
+      { "<leader>s", group = "Search & Replace" },
       { "<leader>g", group = "Git" },
     })
   end,

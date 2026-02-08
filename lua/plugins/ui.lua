@@ -40,6 +40,9 @@ return {
   -- File Explorer
   {
     "nvim-tree/nvim-tree.lua",
+    keys = {
+      { "<leader>\\", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Explorer" },
+    },
     config = function()
       require("nvim-tree").setup({
         view = {
@@ -98,7 +101,7 @@ return {
     event = "VeryLazy",
     keys = {
       { "<leader>x", "<cmd>Bdelete<cr>",  desc = "Close Buffer" },
-      { "<leader>X", "<cmd>Bdelete!<cr>", desc = "Force Close Buffer" },
+      { "<leader>X", "<cmd>Bdelete!<cr>", desc = "Close Buffer (Force)" },
     },
   }
 }
