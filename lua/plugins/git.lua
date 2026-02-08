@@ -20,7 +20,7 @@ return {
       },
     },
     keys = {
-      { "<leader>gd", "<cmd>Gitsigns toggle_diff<cr>",  desc = "Diff View" },
+      { "<leader>gd", "<cmd>Gitsigns diffthis<cr>",     desc = "Diff This" },
       { "<leader>gR", "<cmd>Gitsigns reset_buffer<cr>", desc = "Reset" },
     }
   },

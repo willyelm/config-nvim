@@ -40,9 +40,6 @@ return {
   -- File Explorer
   {
     "nvim-tree/nvim-tree.lua",
-    keys = {
-      { "<leader>\\", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Explorer" },
-    },
     config = function()
       require("nvim-tree").setup({
         view = {

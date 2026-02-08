@@ -5,3 +5,6 @@ vim.keymap.set("n", "<leader>W", "<cmd>wa<cr>", { desc = "Save All Files" })
 -- Toggle Comment
 vim.keymap.set("n", "<leader>/", "gcc", { remap = true, desc = "Comment line" })
 vim.keymap.set("v", "<leader>/", "gc", { remap = true, desc = "Comment selection" })
+
+-- NvimTree
+vim.keymap.set("n", "<leader>\\", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle Explorer" })
