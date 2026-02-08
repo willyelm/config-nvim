@@ -102,7 +102,6 @@ hi("WinBar", { bg = transparent, sp = divider })
 hi("WinBarNC", { bg = transparent, sp = divider })
 hi("StatusLine", { fg = s.light_gray, bg = transparent, sp = divider, underline = true })
 hi("StatusLineNC", { fg = s.medium_gray, bg = transparent })
-hi("FloatBorder", { fg = divider, bg = transparent })
 
 -- Diff
 hi("DiffAdd", { fg = green, bg = bg_subtle })
@@ -126,7 +125,7 @@ hi("@tag.component.jsx", { link = "Type" })
 
 -- Pmenu (Floating Windows/Completion)
 hi("NormalFloat", { bg = transparent, fg = norm })
-hi("FloatBorder", { fg = bg_very_subtle, bg = transparent })
+hi("FloatBorder", { fg = divider, bg = transparent })
 hi("Pmenu", { fg = norm, bg = transparent })
 hi("PmenuSel", { fg = s.black, bg = purple, bold = true })
 hi("PmenuSbar", { bg = transparent })
