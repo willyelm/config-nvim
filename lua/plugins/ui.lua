@@ -27,15 +27,25 @@ return {
   -- Statusline with Git Branch and LSP status
   {
     'nvim-lualine/lualine.nvim',
-    opts = {
-      options = {
-        globalstatus = true,
-        theme = "auto",
-      },
-      sections = {
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
+    opts = function()
+      local custom_auto = require("lualine.themes.auto")
+
+      custom_auto.normal.c.bg = "NONE"
+      custom_auto.insert.c.bg = "NONE"
+      custom_auto.visual.c.bg = "NONE"
+      custom_auto.command.c.bg = "NONE"
+      custom_auto.inactive.c.bg = "NONE"
+
+      return {
+        options = {
+          globalstatus = true,
+          theme = custom_auto,
+        },
+        sections = {
+          lualine_b = { 'branch', 'diff', 'diagnostics' },
+        }
       }
-    }
+    end
   },
   -- File Explorer
   {
@@ -46,7 +56,6 @@ return {
           width = 30,
           side = "right",
         },
-        hijack_netrw = true,
         renderer = {
           highlight_git = true,
           highlight_opened_files = "all",

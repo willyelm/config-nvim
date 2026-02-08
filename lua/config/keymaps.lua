@@ -12,4 +12,5 @@ vim.keymap.set("v", "<leader>/", "gc", { remap = true, desc = "Comment selection
 
 -- NvimTree
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit Window" })
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<cr>", { desc = "Focus Explorer" })
 vim.keymap.set("n", "<leader>\\", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle Explorer" })
