@@ -2,12 +2,11 @@ return {
   'stevearc/aerial.nvim',
   opts = {
     backends = { "treesitter", "lsp" },
-    custom_kinds = {
-      jsx_element = "Class",
-      jsx_self_closing_element = "Class",
-      jsx_opening_element = "Interface",
-    },
-    -- Keymaps for navigation within the outline
+    -- custom_kinds = {
+    --   jsx_element = "Class",
+    --   jsx_self_closing_element = "Class",
+    --   jsx_opening_element = "Interface",
+    -- },
     on_attach = function(bufnr)
       vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
       vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
