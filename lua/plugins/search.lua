@@ -2,7 +2,7 @@ return {
   -- Discovery
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { 
+    dependencies = {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
     },
@@ -30,14 +30,26 @@ return {
     end,
     keys = {
       -- Search
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Search Global" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
+      { "<leader>ff", "<cmd>Telescope find_files<cr>",   desc = "Find Files" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>",    desc = "Search Global" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>",      desc = "Find Buffers" },
       -- Git
       { "<leader>gh", "<cmd>Telescope git_bcommits<cr>", desc = "File History" },
       { "<leader>gH", "<cmd>Telescope git_commits<cr>",  desc = "Project History" },
       { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
       { "<leader>gs", "<cmd>Telescope git_stash<cr>",    desc = "Stash" },
+      -- Command Palette
+      { "<leader>P",  "<cmd>Telescope keymaps<cr>",      desc = "Keymaps" },
+      {
+        "<leader>p",
+        function()
+          require('telescope.builtin').commands(require('telescope.themes').get_dropdown({
+            winblend = 10,
+            previewer = false,
+          }))
+        end,
+        desc = "Command Palette"
+      },
     }
   },
   -- Find/Search
@@ -55,8 +67,8 @@ return {
     event = "VeryLazy",
     opts = {},
     keys = {
-      { "s", mode = { "n", "x", "o" }, "<cmd>lua require('flash').jump()<cr>", desc = "Jump" },
-      { "S", mode = { "n", "x", "o" }, "<cmd>lua require('flash').treesitter()<cr>", desc = "Jump (Treesitter)" },    
+      { "s", mode = { "n", "x", "o" }, "<cmd>lua require('flash').jump()<cr>",       desc = "Jump" },
+      { "S", mode = { "n", "x", "o" }, "<cmd>lua require('flash').treesitter()<cr>", desc = "Jump (Treesitter)" },
     },
   },
 }

@@ -16,13 +16,11 @@ return {
         completion = {
           completeopt = 'menu,menuone,noinsert',
         },
-
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
           end,
         },
-
         window = {
           completion = cmp.config.window.bordered({
             border = "rounded",
@@ -30,15 +28,13 @@ return {
             winhighlight = "Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None",
           }),
           documentation = cmp.config.window.bordered({
-            --border = "rounded",
-            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+            border = "rounded",
             winblend = 10,
             max_width = 50,
             max_height = 20,
             winhighlight = "Normal:PmenuDoc,FloatBorder:PmenuDocBorder,CursorLine:PmenuSel,Search:None",
           }),
         },
-
         mapping = cmp.mapping.preset.insert({
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<CR>'] = cmp.mapping.confirm({ select = true }),
@@ -61,7 +57,6 @@ return {
             end
           end, { 'i', 's' }),
         }),
-
         sources = cmp.config.sources({
           { name = 'nvim_lsp' }, -- Primary source (Biome, ts_ls, etc.)
           { name = 'luasnip' },  -- For code snippets
