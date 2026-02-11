@@ -53,16 +53,51 @@ return {
         "html", "go", "lua", "markdown", "markdown_inline"
       },
       auto_install = true,
+      indent = { enable = true },
       highlight = {
         enable = true,
-        custom_captures = {
-          ["jsx_opening_element"] = "method",
-          ["jsx_closing_element"] = "method",
-          ["jsx_self_closing_element"] = "method",
-        },
       },
-      indent = { enable = true },
     },
+    -- init = function()
+    --   vim.treesitter.language.register('markdown', 'mdx')
+    --   vim.treesitter.query.set("markdown", "injections", [[
+    --     ((inline) @injection.content
+    --      (#lua-match? @injection.content "^%s*import")
+    --      (#set! injection.language "tsx"))
+    --
+    --     ((inline) @injection.content
+    --      (#lua-match? @injection.content "^%s*export")
+    --      (#set! injection.language "tsx"))
+    --
+    --     ((paragraph (inline) @injection.content)
+    --      (#lua-match? @injection.content "^%s*<")
+    --      (#set! injection.language "tsx"))
+    --   ]])
+    -- end,
+    config = function(_, opts)
+      require("nvim-treesitter").setup(opts)
+      -- vim.treesitter.language.register('markdown', 'mdx')
+      vim.treesitter.query.set("markdown", "injections", [[
+        ((inline) @injection.content
+         (#lua-match? @injection.content "^%s*import")
+         (#set! injection.language "tsx"))
+
+        ((inline) @injection.content
+         (#lua-match? @injection.content "^%s*export")
+         (#set! injection.language "tsx"))
+
+        ((paragraph (inline) @injection.content)
+         (#lua-match? @injection.content "^%s*<")
+         (#set! injection.language "tsx"))
+      ]])
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "mdx",
+        callback = function()
+          vim.treesitter.language.register('markdown', 'mdx')
+          vim.treesitter.start()
+        end,
+      })
+    end,
   },
   -- AutoTag
   {

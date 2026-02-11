@@ -54,12 +54,11 @@ return {
   },
   -- Search/Replace
   {
-    "nvim-pack/nvim-spectre",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = { is_live_replace = true },
+    'MagicDuck/grug-far.nvim',
+    opts = { headerMaxWidth = 80 },
     keys = {
-      { "<leader>sr", function() require("spectre").toggle() end, desc = "Search & Replace" },
-    }
+      { "<leader>sr", function() require('grug-far').open() end, desc = "Search & Replace" },
+    },
   },
   -- Quick Navigation
   {
