@@ -7,6 +7,7 @@ return {
       { 'neovim/nvim-lspconfig' },
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
+      { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
     },
     config = function()
       local lsp_zero = require('lsp-zero')
@@ -19,8 +20,9 @@ return {
       end)
 
       require('mason').setup({})
-      require('mason-lspconfig').setup({
+      require('mason-tool-installer').setup({
         ensure_installed = {
+          -- LSPs
           'ts_ls',
           'lua_ls',
           'gopls',
@@ -32,8 +34,14 @@ return {
           'cssls',
           'tailwindcss',
           'biome',
-          'dockerls'
+          'dockerls',
+          -- Formatters
+          'prettierd',
+          'stylua',
+          'shfmt',
         },
+      })
+      require('mason-lspconfig').setup({
         handlers = {
           lsp_zero.default_setup,
         },
@@ -60,12 +68,15 @@ return {
         capabilities = lsp_zero.get_capabilities(),
       })
 
-      -- Override biome config using new API
       vim.lsp.config('biome', {
         cmd = { 'biome', 'lsp-proxy' },
         root_markers = { 'biome.json', 'biome.jsonc' },
         single_file_support = true,
-        on_attach = lsp_zero.on_attach,
+        on_attach = function(client, bufnr)
+          lsp_zero.on_attach(client, bufnr)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
         capabilities = lsp_zero.get_capabilities(),
       })
 
