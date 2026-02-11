@@ -9,36 +9,69 @@ return {
       { 'williamboman/mason-lspconfig.nvim' },
     },
     config = function()
-      local lsp = require('lsp-zero')
-      lsp.on_attach(function(client, bufnr)
-        lsp.default_keymaps({ buffer = bufnr })
+      local lsp_zero = require('lsp-zero')
+
+      lsp_zero.on_attach(function(client, bufnr)
+        lsp_zero.default_keymaps({ buffer = bufnr })
+        if client.server_capabilities.inlayHintProvider then
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end
       end)
-      -- require('lspconfig.ui.windows').default_options.border = 'rounded'
+
       require('mason').setup({})
       require('mason-lspconfig').setup({
         ensure_installed = {
-          'ts_ls', 'lua_ls', 'gopls', 'pyright',
-          'jsonls', 'yamlls',
-          'html', 'mdx_analyzer', 'marksman',
-          'cssls', 'tailwindcss',
+          'ts_ls',
+          'lua_ls',
+          'gopls',
+          'pyright',
+          'jsonls',
+          'yamlls',
+          'html',
+          'mdx_analyzer',
+          'cssls',
+          'tailwindcss',
           'biome',
-          'dockerls',
+          'dockerls'
         },
         handlers = {
-          lsp.default_setup,
-          biome = function()
-            require('lspconfig').biome.setup({
-              single_file_support = true,
-            })
-          end,
-          ts_ls = function()
-            require('lspconfig').ts_ls.setup({
-              root_dir = require('lspconfig').util.root_pattern("package.json", "tsconfig.json", ".git"),
-              single_file_support = false,
-            })
-          end,
+          lsp_zero.default_setup,
         },
       })
+
+      -- Override ts_ls config using new API
+      vim.lsp.config('ts_ls', {
+        cmd = { 'typescript-language-server', '--stdio' },
+        root_markers = { 'package.json', 'tsconfig.json', '.git' },
+        filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+        single_file_support = true,
+        init_options = {
+          preferences = {
+            includeInlayParameterNameHints = "all",
+            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+            -- includeInlayFunctionParameterTypeHints = false,
+            -- includeInlayVariableTypeHints = true,
+            -- includeInlayPropertyDeclarationTypeHints = false,
+            -- includeInlayFunctionLikeReturnTypeHints = false,
+            -- includeInlayEnumMemberValueHints = false,
+          },
+        },
+        on_attach = lsp_zero.on_attach,
+        capabilities = lsp_zero.get_capabilities(),
+      })
+
+      -- Override biome config using new API
+      vim.lsp.config('biome', {
+        cmd = { 'biome', 'lsp-proxy' },
+        root_markers = { 'biome.json', 'biome.jsonc' },
+        single_file_support = true,
+        on_attach = lsp_zero.on_attach,
+        capabilities = lsp_zero.get_capabilities(),
+      })
+
+      -- Enable the configs
+      vim.lsp.enable('ts_ls')
+      vim.lsp.enable('biome')
     end
   },
   -- TreeSitter
@@ -58,22 +91,6 @@ return {
         enable = true,
       },
     },
-    -- init = function()
-    --   vim.treesitter.language.register('markdown', 'mdx')
-    --   vim.treesitter.query.set("markdown", "injections", [[
-    --     ((inline) @injection.content
-    --      (#lua-match? @injection.content "^%s*import")
-    --      (#set! injection.language "tsx"))
-    --
-    --     ((inline) @injection.content
-    --      (#lua-match? @injection.content "^%s*export")
-    --      (#set! injection.language "tsx"))
-    --
-    --     ((paragraph (inline) @injection.content)
-    --      (#lua-match? @injection.content "^%s*<")
-    --      (#set! injection.language "tsx"))
-    --   ]])
-    -- end,
     config = function(_, opts)
       require("nvim-treesitter").setup(opts)
       -- vim.treesitter.language.register('markdown', 'mdx')
@@ -90,10 +107,10 @@ return {
          (#lua-match? @injection.content "^%s*<")
          (#set! injection.language "tsx"))
       ]])
+      vim.treesitter.language.register('markdown', 'mdx')
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = "mdx",
+        pattern = { "mdx", "typescriptreact" },
         callback = function()
-          vim.treesitter.language.register('markdown', 'mdx')
           vim.treesitter.start()
         end,
       })
@@ -103,7 +120,16 @@ return {
   {
     "windwp/nvim-ts-autotag",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {},
+    opts = {
+      opts = {
+        enable_rename = true,
+        enable_close = true,
+        enable_close_on_slash = true,
+      },
+      filetypes = {
+        "html", "svg", "javascript", "typescript", "javascriptreact", "typescriptreact", "tsx", "jsx", "mdx"
+      },
+    }
   },
   -- Colorizer
   {

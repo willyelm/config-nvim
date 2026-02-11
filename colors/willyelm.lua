@@ -5,6 +5,7 @@ end
 vim.g.colors_name = "willyelm"
 -- Colors
 local s = {
+  actual_black  = "#000000",
   black         = "#0D0D0D",
   medium_gray   = "#767676",
   white         = "#F1F1F1",
@@ -18,7 +19,7 @@ local s = {
   pink          = "#fb007a",
   dark_red      = "#C30771",
   light_red     = "#E32791",
-  orange        = "#D75F5F",
+  orange        = "#ef8875",
   darker_blue   = "#005F87",
   dark_blue     = "#008EC4",
   blue          = "#20BBFC",
@@ -28,13 +29,13 @@ local s = {
   dark_green    = "#ace6bf",
   light_green   = "#c6f1d4",
   dark_purple   = "#af5fd7",
-  light_purple  = "#baabdf",
-  yellow        = "#e9d999",
+  light_purple  = "#d5bbfa",
+  yellow        = "#d6ca86",
   light_yellow  = "#eadead",
   dark_yellow   = "#7d713f",
 }
 -- Contextual Logic (Dark Mode focus)
-local bg, bg_subtle, bg_very_subtle, transparent, divider, norm, norm_subtle, norm_strong, purple, cyan, green, red, visual, yellow
+local bg, bg_subtle, bg_very_subtle, transparent, divider, norm, norm_subtle, norm_strong, purple, cyan, green, red, visual, yellow, contrast
 
 transparent = "NONE"
 
@@ -43,7 +44,7 @@ if vim.o.background == "dark" then
   bg_subtle      = s.lighter_black
   bg_very_subtle = s.subtle_black
   divider        = s.subtle_black
-  norm           = s.light_gray
+  norm           = s.lighter_gray
   norm_subtle    = s.medium_gray
   norm_strong    = s.white
   purple         = s.light_purple
@@ -52,6 +53,7 @@ if vim.o.background == "dark" then
   red            = s.light_red
   visual         = s.lightest_gray
   yellow         = s.light_yellow
+  contrast       = s.actual_white
 else
   bg             = s.actual_white
   bg_subtle      = s.light_gray
@@ -66,6 +68,7 @@ else
   red            = s.dark_red
   visual         = s.dark_purple
   yellow         = s.dark_yellow
+  contrast       = s.actual_black
 end
 
 -- Helper Function
@@ -75,20 +78,23 @@ end
 
 -- Standard UI Highlights
 hi("Normal", { fg = norm, bg = transparent })
-hi("Cursor", { fg = norm, bg = actual_white })
-hi("TermCursor", { fg = s.black, bg = norm_strong })
+hi("Cursor", { fg = norm, bg = contrast })
+hi("TermCursor", { fg = norm_strong, bg = norm_strong })
 hi("Comment", { fg = bg_subtle, italic = true })
-hi("String", { fg = s.light_green })
+hi("String", { fg = s.orange })
+hi("Number", { fg = s.yellow })
+hi("Float", { link = "Number" })
+hi("Boolean", { link = "Number" })
 hi("Constant", { fg = norm })
 hi("Identifier", { fg = norm_strong })
-hi("Function", { fg = s.light_purple })
+hi("Function", { fg = norm_strong })
 hi("Keyword", { fg = norm_strong, bold = true })
 hi("Operator", { fg = norm, bold = true })
 hi("PreProc", { fg = norm_subtle })
-hi("Type", { fg = s.light_yellow })
+hi("Type", { fg = s.light_purple })
 hi("Special", { fg = norm_subtle, italic = true })
 hi("Underlined", { underline = true })
-hi("Error", { fg = s.actual_white, bg = red, bold = true })
+hi("Error", { fg = contrast, bg = red, bold = true })
 hi("Todo", { fg = purple, underline = true })
 hi("Directory", { fg = norm_strong })
 hi("LineNr", { fg = bg_subtle })
@@ -103,6 +109,9 @@ hi("WinBarNC", { bg = transparent, sp = divider })
 hi("StatusLine", { fg = s.light_gray, bg = transparent, sp = divider, underline = true })
 hi("StatusLineNC", { fg = s.medium_gray, bg = transparent })
 
+-- hi("@function.call", { fg = "blue", bg = transparent })
+-- hi("@function", { fg = "red", bg = transparent })
+
 -- Diff
 hi("DiffAdd", { fg = green, bg = bg_subtle })
 hi("DiffDelete", { fg = red, bg = bg_subtle })
@@ -115,13 +124,15 @@ hi("GitSignsDeletePreview", { link = "DiffDelete" })
 hi("GitSignsAdd", { fg = green, bg = transparent })
 hi("GitSignsChange", { fg = yellow, bg = transparent })
 hi("GitSignsDelete", { fg = red, bg = transparent })
+
 -- Treesitter & Web Dev (TS/JSX/Go)
 hi("@tag", { link = "Function" })
+hi("@tag.builtin", { link = "Function" })
 hi("@tag.attribute", { link = "Normal" })
 hi("@tag.delimiter", { link = "Normal" })
 hi("@keyword", { link = "Keyword" })
 hi("@type", { link = "Type" })
-hi("@tag.component.jsx", { link = "Type" })
+hi("@tag.component.jsx", { link = "Function" })
 
 -- Pmenu (Floating Windows/Completion)
 hi("NormalFloat", { bg = transparent, fg = norm })
