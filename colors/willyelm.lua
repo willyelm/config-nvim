@@ -1,38 +1,38 @@
 vim.cmd("highlight clear")
 if vim.fn.exists("syntax_on") then
-  vim.cmd("syntax reset")
+	vim.cmd("syntax reset")
 end
 vim.g.colors_name = "willyelm"
 -- Colors
 local s = {
-  actual_black  = "#000000",
-  black         = "#0D0D0D",
-  medium_gray   = "#767676",
-  white         = "#F1F1F1",
-  actual_white  = "#FFFFFF",
-  subtle_black  = "#303030",
-  light_black   = "#262626",
-  lighter_black = "#4E4E4E",
-  light_gray    = "#A8A8A8",
-  lighter_gray  = "#C6C6C6",
-  lightest_gray = "#EEEEEE",
-  pink          = "#fb007a",
-  dark_red      = "#C30771",
-  light_red     = "#E32791",
-  orange        = "#ef8875",
-  darker_blue   = "#005F87",
-  dark_blue     = "#008EC4",
-  blue          = "#20BBFC",
-  light_blue    = "#b6d6fd",
-  dark_cyan     = "#20A5BA",
-  light_cyan    = "#4FB8CC",
-  dark_green    = "#ace6bf",
-  light_green   = "#c6f1d4",
-  dark_purple   = "#af5fd7",
-  light_purple  = "#d5bbfa",
-  yellow        = "#d6ca86",
-  light_yellow  = "#eadead",
-  dark_yellow   = "#7d713f",
+	actual_black = "#000000",
+	black = "#0D0D0D",
+	medium_gray = "#767676",
+	white = "#F1F1F1",
+	actual_white = "#FFFFFF",
+	subtle_black = "#303030",
+	light_black = "#262626",
+	lighter_black = "#4E4E4E",
+	light_gray = "#A8A8A8",
+	lighter_gray = "#C6C6C6",
+	lightest_gray = "#EEEEEE",
+	pink = "#fb007a",
+	dark_red = "#C30771",
+	light_red = "#E32791",
+	orange = "#ef8875",
+	darker_blue = "#005F87",
+	dark_blue = "#008EC4",
+	blue = "#20BBFC",
+	light_blue = "#b6d6fd",
+	dark_cyan = "#20A5BA",
+	light_cyan = "#4FB8CC",
+	dark_green = "#ace6bf",
+	light_green = "#c6f1d4",
+	dark_purple = "#af5fd7",
+	light_purple = "#d5bbfa",
+	yellow = "#d6ca86",
+	light_yellow = "#eadead",
+	dark_yellow = "#7d713f",
 }
 -- Contextual Logic (Dark Mode focus)
 local bg, bg_subtle, bg_very_subtle, transparent, divider, norm, norm_subtle, norm_strong, purple, cyan, green, red, visual, yellow, contrast
@@ -40,40 +40,40 @@ local bg, bg_subtle, bg_very_subtle, transparent, divider, norm, norm_subtle, no
 transparent = "NONE"
 
 if vim.o.background == "dark" then
-  bg             = s.black
-  bg_subtle      = s.lighter_black
-  bg_very_subtle = s.subtle_black
-  divider        = s.subtle_black
-  norm           = s.lighter_gray
-  norm_subtle    = s.medium_gray
-  norm_strong    = s.white
-  purple         = s.light_purple
-  cyan           = s.light_cyan
-  green          = s.light_green
-  red            = s.light_red
-  visual         = s.lightest_gray
-  yellow         = s.light_yellow
-  contrast       = s.actual_white
+	bg = s.black
+	bg_subtle = s.lighter_black
+	bg_very_subtle = s.subtle_black
+	divider = s.subtle_black
+	norm = s.lighter_gray
+	norm_subtle = s.medium_gray
+	norm_strong = s.white
+	purple = s.light_purple
+	cyan = s.light_cyan
+	green = s.light_green
+	red = s.light_red
+	visual = s.lightest_gray
+	yellow = s.light_yellow
+	contrast = s.actual_white
 else
-  bg             = s.actual_white
-  bg_subtle      = s.light_gray
-  bg_very_subtle = s.lightest_gray
-  divider        = s.lightest_gray
-  norm           = s.light_black
-  norm_subtle    = s.medium_gray
-  norm_strong    = s.black
-  purple         = s.dark_purple
-  cyan           = s.dark_cyan
-  green          = s.dark_green
-  red            = s.dark_red
-  visual         = s.dark_purple
-  yellow         = s.dark_yellow
-  contrast       = s.actual_black
+	bg = s.actual_white
+	bg_subtle = s.light_gray
+	bg_very_subtle = s.lightest_gray
+	divider = s.lightest_gray
+	norm = s.light_black
+	norm_subtle = s.medium_gray
+	norm_strong = s.black
+	purple = s.dark_purple
+	cyan = s.dark_cyan
+	green = s.dark_green
+	red = s.dark_red
+	visual = s.dark_purple
+	yellow = s.dark_yellow
+	contrast = s.actual_black
 end
 
 -- Helper Function
-local function hi(group, opts)
-  vim.api.nvim_set_hl(0, group, opts)
+local function hi(name, opts)
+	vim.api.nvim_set_hl(0, name, opts)
 end
 
 -- Standard UI Highlights
@@ -157,13 +157,15 @@ hi("CmpItemKindType", { fg = s.light_yellow })
 hi("NvimTreeNormal", { fg = norm })
 hi("NvimTreeFile", { fg = norm })
 hi("NvimTreeFolderName", { fg = norm })
-
-hi("NvimTreeRootFolder", { fg = purple, bold = true })
+hi("NvimTreeRootFolder", { bold = true })
 hi("NvimTreeIndentMarker", { fg = bg_subtle })
 hi("NvimTreeFolderIcon", { fg = norm })
 hi("NvimTreeOpenedFolderName", { fg = norm_strong, bold = true })
 hi("NvimTreeOpenedFile", { fg = norm_strong, bold = true })
 hi("NvimTreeWinSeparator", { fg = divider, bg = transparent })
+hi("NvimTreeGitStaged", { link = "GitSignsAdd" })
+hi("NvimTreeGitDirty", { link = "GitSignsChange" })
+hi("NvimTreeGitDeleted", { link = "GitSignsDelete" })
 
 -- Barbecue
 hi("Barbecue", { bg = "NONE" })
