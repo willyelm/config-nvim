@@ -35,9 +35,9 @@ local s = {
 	dark_yellow = "#7d713f",
 }
 -- Contextual Logic (Dark Mode focus)
-local bg, bg_subtle, bg_very_subtle, transparent, divider, norm, norm_subtle, norm_strong, purple, cyan, green, red, visual, yellow, contrast
+local bg, bg_subtle, bg_very_subtle, divider, norm, norm_subtle, norm_strong, purple, cyan, green, red, visual, yellow, contrast
 
-transparent = "NONE"
+local transparent = "NONE"
 
 if vim.o.background == "dark" then
 	bg = s.black
@@ -157,18 +157,21 @@ hi("CmpItemKindType", { fg = s.light_yellow })
 hi("NvimTreeNormal", { fg = norm })
 hi("NvimTreeFile", { fg = norm })
 hi("NvimTreeFolderName", { fg = norm })
-hi("NvimTreeRootFolder", { bold = true })
+hi("NvimTreeRootFolder", { bold = true, underline = true })
 hi("NvimTreeIndentMarker", { fg = bg_subtle })
 hi("NvimTreeFolderIcon", { fg = norm })
 hi("NvimTreeOpenedFolderName", { fg = norm_strong, bold = true })
 hi("NvimTreeOpenedFile", { fg = norm_strong, bold = true })
 hi("NvimTreeWinSeparator", { fg = divider, bg = transparent })
-hi("NvimTreeGitStaged", { link = "GitSignsAdd" })
-hi("NvimTreeGitDirty", { link = "GitSignsChange" })
-hi("NvimTreeGitDeleted", { link = "GitSignsDelete" })
+hi("NvimTreeGitIgnored", { link = "Comment" })
+
+hi("NvimTreeGitDirty", { link = "NvimTreeNormal" })
+hi("NvimTreeGitStaged", { link = "NvimTreeNormal" })
+hi("NvimTreeGitNew", { link = "NvimTreeNormal" })
+hi("NvimTreeGitDeleted", { link = "NvimTreeNormal" })
 
 -- Barbecue
-hi("Barbecue", { bg = "NONE" })
+hi("Barbecue", { bg = transparent })
 hi("barbecue_separator", { fg = divider })
 
 -- Lualine

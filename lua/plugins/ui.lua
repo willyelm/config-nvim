@@ -16,7 +16,6 @@ return {
 		version = "*",
 		dependencies = { "SmiteshP/nvim-navic", "nvim-tree/nvim-web-devicons" },
 		opts = {
-			-- show_navic = true,
 			theme = "auto",
 			show_modified = true,
 			show_dirname = true,
@@ -40,6 +39,8 @@ return {
 				options = {
 					globalstatus = true,
 					theme = custom_auto,
+					-- section_separators = { left = "", right = "" },
+					component_separators = { left = "/", right = "/" },
 				},
 				sections = {
 					lualine_b = { "branch", "diff", "diagnostics" },
@@ -60,9 +61,10 @@ return {
 				respect_buf_cwd = true,
 				update_focused_file = {
 					enable = true,
-					update_root = true,
+					-- update_root = true,
 				},
 				renderer = {
+					highlight_git = true,
 					highlight_opened_files = "all",
 					add_trailing = true,
 					indent_markers = {
@@ -91,11 +93,13 @@ return {
 				},
 				filters = {
 					dotfiles = false,
-					custom = { "^.git$" },
-					exclude = { ".env", ".gitignore" },
+					custom = { "^.git$", ".DS_Store" },
+					-- custom = { "^.git$" },
+					-- exclude = { ".env", ".gitignore" },
 				},
 				git = {
-					ignore = true,
+					enable = true,
+					ignore = false,
 				},
 			})
 		end,
