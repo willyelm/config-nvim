@@ -12,12 +12,12 @@ return {
 					enabled = true,
 					auto_trigger = true,
 					keymap = {
-						accept = "<C-Right>", -- Accept the full ghost text
-						next = "<C-Down>", -- Cycle to the next suggestion
-						prev = "<C-Up>", -- Cycle to the previous suggestion
-						dismiss = "<C-Left>", -- Keep C-e for "Escape/End"
-						accept_word = "<C-l>",
-						accept_line = "<C-f>",
+						accept = "<M-f>", -- ⌥→  accept suggestion
+						dismiss = "<M-b>", -- ⌥←  dismiss
+						next = "<M-Down>", -- ⌥↓  next suggestion
+						prev = "<M-Up>", -- ⌥↑  prev suggestion
+						accept_word = "<M-w>", -- ⌥w  accept word
+						accept_line = "<M-l>", -- ⌥l  accept line
 					},
 				},
 			})
