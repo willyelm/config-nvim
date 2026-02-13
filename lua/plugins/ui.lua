@@ -59,14 +59,15 @@ return {
 				},
 				sync_root_with_cwd = true,
 				respect_buf_cwd = true,
-				update_focused_file = {
-					enable = true,
-					-- update_root = true,
-				},
+				-- update_focused_file = {
+				-- 	enable = true,
+				-- 	-- update_root = true,
+				-- },
 				renderer = {
 					highlight_git = true,
 					highlight_opened_files = "all",
 					add_trailing = true,
+					special_files = {},
 					indent_markers = {
 						enable = true,
 					},

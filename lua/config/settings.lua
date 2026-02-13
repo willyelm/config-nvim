@@ -12,8 +12,11 @@ vim.opt.smarttab = true
 vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 
-vim.opt.wrap = true
-vim.opt.wrapmargin = 2
+-- vim.opt.wrap = true
+-- vim.opt.wrapmargin = 2
+vim.opt.wrap = false
+vim.opt.sidescroll = 1
+vim.opt.sidescrolloff = 5
 vim.opt.textwidth = 80
 
 vim.opt.swapfile = false
@@ -39,22 +42,35 @@ vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
 vim.opt.fillchars = {
-  vert = "│",
-  horiz = "─",
-  msgsep = " ",
-  eob = " ",
-  lastline = " ",
+	vert = "│",
+	horiz = "─",
+	msgsep = " ",
+	eob = " ",
+	lastline = " ",
 }
 
 vim.cmd("colorscheme willyelm")
 
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
-  command = "if mode() != 'c' | checktime | endif",
-  pattern = { "*" },
+	command = "if mode() != 'c' | checktime | endif",
+	pattern = { "*" },
 })
 
 vim.filetype.add({
-  extension = {
-    mdx = 'mdx',
-  },
+	extension = {
+		mdx = "mdx",
+	},
 })
+
+-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+-- vim.g.markdown_fenced_languages = {
+-- 	"ts=typescript",
+-- 	"tsx=typescriptreact",
+-- 	"js=javascript",
+-- 	"jsx=javascriptreact",
+-- 	"json=json",
+-- 	"lua=lua",
+-- 	"go=go",
+-- 	"bash=sh",
+-- 	"sh=sh",
+-- }

@@ -5,9 +5,14 @@ vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename Symbol" }
 vim.keymap.set("n", "K", function()
 	vim.lsp.buf.hover({
 		border = "rounded",
+		wrap = true,
+		max_width = 60,
 	})
-end, { noremap = true, desc = "Hover Documentation", silent = true })
--- end, { noremap = true, silent = true })
+end, {
+	noremap = true,
+	desc = "Hover Documentation",
+	silent = true,
+})
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, {
 	desc = "Show line diagnostics",
 	silent = true,

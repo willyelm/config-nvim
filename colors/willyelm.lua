@@ -156,6 +156,8 @@ hi("CmpItemKindType", { fg = s.light_yellow })
 -- Tree
 hi("NvimTreeNormal", { fg = norm })
 hi("NvimTreeFile", { fg = norm })
+hi("NvimTreeExecFile", { link = "NvimTreeFile" })
+hi("NvimTreeImageFile", { link = "NvimTreeFile" })
 hi("NvimTreeFolderName", { fg = norm })
 hi("NvimTreeRootFolder", { bold = true, underline = true })
 hi("NvimTreeIndentMarker", { fg = bg_subtle })

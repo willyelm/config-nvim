@@ -112,24 +112,23 @@ return {
 		},
 		config = function(_, opts)
 			require("nvim-treesitter").setup(opts)
-			-- vim.treesitter.language.register('markdown', 'mdx')
-			vim.treesitter.query.set(
-				"markdown",
-				"injections",
-				[[
-        ((inline) @injection.content
-         (#lua-match? @injection.content "^%s*import")
-         (#set! injection.language "tsx"))
-
-        ((inline) @injection.content
-         (#lua-match? @injection.content "^%s*export")
-         (#set! injection.language "tsx"))
-
-        ((paragraph (inline) @injection.content)
-         (#lua-match? @injection.content "^%s*<")
-         (#set! injection.language "tsx"))
-      ]]
-			)
+			-- vim.treesitter.query.set(
+			-- 	"markdown",
+			-- 	"injections",
+			-- 	[[
+			--      ((inline) @injection.content
+			--       (#lua-match? @injection.content "^%s*import")
+			--       (#set! injection.language "tsx"))
+			--
+			--      ((inline) @injection.content
+			--       (#lua-match? @injection.content "^%s*export")
+			--       (#set! injection.language "tsx"))
+			--
+			--      ((paragraph (inline) @injection.content)
+			--       (#lua-match? @injection.content "^%s*<")
+			--       (#set! injection.language "tsx"))
+			--    ]]
+			-- )
 			vim.treesitter.language.register("markdown", "mdx")
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = { "mdx", "typescriptreact" },
