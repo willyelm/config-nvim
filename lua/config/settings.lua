@@ -42,24 +42,24 @@ vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
 vim.opt.fillchars = {
-	vert = "│",
-	horiz = "─",
-	msgsep = " ",
-	eob = " ",
-	lastline = " ",
+  vert = "│",
+  horiz = "─",
+  msgsep = " ",
+  eob = " ",
+  lastline = " ",
 }
 
 vim.cmd("colorscheme willyelm")
 
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
-	command = "if mode() != 'c' | checktime | endif",
-	pattern = { "*" },
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = { "*" },
 })
 
 vim.filetype.add({
-	extension = {
-		mdx = "mdx",
-	},
+  extension = {
+    mdx = "mdx",
+  },
 })
 
 -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
