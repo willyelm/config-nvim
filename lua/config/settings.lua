@@ -44,9 +44,9 @@ vim.opt.laststatus = 3
 vim.opt.fillchars = {
   vert = "│",
   horiz = "─",
-  msgsep = " ",
-  eob = " ",
-  lastline = " ",
+  -- msgsep = " ",
+  -- eob = " ",
+  -- lastline = " ",
 }
 
 vim.cmd("colorscheme willyelm")
