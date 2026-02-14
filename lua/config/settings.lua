@@ -31,8 +31,8 @@ vim.opt.colorcolumn = "100"
 vim.opt.termguicolors = true
 vim.o.autoread = true
 
-vim.opt.scrolloff = 8
-vim.opt.sidescrolloff = 8
+-- vim.opt.scrolloff = 8
+-- vim.opt.sidescrolloff = 8
 vim.opt.cursorline = true
 vim.opt.guicursor = "n-c-sm:block,i-ci-ve:ver25,v:ver25,r-cr:hor20,o:hor50"
 vim.opt.mouse = "a"
@@ -45,8 +45,8 @@ vim.opt.fillchars = {
   vert = "│",
   horiz = "─",
   -- msgsep = " ",
-  -- eob = " ",
-  -- lastline = " ",
+  eob = " ",
+  lastline = " ",
 }
 
 vim.cmd("colorscheme willyelm")

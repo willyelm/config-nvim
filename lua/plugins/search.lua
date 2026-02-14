@@ -39,6 +39,7 @@ return {
       { "<leader>gH", "<cmd>Telescope git_commits<cr>",               desc = "Project History" },
       { "<leader>gb", "<cmd>Telescope git_branches<cr>",              desc = "Branches" },
       { "<leader>gs", "<cmd>Telescope git_stash<cr>",                 desc = "Stash" },
+      { "<leader>ga", "<cmd>DiffviewOpen<cr>",                        desc = "Diff All" },
       -- Command Palette
       { "<leader>k",  "<cmd>Telescope keymaps<cr>",                   desc = "Keymaps" },
       {
