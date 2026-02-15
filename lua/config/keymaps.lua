@@ -1,6 +1,5 @@
 -- Refactor
 vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename Symbol" })
-
 -- Hovers
 -- vim.keymap.set("n", "K", function()
 --   vim.lsp.buf.hover({
@@ -19,23 +18,22 @@ vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename Symbol" }
 -- })
 
 vim.keymap.set('n', 'K', function()
+  local float_settings = {
+    border = "rounded",
+    wrap = true,
+    max_width = 60,
+  }
   local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })
-
   if diagnostics[1] then
-    vim.diagnostic.open_float(nil, {
+    local diagnostic_settings = vim.tbl_extend("force", {
       focusable = false,
       close_events = { "BufLeave", "CursorMoved", "InsertEnter" },
-      border = 'rounded',
       source = 'always',
-      wrap = true,
-      max_width = 80,
-    })
+    }, float_settings)
+
+    vim.diagnostic.open_float(nil, diagnostic_settings)
   else
-    vim.lsp.buf.hover({
-      border = "rounded",
-      wrap = true,
-      max_width = 80,
-    })
+    vim.lsp.buf.hover(float_settings)
   end
 end, { desc = "Show diagnostics or hover info" })
 

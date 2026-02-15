@@ -24,19 +24,23 @@ return {
     end,
   },
   {
-    dir = "~/Git/ai-hints.nvim",
-    dev = true,
+    "willyelm/ai-hints.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      {
+        "<M-a>",
+        function()
+          require("ai-hints").run_ai()
+        end,
+        desc = "Run AI"
+      }
+    },
     opts = {
+      hint_text = "Implement with AI (⌥+a)",
       tools = {
-        Claude = {
-          cmd = "claude --permission-mode bypassPermissions",
-          keymap = "<leader>1",
-        },
-        Codex = {
-          cmd = "codex",
-          keymap = "<leader>2",
-        }
+        Claude = "claude --permission-mode bypassPermissions",
+        Codex = "codex",
       }
     }
   }
