@@ -4,6 +4,7 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "debugloop/telescope-undo.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     opts = {
@@ -28,8 +29,14 @@ return {
       local telescope = require("telescope")
       telescope.setup(opts)
       telescope.load_extension("fzf")
+      telescope.load_extension("undo")
+      vim.opt.undofile = true
+      vim.opt.undolevels = 10000
+      vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
     end,
     keys = {
+      -- Undo
+      { "<leader>u",  "<cmd>Telescope undo<cr>",                      desc = "Undo History" },
       -- Search
       { "<leader>f",  "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Find in Buffer" },
       { "<leader>sf", "<cmd>Telescope find_files<cr>",                desc = "Find Files" },
@@ -40,24 +47,24 @@ return {
       { "<leader>gH", "<cmd>Telescope git_commits<cr>",               desc = "Project History" },
       { "<leader>gb", "<cmd>Telescope git_branches<cr>",              desc = "Branches" },
       { "<leader>gs", "<cmd>Telescope git_stash<cr>",                 desc = "Stash" },
-      {
-        "<leader>gB",
-        function()
-          require("telescope.builtin").git_branches({
-            attach_mappings = function(_, map)
-              map("i", "<CR>", function(prompt_bufnr)
-                local selection = require("telescope.actions.state").get_selected_entry()
-                require("telescope.actions").close(prompt_bufnr)
-                vim.cmd("DiffviewOpen main.." .. selection.value)
-              end)
-              return true
-            end,
-          })
-        end,
-        desc = "Diff Branch",
-      },
+      -- {
+      --   "<leader>gB",
+      --   function()
+      --     require("telescope.builtin").git_branches({
+      --       attach_mappings = function(_, map)
+      --         map("i", "<CR>", function(prompt_bufnr)
+      --           local selection = require("telescope.actions.state").get_selected_entry()
+      --           require("telescope.actions").close(prompt_bufnr)
+      --           vim.cmd("DiffviewOpen main.." .. selection.value)
+      --         end)
+      --         return true
+      --       end,
+      --     })
+      --   end,
+      --   desc = "Diff Branch",
+      -- },
       -- Command Palette
-      { "<leader>k", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
+      { "<leader>k",  "<cmd>Telescope keymaps<cr>",                   desc = "Keymaps" },
       {
         "<leader>p",
         function()

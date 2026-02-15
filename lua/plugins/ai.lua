@@ -24,102 +24,123 @@ return {
     end,
   },
   {
-    "nvim-telescope/telescope.nvim",
-    keys = {
-      {
-        "<leader>a",
-        function()
-          local context = vim.fn.expand("%:p")
-          -- Add selection if in visual mode
-          if vim.fn.mode():match("[vV]") then
-            vim.cmd('normal! "vy')
-            context = context .. "\n\n" .. vim.fn.getreg('v')
-          end
-          -- Use Telescope picker
-          require('telescope.pickers').new({}, {
-            prompt_title = 'Select AI Tool',
-            finder = require('telescope.finders').new_table({
-              results = {
-                { display = 'Claude Code', cmd = 'claude --permission-mode bypassPermissions' },
-                { display = 'Open Code',   cmd = 'opencode' },
-                { display = 'Codex',       cmd = 'codex' },
-              },
-              entry_maker = function(entry)
-                return {
-                  value = entry,
-                  display = entry.display,
-                  ordinal = entry.display,
-                }
-              end,
-            }),
-            sorter = require('telescope.config').values.generic_sorter({}),
-            attach_mappings = function(prompt_bufnr, map)
-              local actions = require('telescope.actions')
-              local action_state = require('telescope.actions.state')
-              actions.select_default:replace(function()
-                local selection = action_state.get_selected_entry()
-                actions.close(prompt_bufnr)
-                vim.ui.input({ prompt = '❯ Question: ' }, function(question)
-                  if not question then return end
-                  local prompt = context .. "\n\n" .. question
-                  vim.cmd('botright 15split')
-                  vim.fn.termopen(selection.value.cmd, { on_exit = function() end })
-                  vim.api.nvim_chan_send(vim.b.terminal_job_id, prompt .. "\n")
-                  vim.cmd('startinsert')
-                end)
-              end)
-              return true
-            end,
-          }):find()
-        end,
-        mode = { "n", "v" },
-        desc = "Ask AI"
+    dir = "~/Git/ai-hints.nvim",
+    dev = true,
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      tools = {
+        Claude = {
+          cmd = "claude --permission-mode bypassPermissions",
+          keymap = "<leader>1",
+        },
+        Codex = {
+          cmd = "codex",
+          keymap = "<leader>2",
+        }
       }
     }
   }
   -- {
   --   "nvim-lua/plenary.nvim",
-  --   keys = {
-  --     {
-  --       "<leader>a",
-  --       function()
-  --         local context = vim.fn.expand("%:p")
+  --   config = function()
+  --     local ns_id = vim.api.nvim_create_namespace("ai_hints")
   --
-  --         -- Add selection if in visual mode
-  --         if vim.fn.mode():match("[vV]") then
-  --           vim.cmd('normal! "vy')
-  --           context = context .. "\n\n" .. vim.fn.getreg('v')
+  --     -- Function to run AI tool
+  --     local function run_ai_tool(tool, prompt, file_path, line_num)
+  --       local full_prompt = string.format(
+  --         "Context Files:\n%s\nLine: %d\n\nTask:\n%s",
+  --         file_path,
+  --         line_num,
+  --         prompt
+  --       )
+  --
+  --       local base_cmd
+  --       if tool == "claude" then
+  --         base_cmd = 'claude --permission-mode bypassPermissions'
+  --       elseif tool == "codex" then
+  --         base_cmd = 'codex'
+  --       else
+  --         base_cmd = 'opencode'
+  --       end
+  --
+  --       local tmp_file = os.tmpname()
+  --       local f = io.open(tmp_file, 'w')
+  --       f:write(full_prompt)
+  --       f:close()
+  --
+  --       local current_buf = vim.api.nvim_get_current_buf()
+  --       local buf = vim.api.nvim_create_buf(false, true)
+  --       vim.api.nvim_buf_set_name(buf, string.format("[AI] %s", prompt:sub(1, 40)))
+  --       vim.api.nvim_set_current_buf(buf)
+  --
+  --       local cmd = string.format('cat %s | %s', tmp_file, base_cmd)
+  --       vim.fn.termopen(cmd, {
+  --         on_exit = function()
+  --           os.remove(tmp_file)
   --         end
+  --       })
   --
-  --         -- Pick tool and ask question
-  --         vim.ui.select({ "claude", "opencode", "codex" }, { prompt = "AI tool:" }, function(tool)
-  --           if not tool then return end
+  --       vim.api.nvim_set_current_buf(current_buf)
+  --       vim.notify(string.format("AI running: %s", tool), vim.log.levels.INFO)
+  --     end
   --
-  --           vim.ui.input({ prompt = "Question: " }, function(question)
-  --             if not question then return end
+  --     -- Function to scan buffer and add virtual text
+  --     local function update_hints(bufnr)
+  --       bufnr = bufnr or vim.api.nvim_get_current_buf()
+  --       vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
   --
-  --             -- Escape for shell
-  --             local escaped_context = context:gsub('"', '\\"'):gsub('\n', '\\n')
-  --             local escaped_question = question:gsub('"', '\\"')
+  --       local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+  --       local file_path = vim.api.nvim_buf_get_name(bufnr)
   --
-  --             local cmd
-  --             if tool == "claude" then
-  --               cmd = 'claude --permission-mode bypassPermissions -p "' ..
-  --               escaped_context .. '\\n\\n' .. escaped_question .. '"'
-  --             elseif tool == "opencode" then
-  --               cmd = 'opencode -p "' .. escaped_context .. '\\n\\n' .. escaped_question .. '"'
-  --             else -- codex
-  --               cmd = 'codex -p "' .. escaped_context .. '\\n\\n' .. escaped_question .. '"'
-  --             end
+  --       for line_num, line in ipairs(lines) do
+  --         local todo_match = line:match("TODO:%s*(.+)") or line:match("FIX:%s*(.+)")
+  --         if todo_match then
+  --           vim.api.nvim_buf_set_extmark(bufnr, ns_id, line_num - 1, 0, {
+  --             virt_text = {
+  --               { " → ", "Comment" },
+  --               { "Claude <l-1>", "DiagnosticHint" },
+  --               { " | ", "Comment" },
+  --               { "Codex <l-2>", "DiagnosticHint" }
+  --             },
+  --             virt_text_pos = "eol",
+  --           })
+  --         end
+  --       end
+  --     end
   --
-  --             vim.cmd('botright 15split')
-  --             vim.cmd('term ' .. cmd)
-  --           end)
-  --         end)
+  --     -- Keymaps for triggering AI
+  --     vim.keymap.set("n", "<leader>1", function()
+  --       local line = vim.api.nvim_get_current_line()
+  --       local todo_match = line:match("TODO:%s*(.+)") or line:match("FIX:%s*(.+)")
+  --       if todo_match then
+  --         local file_path = vim.fn.expand("%:p")
+  --         local line_num = vim.fn.line(".")
+  --         run_ai_tool("claude", todo_match, file_path, line_num)
+  --       end
+  --     end, { desc = "Run Claude on TODO/FIX" })
+  --
+  --     vim.keymap.set("n", "<leader>2", function()
+  --       local line = vim.api.nvim_get_current_line()
+  --       local todo_match = line:match("TODO:%s*(.+)") or line:match("FIX:%s*(.+)")
+  --       if todo_match then
+  --         local file_path = vim.fn.expand("%:p")
+  --         local line_num = vim.fn.line(".")
+  --         run_ai_tool("codex", todo_match, file_path, line_num)
+  --       end
+  --     end, { desc = "Run Codex on TODO/FIX" })
+  --
+  --     -- Auto-update hints
+  --     local group = vim.api.nvim_create_augroup("AIHints", { clear = true })
+  --     vim.api.nvim_create_autocmd({ "BufEnter", "TextChanged", "TextChangedI" }, {
+  --       group = group,
+  --       callback = function()
+  --         update_hints()
   --       end,
-  --       mode = { "n", "v" },
-  --       desc = "Ask AI"
-  --     }
-  --   }
+  --     })
+  --
+  --     -- Initial load
+  --     update_hints()
+  --   end
   -- }
+  -- ,
 }

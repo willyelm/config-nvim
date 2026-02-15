@@ -57,13 +57,13 @@ return {
           width = 30,
           side = "right",
         },
-        sync_root_with_cwd = true,
-        respect_buf_cwd = true,
-        update_focused_file = {
-          enable = true,
-          update_root = true,
-        },
+        -- sync_root_with_cwd = true,
+        -- respect_buf_cwd = true,
+        -- diagnostics = {
+        --   enable = true,
+        -- },
         renderer = {
+          group_empty = true,
           highlight_git = true,
           highlight_opened_files = "all",
           add_trailing = true,
@@ -91,6 +91,9 @@ return {
             },
           },
         },
+        filesystem_watchers = {
+          enable = true,
+        },
         filters = {
           dotfiles = false,
           custom = { "^.git$", ".DS_Store" },
@@ -98,6 +101,12 @@ return {
         git = {
           enable = true,
           ignore = false,
+        },
+        update_focused_file = {
+          enable = true,
+        },
+        modified = {
+          enable = true,
         },
       })
     end,
