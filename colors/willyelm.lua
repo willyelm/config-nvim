@@ -9,7 +9,7 @@ local s = {
 	black = "#0D0D0D",
 	medium_gray = "#767676",
 	white = "#F1F1F1",
-	actual_white = "#FFFFFF",
+	actual_white = "#FEFEFE",
 	subtle_black = "#303030",
 	light_black = "#262626",
 	lighter_black = "#4E4E4E",
@@ -88,6 +88,7 @@ hi("Boolean", { link = "Number" })
 hi("Constant", { fg = norm })
 hi("Identifier", { fg = norm_strong })
 hi("Function", { fg = norm_strong })
+hi("Statement", { fg = norm_strong, bold = true })
 hi("Keyword", { fg = norm_strong, bold = true })
 hi("Operator", { fg = norm, bold = true })
 hi("PreProc", { fg = norm_subtle })
@@ -111,6 +112,8 @@ hi("StatusLineNC", { fg = s.medium_gray, bg = transparent })
 
 -- TypeScript
 hi("typescriptTypeReference", { link = "Type" })
+hi("typescriptObjectLabel", { link = "Normal" })
+hi("typescriptVariable", { link = "Keyword" })
 
 -- Diff
 hi("DiffAdd", { fg = green, bg = bg_subtle })
@@ -130,21 +133,6 @@ hi("@tag.builtin.tsx", {})
 hi("@tag.tsx", {})
 hi("@tag.attribute.tsx", { link = "Normal" })
 hi("@type.tsx", { link = "Type", force = true })
--- - hi("@tag", {gc fg = s.light_purple })
--- hi("@tag.builtin", { fg = s.light_blue })
--- hi("@tag.component", { fg = s.yellow })
--- hi("@constructor.tsx", { fg = s.yellow })
--- hi("@tag.attribute", { fg = s.cyan })
--- hi("@tag.delimiter", { fg = s.norm_strong })
--- hi("@keyword", { fg = s.purple })
--- hi("@type", { fg = s.green })
--- hi("@tag", { fg = s.light_purple })
--- hi("@tag.builtin", { link = "Function" })
--- hi("@tag.attribute", { link = "Normal" })
--- hi("@tag.delimiter", { link = "Normal" })
--- hi("@keyword", { link = "Keyword" })
--- hi("@type", { link = "Type" })
--- hi("@tag.component.jsx", { link = "Function" })
 
 -- Pmenu (Floating Windows/Completion)
 hi("NormalFloat", { bg = transparent, fg = norm })
@@ -190,6 +178,7 @@ hi("barbecue_separator", { fg = divider })
 
 -- Lualine
 hi("LualineSeparator", { fg = divider })
+hi("lualine_a_normal", { bg = contrast })
 hi("lualine_c_normal", { link = "StatusLine" })
 hi("lualine_c_insert", { link = "StatusLine" })
 hi("lualine_c_visual", { link = "StatusLine" })
@@ -200,3 +189,11 @@ hi("AerialError", { fg = red })
 hi("AerialWarning", { fg = yellow })
 hi("AerialInformation", { fg = cyan })
 hi("AerialHint", { fg = purple })
+--
+-- return {
+-- 	normal = { a = { fg = norm, bg = contrast } },
+-- 	insert = { a = { fg = norm, bg = s.light_yellow } },
+-- 	visual = { a = { fg = norm, bg = s.light_blue } },
+-- 	replace = { a = { fg = norm, bg = s.orange } },
+-- 	command = { a = { fg = norm, bg = s.light_green } },
+-- }
