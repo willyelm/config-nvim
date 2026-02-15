@@ -1,38 +1,38 @@
 vim.cmd("highlight clear")
 if vim.fn.exists("syntax_on") then
-	vim.cmd("syntax reset")
+  vim.cmd("syntax reset")
 end
 vim.g.colors_name = "willyelm"
 -- Colors
 local s = {
-	actual_black = "#000000",
-	black = "#0D0D0D",
-	medium_gray = "#767676",
-	white = "#F1F1F1",
-	actual_white = "#FEFEFE",
-	subtle_black = "#303030",
-	light_black = "#262626",
-	lighter_black = "#4E4E4E",
-	light_gray = "#A8A8A8",
-	lighter_gray = "#C6C6C6",
-	lightest_gray = "#EEEEEE",
-	pink = "#fb007a",
-	dark_red = "#C30771",
-	light_red = "#E32791",
-	orange = "#ef8875",
-	darker_blue = "#005F87",
-	dark_blue = "#008EC4",
-	blue = "#20BBFC",
-	light_blue = "#b6d6fd",
-	dark_cyan = "#20A5BA",
-	light_cyan = "#4FB8CC",
-	dark_green = "#ace6bf",
-	light_green = "#c6f1d4",
-	dark_purple = "#af5fd7",
-	light_purple = "#d5bbfa",
-	yellow = "#d6ca86",
-	light_yellow = "#eadead",
-	dark_yellow = "#7d713f",
+  actual_black = "#000000",
+  black = "#0D0D0D",
+  medium_gray = "#767676",
+  white = "#F1F1F1",
+  actual_white = "#FEFEFE",
+  subtle_black = "#303030",
+  light_black = "#262626",
+  lighter_black = "#4E4E4E",
+  light_gray = "#A8A8A8",
+  lighter_gray = "#C6C6C6",
+  lightest_gray = "#EEEEEE",
+  pink = "#fb007a",
+  dark_red = "#C30771",
+  light_red = "#E32791",
+  orange = "#ef8875",
+  darker_blue = "#005F87",
+  dark_blue = "#008EC4",
+  blue = "#20BBFC",
+  light_blue = "#b6d6fd",
+  dark_cyan = "#20A5BA",
+  light_cyan = "#4FB8CC",
+  dark_green = "#ace6bf",
+  light_green = "#c6f1d4",
+  dark_purple = "#af5fd7",
+  light_purple = "#d5bbfa",
+  yellow = "#d6ca86",
+  light_yellow = "#eadead",
+  dark_yellow = "#7d713f",
 }
 -- Contextual Logic (Dark Mode focus)
 local bg, bg_subtle, bg_very_subtle, divider, norm, norm_subtle, norm_strong, purple, cyan, green, red, visual, yellow, contrast
@@ -40,40 +40,40 @@ local bg, bg_subtle, bg_very_subtle, divider, norm, norm_subtle, norm_strong, pu
 local transparent = "NONE"
 
 if vim.o.background == "dark" then
-	bg = s.black
-	bg_subtle = s.lighter_black
-	bg_very_subtle = s.subtle_black
-	divider = s.subtle_black
-	norm = s.lighter_gray
-	norm_subtle = s.medium_gray
-	norm_strong = s.white
-	purple = s.light_purple
-	cyan = s.light_cyan
-	green = s.light_green
-	red = s.light_red
-	visual = s.lightest_gray
-	yellow = s.light_yellow
-	contrast = s.actual_white
+  bg = s.black
+  bg_subtle = s.lighter_black
+  bg_very_subtle = s.subtle_black
+  divider = s.subtle_black
+  norm = s.lighter_gray
+  norm_subtle = s.medium_gray
+  norm_strong = s.white
+  purple = s.light_purple
+  cyan = s.light_cyan
+  green = s.light_green
+  red = s.light_red
+  visual = s.lightest_gray
+  yellow = s.light_yellow
+  contrast = s.actual_white
 else
-	bg = s.actual_white
-	bg_subtle = s.light_gray
-	bg_very_subtle = s.lightest_gray
-	divider = s.lightest_gray
-	norm = s.light_black
-	norm_subtle = s.medium_gray
-	norm_strong = s.black
-	purple = s.dark_purple
-	cyan = s.dark_cyan
-	green = s.dark_green
-	red = s.dark_red
-	visual = s.dark_purple
-	yellow = s.dark_yellow
-	contrast = s.actual_black
+  bg = s.actual_white
+  bg_subtle = s.light_gray
+  bg_very_subtle = s.lightest_gray
+  divider = s.lightest_gray
+  norm = s.light_black
+  norm_subtle = s.medium_gray
+  norm_strong = s.black
+  purple = s.dark_purple
+  cyan = s.dark_cyan
+  green = s.dark_green
+  red = s.dark_red
+  visual = s.dark_purple
+  yellow = s.dark_yellow
+  contrast = s.actual_black
 end
 
 -- Helper Function
 local function hi(name, opts)
-	vim.api.nvim_set_hl(0, name, opts)
+  vim.api.nvim_set_hl(0, name, opts)
 end
 
 -- Standard UI Highlights
@@ -167,11 +167,6 @@ hi("NvimTreeOpenedFile", { fg = norm_strong, bold = true })
 hi("NvimTreeWinSeparator", { fg = divider, bg = transparent })
 hi("NvimTreeGitIgnored", { link = "Comment" })
 
--- hi("NvimTreeGitDirty", { link = "NvimTreeNormal" })
--- hi("NvimTreeGitStaged", { link = "NvimTreeNormal" })
--- hi("NvimTreeGitNew", { link = "NvimTreeNormal" })
--- hi("NvimTreeGitDeleted", { link = "NvimTreeNormal" })
-
 -- Barbecue
 hi("Barbecue", { bg = transparent })
 hi("barbecue_separator", { fg = divider })
@@ -189,11 +184,6 @@ hi("AerialError", { fg = red })
 hi("AerialWarning", { fg = yellow })
 hi("AerialInformation", { fg = cyan })
 hi("AerialHint", { fg = purple })
---
--- return {
--- 	normal = { a = { fg = norm, bg = contrast } },
--- 	insert = { a = { fg = norm, bg = s.light_yellow } },
--- 	visual = { a = { fg = norm, bg = s.light_blue } },
--- 	replace = { a = { fg = norm, bg = s.orange } },
--- 	command = { a = { fg = norm, bg = s.light_green } },
--- }
+
+-- Telescope
+hi("TelescopeNormal", { bg = transparent })

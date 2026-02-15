@@ -14,11 +14,6 @@ return {
       auto_attach = true,
       signcolumn = true,
       current_line_blame = true,
-      current_line_blame_opts = {
-        virt_text = true,
-        virt_text_pos = 'eol',
-        delay = 300,
-      },
       word_diff = false,
       watch_gitdir = {
         follow_files = true,
