@@ -14,7 +14,7 @@ local s = {
 	gray_05 = "#767676",
 	gray_06 = "#404040",
 	gray_07 = "#303030",
-	gray_08 = "#222222",
+	gray_08 = "#202020",
 	gray_09 = "#0D0D0D",
 	orange = "#ef8875",
 	red_01 = "#ec7e90",
@@ -31,14 +31,14 @@ local s = {
 	yellow_10 = "#7d713f",
 }
 -- Semantic variables
-local bg_main, bg_muted, bg_visual, bg_inverse, bg_positive, bg_negative
+local bg_main, bg_active, bg_visual, bg_inverse, bg_positive, bg_negative
 local fg_body, fg_primary, fg_secondary, fg_muted, fg_inverse, fg_contrast
 local fg_positive, fg_negative, fg_warning, fg_info, fg_accent, fg_string, fg_link
 local divider
 
 if vim.o.background == "dark" then
 	bg_main = "NONE"
-	bg_muted = s.gray_07
+	bg_active = s.gray_08
 	bg_visual = s.gray_02
 	bg_inverse = s.white
 	bg_positive = s.green_10
@@ -59,7 +59,7 @@ if vim.o.background == "dark" then
 	divider = s.gray_07
 else
 	bg_main = "NONE"
-	bg_muted = s.gray_02
+	bg_active = s.gray_02
 	bg_visual = s.purple_10
 	bg_inverse = s.black
 	bg_positive = s.green_01
@@ -108,8 +108,8 @@ hi("Error", { fg = fg_contrast, bg = bg_negative, bold = true })
 hi("Todo", { fg = fg_accent, underline = true })
 hi("Directory", { fg = fg_primary })
 hi("LineNr", { fg = fg_muted })
-hi("CursorLine", { bg = bg_muted })
-hi("CursorLineNr", { bg = bg_muted })
+hi("CursorLine", { bg = bg_active })
+hi("CursorLineNr", { bg = bg_active })
 hi("Visual", { fg = fg_inverse, bg = bg_visual })
 hi("VertSplit", { fg = divider, bg = bg_main })
 hi("WinSeparator", { fg = divider, bg = bg_main })
@@ -150,7 +150,7 @@ hi("Pmenu", { fg = fg_body, bg = bg_main })
 hi("PmenuSel", { fg = fg_inverse, bg = fg_accent, bold = true })
 hi("PmenuSbar", { bg = bg_main })
 hi("PmenuDoc", { bg = bg_main })
-hi("PmenuThumb", { bg = bg_muted })
+hi("PmenuThumb", { bg = bg_active })
 hi("PmenuBorder", { fg = divider, bg = bg_main })
 hi("PmenuDocBorder", { fg = divider, bg = bg_main })
 

@@ -24,24 +24,23 @@ return {
 		end,
 	},
 	{
-		"willyelm/ai-hints.nvim",
+		dir = "~/Git/sidekick.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("sidekick").setup({
+				hints = {
+					enabled = true,
+					tip = "Implement with AI (⌥+a)",
+				},
+				tools = {
+					Claude = "claude --permission-mode bypassPermissions",
+					-- Codex = "codex",
+				},
+			})
+		end,
 		keys = {
-			{
-				"<M-a>",
-				function()
-					require("ai-hints").run_ai()
-				end,
-				desc = "Run AI",
-			},
-		},
-		opts = {
-			hint_text = "Implement with AI (⌥+a)",
-			tools = {
-				Claude = "claude --permission-mode bypassPermissions",
-				Codex = "codex",
-			},
+			{ "<M-a>", "<cmd>Sidekick<cr>", desc = "Start agent tool" },
 		},
 	},
 }
