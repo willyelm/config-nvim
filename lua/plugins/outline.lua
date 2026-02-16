@@ -13,9 +13,9 @@ return {
 			highlight_on_hover = true,
 			filter_kind = false,
 			layout = {
-				default_direction = "left",
+				default_direction = "right",
 				placement = "window",
-				width = 30,
+				width = 20,
 			},
 			attach_mode = "global",
 		},
