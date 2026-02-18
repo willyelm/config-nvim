@@ -12,12 +12,10 @@ vim.opt.smarttab = true
 vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 
--- vim.opt.wrap = true
--- vim.opt.wrapmargin = 2
 vim.opt.wrap = false
 vim.opt.sidescroll = 1
 vim.opt.sidescrolloff = 5
--- vim.opt.textwidth = 80
+vim.opt.textwidth = 80
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -31,10 +29,8 @@ vim.opt.colorcolumn = "100"
 vim.opt.termguicolors = true
 vim.o.autoread = true
 
--- vim.opt.scrolloff = 8
--- vim.opt.sidescrolloff = 8
 vim.opt.cursorline = true
-vim.opt.guicursor = "n-c-sm:block,i-ci-ve:ver25,v:ver25,r-cr:hor20,o:hor50"
+-- vim.opt.guicursor = "n-c-sm:block,i-ci-ve:ver25,v:ver25,r-cr:hor20,o:hor50"
 vim.opt.mouse = "a"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.signcolumn = "yes"
@@ -62,16 +58,3 @@ vim.filetype.add({
 		mdx = "mdx",
 	},
 })
-
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
--- vim.g.markdown_fenced_languages = {
--- 	"ts=typescript",
--- 	"tsx=typescriptreact",
--- 	"js=javascript",
--- 	"jsx=javascriptreact",
--- 	"json=json",
--- 	"lua=lua",
--- 	"go=go",
--- 	"bash=sh",
--- 	"sh=sh",
--- }

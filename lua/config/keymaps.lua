@@ -1,5 +1,13 @@
--- Refactor
+-- LSP
 vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+vim.keymap.set("n", "<leader>h", function()
+	vim.lsp.buf.document_highlight()
+	vim.api.nvim_create_autocmd("CursorMoved", {
+		once = true,
+		callback = vim.lsp.buf.clear_references,
+	})
+end, { desc = "Highlight similar words (Manual)" })
+
 -- Hovers
 vim.keymap.set("n", "K", function()
 	vim.lsp.buf.hover({
@@ -16,7 +24,7 @@ vim.keymap.set("n", "gl", vim.diagnostic.open_float, {
 	desc = "Show line diagnostics",
 	silent = true,
 })
-
+--
 -- vim.keymap.set("n", "K", function()
 -- 	local float_settings = {
 -- 		border = "rounded",
@@ -39,9 +47,6 @@ vim.keymap.set("n", "gl", vim.diagnostic.open_float, {
 
 -- Save
 vim.keymap.set({ "n", "i" }, "<C-s>", "<Esc>:write<CR>", { desc = "Save Changes" })
--- Toggle Comment
--- vim.keymap.set("n", "<leader>/", "gcc", { remap = true, desc = "Comment line" })
--- vim.keymap.set("v", "<leader>/", "gc", { remap = true, desc = "Comment selection" })
 
 -- NvimTree
 vim.keymap.set("n", "<leader><Tab>", "<C-w>w", { desc = "Next window" })
@@ -58,3 +63,12 @@ vim.keymap.set("n", "<leader>l", function()
 	vim.fn.setreg("+", coordinates)
 	print("Copied: " .. coordinates)
 end, { desc = "Copy location" })
+-- Toggle Comments
+vim.keymap.set({ "n", "v" }, "<leader>/", function()
+	local mode = vim.api.nvim_get_mode().mode
+	if mode == "v" or mode == "V" then
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>gvgc", true, false, true), "m", false)
+	else
+		vim.api.nvim_feedkeys("gcc", "m", false)
+	end
+end, { desc = "Toggle comment" })

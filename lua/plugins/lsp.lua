@@ -14,24 +14,24 @@ return {
 
 			lsp_zero.on_attach(function(client, bufnr)
 				lsp_zero.default_keymaps({ buffer = bufnr })
-				-- Enaable inlays
+				-- Enable inlays
 				if client.server_capabilities.inlayHintProvider then
 					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 				end
 				-- Enable document highlights
-				if client.server_capabilities.documentHighlightProvider then
-					local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-					vim.api.nvim_create_autocmd("CursorHold", {
-						group = group,
-						buffer = bufnr,
-						callback = vim.lsp.buf.document_highlight,
-					})
-					vim.api.nvim_create_autocmd("CursorMoved", {
-						group = group,
-						buffer = bufnr,
-						callback = vim.lsp.buf.clear_references,
-					})
-				end
+				-- if client.server_capabilities.documentHighlightProvider then
+				-- 	local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+				-- 	vim.api.nvim_create_autocmd("CursorHold", {
+				-- 		group = group,
+				-- 		buffer = bufnr,
+				-- 		callback = vim.lsp.buf.document_highlight,
+				-- 	})
+				-- 	vim.api.nvim_create_autocmd("CursorMoved", {
+				-- 		group = group,
+				-- 		buffer = bufnr,
+				-- 		callback = vim.lsp.buf.clear_references,
+				-- 	})
+				-- end
 			end)
 
 			require("mason").setup({})
@@ -69,17 +69,21 @@ return {
 				single_file_support = true,
 				init_options = {
 					preferences = {
+						providePrefixAndSuffixTextForRename = true,
+						allowRenameOfImportPath = true,
+						includeCompletionsWithSnippetText = true,
+						includeCompletionsWithInsertText = true,
 						-- auto imports
 						includeCompletionsForModuleExports = true,
 						includeCompletionsForImportStatements = true,
 						importModuleSpecifierPreference = "non-relative",
 						includeInlayParameterNameHints = "all",
 						-- inlays
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						-- includeInlayFunctionParameterTypeHints = false,
-						-- includeInlayVariableTypeHints = true,
 						-- includeInlayPropertyDeclarationTypeHints = false,
-						-- includeInlayFunctionLikeReturnTypeHints = false,
+						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+						includeInlayFunctionParameterTypeHints = false,
+						includeInlayVariableTypeHints = true,
+						includeInlayFunctionLikeReturnTypeHints = false,
 						includeInlayEnumMemberValueHints = true,
 					},
 				},
@@ -177,12 +181,11 @@ return {
 					formatting = {
 						fields = { "abbr", "kind", "menu" },
 						format = function(entry, vim_item)
-							-- Show which source the suggestion is coming from
 							vim_item.menu = ({
-								nvim_lsp = "[LSP]",
-								luasnip = "[Snippet]",
-								buffer = "[Buffer]",
-								path = "[Path]",
+								nvim_lsp = "(lsp)",
+								luasnip = "(snippet)",
+								buffer = "(buffer)",
+								path = "(path)",
 							})[entry.source.name]
 							return vim_item
 						end,
