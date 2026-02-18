@@ -34,8 +34,10 @@ return {
 					tip = "Implement with AI (⌥+a)",
 				},
 				tools = {
+					--dangerously-skip-permissions
+					["Claude Ollama"] = "ollama launch claude",
+					OpenCode = "opencode",
 					Claude = "claude --permission-mode bypassPermissions",
-					-- Codex = "codex",
 				},
 			})
 		end,

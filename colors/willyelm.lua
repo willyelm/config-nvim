@@ -18,17 +18,17 @@ local s = {
 	gray_09 = "#0D0D0D",
 	orange = "#ef8875",
 	red_01 = "#ec7e90",
-	red_10 = "#7d2c34",
+	red_10 = "#3b2327",
 	blue_01 = "#b6d6fd",
-	blue_10 = "#008EC4",
+	blue_10 = "##1e435d",
 	cyan_01 = "#4fb8cc",
 	cyan_10 = "#20434b",
 	green_01 = "#c6f1d4",
-	green_10 = "#333f36",
+	green_10 = "#272e29",
 	purple_01 = "#d5bbfa",
 	purple_10 = "#442a58",
 	yellow_01 = "#eadead",
-	yellow_10 = "#7d713f",
+	yellow_10 = "#564819",
 }
 -- Semantic variables
 local bg_main, bg_active, bg_visual, bg_inverse, bg_positive, bg_negative
