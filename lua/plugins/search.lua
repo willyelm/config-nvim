@@ -9,7 +9,7 @@ return {
 		},
 		opts = {
 			defaults = {
-				winblend = 10,
+				winblend = 0,
 				layout_strategy = "horizontal",
 				layout_config = {
 					horizontal = {
@@ -69,7 +69,7 @@ return {
 				"<leader>p",
 				function()
 					require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
-						winblend = 10,
+						winblend = 0,
 						previewer = false,
 					}))
 				end,

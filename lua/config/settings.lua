@@ -30,6 +30,7 @@ vim.opt.termguicolors = true
 vim.o.autoread = true
 
 vim.opt.cursorline = true
+vim.opt.guicursor = "n:block,v-i-ci-ve:ver10-Cursor"
 -- vim.opt.guicursor = "n-c-sm:block,i-ci-ve:ver25,v:ver25,r-cr:hor20,o:hor50"
 vim.opt.mouse = "a"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }

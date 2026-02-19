@@ -11,9 +11,9 @@ local s = {
 	gray_02 = "#EEEEEE",
 	gray_03 = "#C6C6C6",
 	gray_04 = "#A8A8A8",
-	gray_05 = "#767676",
-	gray_06 = "#404040",
-	gray_07 = "#303030",
+	gray_05 = "#868686",
+	gray_06 = "#606060",
+	gray_07 = "#3b3b3b",
 	gray_08 = "#202020",
 	gray_09 = "#0D0D0D",
 	orange = "#ef8875",
@@ -144,7 +144,7 @@ hi("@tag.attribute.tsx", { link = "Normal" })
 hi("@type.tsx", { link = "Type", force = true })
 
 -- Pmenu (Floating Windows/Completion)
-hi("NormalFloat", { bg = bg_main, fg = fg_body })
+hi("NormalFloat", { bg = bg_main, fg = fg_body, ctermbg = "none" })
 hi("FloatBorder", { fg = divider, bg = bg_main })
 hi("Pmenu", { fg = fg_body, bg = bg_main })
 hi("PmenuSel", { fg = fg_inverse, bg = fg_accent, bold = true })
@@ -195,4 +195,11 @@ hi("AerialInformation", { fg = fg_info })
 hi("AerialHint", { fg = fg_accent })
 
 -- Telescope
-hi("TelescopeNormal", { bg = bg_main })
+hi("TelescopeNormal", { link = "NormalFloat" })
+hi("TelescopeBorder", { fg = divider })
+hi("TelescopePromptNormal", { link = "NormalFloat" })
+hi("TelescopePromptBorder", { fg = divider })
+hi("TelescopeResultsNormal", { link = "NormalFloat" })
+hi("TelescopeResultsBorder", { fg = divider })
+hi("TelescopePreviewNormal", { link = "NormalFloat" })
+hi("TelescopePreviewBorder", { fg = divider })

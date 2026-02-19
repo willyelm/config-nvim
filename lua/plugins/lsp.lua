@@ -38,7 +38,7 @@ return {
 			require("mason-tool-installer").setup({
 				ensure_installed = {
 					-- LSPs
-					"ts_ls",
+					"vtsls",
 					"lua_ls",
 					"gopls",
 					"pyright",
@@ -61,30 +61,33 @@ return {
 					lsp_zero.default_setup,
 				},
 			})
-			-- Override ts_ls config using new API
-			vim.lsp.config("ts_ls", {
-				cmd = { "typescript-language-server", "--stdio" },
+
+			vim.lsp.config("vtsls", {
 				root_markers = { "package.json", "tsconfig.json", ".git" },
 				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-				single_file_support = true,
-				init_options = {
-					preferences = {
-						providePrefixAndSuffixTextForRename = true,
-						allowRenameOfImportPath = true,
-						includeCompletionsWithSnippetText = true,
-						includeCompletionsWithInsertText = true,
-						-- auto imports
-						includeCompletionsForModuleExports = true,
-						includeCompletionsForImportStatements = true,
-						importModuleSpecifierPreference = "non-relative",
-						includeInlayParameterNameHints = "all",
-						-- inlays
-						-- includeInlayPropertyDeclarationTypeHints = false,
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayFunctionParameterTypeHints = false,
-						includeInlayVariableTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = false,
-						includeInlayEnumMemberValueHints = true,
+				settings = {
+					typescript = {
+						updateImportsOnFileMove = { enabled = "always" },
+						suggest = {
+							completeFunctionCalls = true,
+						},
+						inlayHints = {
+							parameterNames = { enabled = "all" },
+							parameterTypes = { enabled = false },
+							variableTypes = { enabled = true },
+							propertyDeclarationTypes = { enabled = false },
+							functionLikeReturnTypes = { enabled = false },
+							enumMemberValues = { enabled = true },
+						},
+						preferences = {
+							importModuleSpecifierPreference = "non-relative",
+							includeCompletionsForModuleExports = true,
+							includeCompletionsForImportStatements = true,
+							includeCompletionsWithSnippetText = true,
+							includeCompletionsWithInsertText = true,
+							providePrefixAndSuffixTextForRename = true,
+							allowRenameOfImportPath = true,
+						},
 					},
 				},
 				on_attach = lsp_zero.on_attach,
@@ -104,7 +107,7 @@ return {
 			})
 
 			-- Enable the configs
-			vim.lsp.enable("ts_ls")
+			vim.lsp.enable("vstls")
 			vim.lsp.enable("biome")
 		end,
 	},
@@ -113,6 +116,9 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
 		build = ":TSUpdate",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
 		main = "nvim-treesitter",
 		opts = {
 			ensure_installed = {
@@ -129,8 +135,18 @@ return {
 			},
 			auto_install = true,
 			indent = { enable = true },
-			highlight = {
-				enable = true,
+			highlight = { enable = true },
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true,
+					keymaps = {
+						["af"] = "@function.outer",
+						["if"] = "@function.inner",
+						["ac"] = "@class.outer",
+						["ic"] = "@class.inner",
+					},
+				},
 			},
 		},
 		config = function(_, opts)

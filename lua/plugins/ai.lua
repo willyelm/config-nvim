@@ -35,9 +35,10 @@ return {
 				},
 				tools = {
 					--dangerously-skip-permissions
-					["Claude Ollama"] = "ollama launch claude",
 					OpenCode = "opencode",
+					Copilot = "copilot",
 					Claude = "claude --permission-mode bypassPermissions",
+					Ollama = "ollama launch claude",
 				},
 			})
 		end,

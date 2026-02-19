@@ -6,7 +6,15 @@ vim.keymap.set("n", "<leader>h", function()
 		once = true,
 		callback = vim.lsp.buf.clear_references,
 	})
-end, { desc = "Highlight similar words (Manual)" })
+end, { desc = "Highlight words" })
+
+-- Move Text
+vim.keymap.set("v", "<leader>.", ">gv", { desc = "Increase indent" })
+vim.keymap.set("v", "<leader>,", "<gv", { desc = "Decrease indent" })
+vim.keymap.set("n", "<M-Down>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
+vim.keymap.set("n", "<M-Up>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
+vim.keymap.set("v", "<M-Down>", ":m '>+1<cr>gv=gv", { desc = "Move block down" })
+vim.keymap.set("v", "<M-Up>", ":m '<-2<cr>gv=gv", { desc = "Move block up" })
 
 -- Hovers
 vim.keymap.set("n", "K", function()
@@ -63,6 +71,7 @@ vim.keymap.set("n", "<leader>l", function()
 	vim.fn.setreg("+", coordinates)
 	print("Copied: " .. coordinates)
 end, { desc = "Copy location" })
+
 -- Toggle Comments
 vim.keymap.set({ "n", "v" }, "<leader>/", function()
 	local mode = vim.api.nvim_get_mode().mode
