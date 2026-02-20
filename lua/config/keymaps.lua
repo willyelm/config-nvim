@@ -64,7 +64,7 @@ vim.keymap.set("n", "<leader>\\", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle Ex
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Copy Location
-vim.keymap.set("n", "<leader>l", function()
+vim.keymap.set("n", "<leader>c", function()
 	local path = vim.fn.expand("%")
 	local line = vim.fn.line(".")
 	local coordinates = path .. ":" .. line

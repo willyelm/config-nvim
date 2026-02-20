@@ -19,7 +19,7 @@ return {
 					},
 					width = 0.85,
 					height = 0.80,
-					preview_cutoff = 120,
+					preview_cutoff = 100,
 				},
 				sorting_strategy = "ascending",
 				border = true,
@@ -39,9 +39,9 @@ return {
 			{ "<leader>u", "<cmd>Telescope undo<cr>", desc = "Undo History" },
 			-- Search
 			{ "<leader>f", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Find in Buffer" },
-			{ "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-			{ "<leader>sg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
-			{ "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+			-- { "<leader>w", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+			{ "<leader>l", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+			-- { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
 			-- Git
 			{ "<leader>gh", "<cmd>Telescope git_bcommits<cr>", desc = "File History" },
 			{ "<leader>gH", "<cmd>Telescope git_commits<cr>", desc = "Project History" },
@@ -65,16 +65,6 @@ return {
 			},
 			-- Command Palette
 			{ "<leader>k", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
-			{
-				"<leader>p",
-				function()
-					require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
-						winblend = 0,
-						previewer = false,
-					}))
-				end,
-				desc = "Command Palette",
-			},
 		},
 	},
 	-- Search/Replace
@@ -93,12 +83,17 @@ return {
 	},
 	-- Quick Navigation
 	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		opts = {},
+		dir = "~/Git/pulse.nvim",
+		lazy = false,
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = {
+			cmdline = true,
+		},
 		keys = {
-			{ "s", mode = { "n", "x", "o" }, "<cmd>lua require('flash').jump()<cr>", desc = "Jump" },
-			{ "S", mode = { "n", "x", "o" }, "<cmd>lua require('flash').treesitter()<cr>", desc = "Jump (Treesitter)" },
+			{ "<leader>p", "<cmd>Pulse<cr>", desc = "Pulse" },
 		},
 	},
 	{

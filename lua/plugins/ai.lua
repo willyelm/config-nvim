@@ -34,11 +34,8 @@ return {
 					tip = "Implement with AI (⌥+a)",
 				},
 				tools = {
-					--dangerously-skip-permissions
-					OpenCode = "opencode",
-					Copilot = "copilot",
-					Claude = "claude --permission-mode bypassPermissions",
-					Ollama = "ollama launch claude",
+					claude = "claude --permission-mode bypassPermissions",
+					ollama = "ollama launch claude",
 				},
 			})
 		end,

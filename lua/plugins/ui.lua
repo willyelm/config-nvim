@@ -21,19 +21,6 @@ return {
 			show_dirname = true,
 			show_basename = true,
 			symbols = { separator = "/", modified = "*", ellipsis = "..." },
-			-- lead_custom_section = function()
-			-- 	local mode_map = {
-			-- 		["n"] = " NORMAL ",
-			-- 		["i"] = " INSERT ",
-			-- 		["v"] = " VISUAL ",
-			-- 		["V"] = " V-LINE ",
-			-- 		["c"] = " COMMAND ",
-			-- 		["R"] = " REPLACE ",
-			-- 		["t"] = " TERMINAL ",
-			-- 	}
-			-- 	local mode = vim.api.nvim_get_mode().mode
-			-- 	return mode_map[mode] or mode
-			-- end,
 		},
 	},
 	-- Statusline with Git Branch and LSP status
@@ -49,10 +36,6 @@ return {
 			theme.inactive.c.bg = "NONE"
 
 			return {
-				-- winbar = {
-				-- 	lualine_a = { "mode" },
-				-- 	lualine_b = { "filename" },
-				-- },
 				options = {
 					globalstatus = true,
 					theme = theme,
@@ -84,11 +67,6 @@ return {
 					width = 30,
 					side = "right",
 				},
-				-- sync_root_with_cwd = true,
-				-- respect_buf_cwd = true,
-				-- diagnostics = {
-				--   enable = true,
-				-- },
 				renderer = {
 					group_empty = true,
 					highlight_git = true,
@@ -145,6 +123,21 @@ return {
 		keys = {
 			{ "<leader>x", "<cmd>Bdelete<cr>", desc = "Close Buffer" },
 			{ "<leader>X", "<cmd>bufdo bd<cr>", desc = "Close All" },
+		},
+	},
+	-- Scrollbar with git and diagnostic indicators
+	{
+		"petertriho/nvim-scrollbar",
+		event = "VeryLazy",
+		dependencies = {
+			"lewis6991/gitsigns.nvim",
+		},
+		opts = {
+			show = true,
+			handlers = {
+				gitsigns = true,
+				diagnostic = true,
+			},
 		},
 	},
 	-- Colorizer
