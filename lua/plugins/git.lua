@@ -68,6 +68,7 @@ return {
 			})
 		end,
 		keys = {
+			{ "<leader>gc", "<cmd>Neogit commit<cr>", desc = "Stash menu" },
 			{ "<leader>gz", "<cmd>Neogit stash<cr>", desc = "Stash menu" },
 		},
 	},

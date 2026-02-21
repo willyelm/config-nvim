@@ -27,7 +27,7 @@ local s = {
 	green_10 = "#272e29",
 	purple_01 = "#d5bbfa",
 	purple_10 = "#442a58",
-	yellow_01 = "#eadead",
+	yellow_01 = "#f6e191",
 	yellow_10 = "#564819",
 }
 -- Semantic variables
@@ -60,7 +60,7 @@ if vim.o.background == "dark" then
 else
 	bg_main = "NONE"
 	bg_active = s.gray_02
-	bg_visual = s.purple_10
+	bg_visual = s.gray_08
 	bg_inverse = s.black
 	bg_positive = s.green_01
 	bg_negative = s.red_01
@@ -187,19 +187,12 @@ hi("lualine_c_normal", { link = "StatusLine" })
 hi("lualine_c_insert", { link = "StatusLine" })
 hi("lualine_c_visual", { link = "StatusLine" })
 
--- Aerial
-hi("AerialNormal", { fg = fg_body })
-hi("AerialError", { fg = fg_negative })
-hi("AerialWarning", { fg = fg_warning })
-hi("AerialInformation", { fg = fg_info })
-hi("AerialHint", { fg = fg_accent })
-
--- Telescope
-hi("TelescopeNormal", { link = "NormalFloat" })
-hi("TelescopeBorder", { fg = divider })
-hi("TelescopePromptNormal", { link = "NormalFloat" })
-hi("TelescopePromptBorder", { fg = divider })
-hi("TelescopeResultsNormal", { link = "NormalFloat" })
-hi("TelescopeResultsBorder", { fg = divider })
-hi("TelescopePreviewNormal", { link = "NormalFloat" })
-hi("TelescopePreviewBorder", { fg = divider })
+-- -- Telescope
+-- hi("TelescopeNormal", { link = "NormalFloat" })
+-- hi("TelescopeBorder", { fg = divider })
+-- hi("TelescopePromptNormal", { link = "NormalFloat" })
+-- hi("TelescopePromptBorder", { fg = divider })
+-- hi("TelescopeResultsNormal", { link = "NormalFloat" })
+-- hi("TelescopeResultsBorder", { fg = divider })
+-- hi("TelescopePreviewNormal", { link = "NormalFloat" })
+-- hi("TelescopePreviewBorder", { fg = divider })

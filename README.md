@@ -115,8 +115,6 @@ npm install -g @mdx-js/language-server
 | `<Leader>/`  | Toggle comment      |
 | `<C-s>`      | Save file           |
 | `K`          | Hover documentation |
-| `s`          | Flash jump          |
-| `{` / `}`    | Aerial prev/next    |
 
 ### Debug Keys
 
