@@ -5,7 +5,7 @@ end
 vim.g.colors_name = "willyelm"
 -- Colors
 local s = {
-	black = "#000000",
+	black = "#0D0D0D",
 	white = "#FEFEFE",
 	gray_01 = "#F1F1F1",
 	gray_02 = "#EEEEEE",
@@ -13,25 +13,26 @@ local s = {
 	gray_04 = "#A8A8A8",
 	gray_05 = "#868686",
 	gray_06 = "#606060",
-	gray_07 = "#3b3b3b",
-	gray_08 = "#202020",
-	gray_09 = "#0D0D0D",
+	gray_07 = "#40403f",
+	gray_08 = "#2d2d2d",
 	orange = "#ef8875",
 	red_01 = "#ec7e90",
-	red_10 = "#3b2327",
+	red_07 = "#632f36",
+	red_08 = "#361f24",
 	blue_01 = "#b6d6fd",
-	blue_10 = "##1e435d",
+	blue_08 = "#1c4059",
 	cyan_01 = "#4fb8cc",
-	cyan_10 = "#20434b",
+	cyan_08 = "#20424a",
 	green_01 = "#c6f1d4",
-	green_10 = "#272e29",
+	green_07 = "#334537",
+	green_08 = "#242a27",
 	purple_01 = "#d5bbfa",
-	purple_10 = "#442a58",
+	purple_08 = "#402753",
 	yellow_01 = "#f6e191",
-	yellow_10 = "#564819",
+	yellow_08 = "#544719",
 }
 -- Semantic variables
-local bg_main, bg_active, bg_visual, bg_inverse, bg_positive, bg_negative
+local bg_main, bg_active, bg_visual, bg_inverse, bg_positive, bg_negative, bg_search
 local fg_body, fg_primary, fg_secondary, fg_muted, fg_inverse, fg_contrast
 local fg_positive, fg_negative, fg_warning, fg_info, fg_accent, fg_string, fg_link
 local divider
@@ -41,13 +42,14 @@ if vim.o.background == "dark" then
 	bg_active = s.gray_08
 	bg_visual = s.gray_02
 	bg_inverse = s.white
-	bg_positive = s.green_10
-	bg_negative = s.red_10
+	bg_positive = s.green_08
+	bg_negative = s.red_08
+	bg_search = s.yellow_01
 	fg_body = s.gray_03
 	fg_primary = s.gray_01
 	fg_secondary = s.gray_05
 	fg_muted = s.gray_06
-	fg_inverse = s.gray_09
+	fg_inverse = s.black
 	fg_contrast = s.white
 	fg_positive = s.green_01
 	fg_negative = s.red_01
@@ -64,20 +66,21 @@ else
 	bg_inverse = s.black
 	bg_positive = s.green_01
 	bg_negative = s.red_01
+	bg_search = s.yellow_01
 	fg_body = s.gray_08
-	fg_primary = s.gray_09
-	fg_secondary = s.gray_05
-	fg_muted = s.gray_04
+	fg_primary = s.black
+	fg_secondary = s.gray_06
+	fg_muted = s.gray_05
 	fg_inverse = s.white
 	fg_contrast = s.black
-	fg_positive = s.green_10
-	fg_negative = s.red_10
-	fg_warning = s.yellow_10
-	fg_info = s.cyan_10
-	fg_accent = s.purple_10
+	fg_positive = s.green_07
+	fg_negative = s.red_07
+	fg_warning = s.yellow_08
+	fg_info = s.cyan_08
+	fg_accent = s.purple_08
 	fg_string = s.orange
-	fg_link = s.blue_10
-	divider = s.gray_02
+	fg_link = s.blue_08
+	divider = s.gray_04
 end
 
 -- Helper Function
@@ -111,6 +114,7 @@ hi("LineNr", { fg = fg_muted })
 hi("CursorLine", { bg = bg_active })
 hi("CursorLineNr", { bg = bg_active })
 hi("Visual", { fg = fg_inverse, bg = bg_visual })
+hi("Search", { fg = fg_inverse, bg = bg_search })
 hi("VertSplit", { fg = divider, bg = bg_main })
 hi("WinSeparator", { fg = divider, bg = bg_main })
 hi("ColorColumn", { fg = divider, bg = divider })
@@ -187,9 +191,18 @@ hi("lualine_c_normal", { link = "StatusLine" })
 hi("lualine_c_insert", { link = "StatusLine" })
 hi("lualine_c_visual", { link = "StatusLine" })
 
--- -- Telescope
+-- Pulse
+if vim.o.background == "dark" then
+	hi("PulseDiffNAdd", { bg = s.green_07, fg = fg_body })
+	hi("PulseDiffNDelete", { bg = s.red_07, fg = fg_body })
+	-- else
+	--   hi("PulseDiffNAdd", { fg = s.green_07 })
+	--   hi("PulseDiffNDelete", { fg = s.red_07
+end
+
+-- Telescope
 -- hi("TelescopeNormal", { link = "NormalFloat" })
--- hi("TelescopeBorder", { fg = divider })
+hi("TelescopeBorder", { fg = divider })
 -- hi("TelescopePromptNormal", { link = "NormalFloat" })
 -- hi("TelescopePromptBorder", { fg = divider })
 -- hi("TelescopeResultsNormal", { link = "NormalFloat" })

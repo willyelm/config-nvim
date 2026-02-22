@@ -37,11 +37,6 @@ return {
 		keys = {
 			-- Undo
 			{ "<leader>u", "<cmd>Telescope undo<cr>", desc = "Undo History" },
-			-- Search
-			{ "<leader>f", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Find in Buffer" },
-			-- { "<leader>w", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-			{ "<leader>l", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
-			-- { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
 			-- Git
 			{ "<leader>gh", "<cmd>Telescope git_bcommits<cr>", desc = "File History" },
 			{ "<leader>gH", "<cmd>Telescope git_commits<cr>", desc = "Project History" },
@@ -91,9 +86,14 @@ return {
 		},
 		opts = {
 			cmdline = true,
+			position = "top",
+			height = 0.75,
+			width = 0.75,
 		},
 		keys = {
 			{ "<leader>p", "<cmd>Pulse<cr>", desc = "Pulse" },
+			{ "<leader>l", "<cmd>Pulse live_grep<cr>", desc = "Live Grep" },
+			{ "<leader>f", "<cmd>Pulse fuzzy_search<cr>", desc = "Fuzzy Search" },
 		},
 	},
 	{
