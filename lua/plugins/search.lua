@@ -78,7 +78,7 @@ return {
 	},
 	-- Quick Navigation
 	{
-		dir = "~/Git/pulse.nvim",
+		dir = "willyelm/pulse.nvim",
 		lazy = false,
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
