@@ -5,7 +5,7 @@ return {
 		opts = {
 			default = true,
 			strict = true,
-			color_icons = false,
+			color_icons = true,
 			icons = true,
 		},
 	},

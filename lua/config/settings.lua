@@ -1,7 +1,6 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.opt.guicursor = ""
 vim.opt.nu = true
 vim.opt.autoindent = true
 vim.opt.expandtab = true
@@ -22,31 +21,35 @@ vim.opt.backup = false
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
+vim.opt.backspace = "indent,eol,start"
 vim.opt.selection = "exclusive"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.updatetime = 50
--- vim.opt.colorcolumn = "100"
 vim.opt.termguicolors = true
-vim.o.autoread = true
+vim.opt.autoread = true
+vim.opt.autochdir = false
 
 vim.opt.cursorline = true
 vim.opt.guicursor = "n:block,v-i-ci-ve:ver10-Cursor"
 vim.opt.mouse = "a"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
--- vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 300
+
+-- Folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldcolumn = "auto:9" -- fold column width
+vim.opt.foldlevel = 99 -- set all folds to open by default(0 closed)
 
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
 vim.opt.fillchars = {
 	vert = "│",
 	horiz = "─",
-	-- msgsep = " ",
+	msgsep = " ",
 	eob = " ",
 	lastline = " ",
 }
-
-vim.cmd("colorscheme willyelm")
 
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
 	command = "if mode() != 'c' | checktime | endif",
@@ -58,3 +61,5 @@ vim.filetype.add({
 		mdx = "mdx",
 	},
 })
+
+vim.cmd("colorscheme willyelm")

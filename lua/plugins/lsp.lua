@@ -59,6 +59,8 @@ return {
 			require("mason-lspconfig").setup({
 				handlers = {
 					lsp_zero.default_setup,
+					-- Prevent Mason from auto-configuring ts_ls when vtsls is preferred.
+					ts_ls = function() end,
 				},
 			})
 
@@ -107,7 +109,7 @@ return {
 			})
 
 			-- Enable the configs
-			vim.lsp.enable("vstls")
+			vim.lsp.enable("vtsls")
 			vim.lsp.enable("biome")
 		end,
 	},
@@ -243,7 +245,7 @@ return {
 						end, { "i", "s" }),
 					}),
 					sources = cmp.config.sources({
-						{ name = "nvim_lsp" }, -- Primary source (Biome, ts_ls, etc.)
+						{ name = "nvim_lsp" }, -- Primary source (Biome, vtsls, etc.)
 						{ name = "luasnip" }, -- For code snippets
 					}, {
 						{ name = "buffer" }, -- Text from current file
@@ -251,6 +253,21 @@ return {
 					}),
 				})
 			end,
+		},
+	},
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "VeryLazy",
+		-- priority = 1000,
+		opts = {
+			options = {
+				add_messages = {
+					display_count = true,
+				},
+				multilines = {
+					enabled = true,
+				},
+			},
 		},
 	},
 	-- AutoPairs

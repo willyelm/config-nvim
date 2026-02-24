@@ -103,8 +103,8 @@ npm install -g @mdx-js/language-server
 | ------------ | ------------------- |
 | `<Leader>\`  | Toggle NvimTree     |
 | `<Leader>f`  | Find in buffer      |
-| `<Leader>sf` | Find files          |
-| `<Leader>sg` | Live grep           |
+| `<Leader>b`  | Find files          |
+| `<Leader>l`  | Live grep           |
 | `<Leader>u`  | Undo history        |
 | `<Leader>sr` | Search & replace    |
 | `<Leader>gd` | Git diff            |
