@@ -57,6 +57,9 @@ return {
 				},
 			})
 			require("mason-lspconfig").setup({
+				automatic_enable = {
+					exclude = { "ts_ls" },
+				},
 				handlers = {
 					lsp_zero.default_setup,
 					-- Prevent Mason from auto-configuring ts_ls when vtsls is preferred.
@@ -90,6 +93,23 @@ return {
 							providePrefixAndSuffixTextForRename = true,
 							allowRenameOfImportPath = true,
 						},
+					},
+				},
+				on_attach = lsp_zero.on_attach,
+				capabilities = lsp_zero.get_capabilities(),
+			})
+
+			vim.lsp.config("lua_ls", {
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim" },
+						},
+						workspace = {
+							checkThirdParty = false,
+							library = vim.api.nvim_get_runtime_file("", true),
+						},
+						telemetry = { enable = false },
 					},
 				},
 				on_attach = lsp_zero.on_attach,
