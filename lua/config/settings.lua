@@ -36,11 +36,13 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.updatetime = 300
 
 -- Folding
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
--- vim.opt.foldcolumn = "1"
--- vim.opt.foldlevel = 99 -- set all folds to open by default(0 closed)
--- vim.opt.statuscolumn = "%s %l %C"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
+vim.opt.foldcolumn = "0"
+vim.opt.signcolumn = "auto:1"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
 
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3

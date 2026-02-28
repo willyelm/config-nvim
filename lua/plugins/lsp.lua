@@ -11,6 +11,12 @@ return {
 		},
 		config = function()
 			local lsp_zero = require("lsp-zero")
+			local capabilities = lsp_zero.get_capabilities()
+			capabilities.textDocument = capabilities.textDocument or {}
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			}
 
 			lsp_zero.on_attach(function(client, bufnr)
 				lsp_zero.default_keymaps({ buffer = bufnr })
@@ -96,7 +102,7 @@ return {
 					},
 				},
 				on_attach = lsp_zero.on_attach,
-				capabilities = lsp_zero.get_capabilities(),
+				capabilities = capabilities,
 			})
 
 			vim.lsp.config("lua_ls", {
@@ -113,7 +119,7 @@ return {
 					},
 				},
 				on_attach = lsp_zero.on_attach,
-				capabilities = lsp_zero.get_capabilities(),
+				capabilities = capabilities,
 			})
 
 			vim.lsp.config("biome", {
@@ -125,7 +131,7 @@ return {
 					client.server_capabilities.documentFormattingProvider = false
 					client.server_capabilities.documentRangeFormattingProvider = false
 				end,
-				capabilities = lsp_zero.get_capabilities(),
+				capabilities = capabilities,
 			})
 
 			-- Enable the configs

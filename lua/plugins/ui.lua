@@ -142,20 +142,20 @@ return {
 	},
 	-- Colorizer
 	{
-		"NvChad/nvim-colorizer.lua",
+		"catgoose/nvim-colorizer.lua",
+		event = "BufReadPre",
 		opts = {
 			filetypes = { "css", "scss", "javascript", "typescriptreact", "html", "json", "lua", "markdown" },
-			user_default_options = {
-				RGB = true,
-				RRGGBB = true,
-				names = false,
-				RRGGBBAA = true,
-				tailwind = true,
-				rgb_fn = true,
-				hsl_fn = true,
-				css = true,
-				css_fn = true,
-				mode = "background",
+			options = {
+				parsers = {
+					css_fn = true,
+					css = true,
+					names = { enable = false },
+					tailwind = { enable = true, lsp = true, update_names = true },
+				},
+				display = {
+					mode = "background",
+				},
 			},
 		},
 	},

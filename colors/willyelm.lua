@@ -5,16 +5,14 @@ end
 vim.g.colors_name = "willyelm"
 -- Colors
 local s = {
-	black = "#0D0D0D",
-	white = "#FEFEFE",
-	gray_01 = "#F1F1F1",
-	gray_02 = "#EEEEEE",
-	gray_03 = "#C6C6C6",
-	gray_04 = "#A8A8A8",
-	gray_05 = "#868686",
-	gray_06 = "#606060",
-	gray_07 = "#40403f",
-	gray_08 = "#2d2d2d",
+	gray_01 = "#C8C8C8",
+	gray_02 = "#B2B2B2",
+	gray_03 = "#9C9C9C",
+	gray_04 = "#868686",
+	gray_05 = "#707070",
+	gray_06 = "#5A5A5A",
+	gray_07 = "#444444",
+	gray_08 = "#2E2E2E",
 	orange = "#ef8875",
 	red_01 = "#ec7e90",
 	red_07 = "#632f36",
@@ -32,54 +30,54 @@ local s = {
 	yellow_08 = "#544719",
 }
 -- Semantic variables
-local bg_main, bg_active, bg_visual, bg_inverse, bg_positive, bg_negative, bg_search
-local fg_body, fg_primary, fg_secondary, fg_muted, fg_inverse, fg_contrast
-local fg_positive, fg_negative, fg_warning, fg_info, fg_accent, fg_string, fg_link
+local bg_main, bg_inverse, bg_active, bg_visual, bg_search, bg_positive, bg_negative
+local fg_primary, fg_body, fg_secondary, fg_muted, fg_inverse, fg_contrast
+local fg_link, fg_info, fg_accent, fg_string, fg_warning, fg_positive, fg_negative
 local divider
 
 if vim.o.background == "dark" then
 	bg_main = "NONE"
+	bg_inverse = s.gray_01
 	bg_active = s.gray_08
 	bg_visual = s.gray_02
-	bg_inverse = s.white
+	bg_search = s.yellow_01
 	bg_positive = s.green_08
 	bg_negative = s.red_08
-	bg_search = s.yellow_01
-	fg_body = s.gray_03
 	fg_primary = s.gray_01
+	fg_body = s.gray_03
 	fg_secondary = s.gray_05
 	fg_muted = s.gray_06
-	fg_inverse = s.black
-	fg_contrast = s.white
-	fg_positive = s.green_01
-	fg_negative = s.red_01
-	fg_warning = s.yellow_01
+	fg_inverse = s.gray_08
+	fg_contrast = s.gray_01
+	fg_link = s.blue_01
 	fg_info = s.cyan_01
 	fg_accent = s.purple_01
 	fg_string = s.orange
-	fg_link = s.blue_01
+	fg_warning = s.yellow_01
+	fg_positive = s.green_01
+	fg_negative = s.red_01
 	divider = s.gray_07
 else
 	bg_main = "NONE"
+	bg_inverse = s.gray_08
 	bg_active = s.gray_02
 	bg_visual = s.gray_08
-	bg_inverse = s.black
+	bg_search = s.yellow_01
 	bg_positive = s.green_01
 	bg_negative = s.red_01
-	bg_search = s.yellow_01
+	fg_primary = s.gray_08
 	fg_body = s.gray_08
-	fg_primary = s.black
 	fg_secondary = s.gray_06
 	fg_muted = s.gray_05
-	fg_inverse = s.white
-	fg_contrast = s.black
-	fg_positive = s.green_07
-	fg_negative = s.red_07
-	fg_warning = s.yellow_08
+	fg_inverse = s.gray_01
+	fg_contrast = s.gray_08
+	fg_link = s.blue_08
 	fg_info = s.cyan_08
 	fg_accent = s.purple_08
 	fg_string = s.orange
-	fg_link = s.blue_08
+	fg_warning = s.yellow_08
+	fg_positive = s.green_07
+	fg_negative = s.red_07
 	divider = s.gray_04
 end
 
@@ -89,6 +87,7 @@ local function hi(name, opts)
 end
 
 -- Standard UI Highlights
+hi("Title", { fg = fg_body })
 hi("Normal", { fg = fg_body, bg = bg_main })
 hi("Cursor", { fg = fg_body, bg = bg_inverse })
 hi("TermCursor", { fg = fg_primary, bg = fg_primary })
