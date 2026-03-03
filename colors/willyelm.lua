@@ -5,15 +5,16 @@ end
 vim.g.colors_name = "willyelm"
 -- Colors
 local s = {
-	gray_01 = "#C8C8C8",
-	gray_02 = "#B2B2B2",
-	gray_03 = "#9C9C9C",
-	gray_04 = "#868686",
-	gray_05 = "#707070",
-	gray_06 = "#5A5A5A",
+	gray_01 = "#BCBCBC",
+	gray_02 = "#A8A8A8",
+	gray_03 = "#949494",
+	gray_04 = "#808080",
+	gray_05 = "#6C6C6C",
+	gray_06 = "#585858",
 	gray_07 = "#444444",
-	gray_08 = "#2E2E2E",
-	orange = "#ef8875",
+	gray_08 = "#202020",
+	orange_01 = "#de9084",
+	orange_08 = "#4A2D28",
 	red_01 = "#ec7e90",
 	red_07 = "#632f36",
 	red_08 = "#361f24",
@@ -52,7 +53,7 @@ if vim.o.background == "dark" then
 	fg_link = s.blue_01
 	fg_info = s.cyan_01
 	fg_accent = s.purple_01
-	fg_string = s.orange
+	fg_string = s.orange_01
 	fg_warning = s.yellow_01
 	fg_positive = s.green_01
 	fg_negative = s.red_01
@@ -74,7 +75,7 @@ else
 	fg_link = s.blue_08
 	fg_info = s.cyan_08
 	fg_accent = s.purple_08
-	fg_string = s.orange
+	fg_string = s.orange_08
 	fg_warning = s.yellow_08
 	fg_positive = s.green_07
 	fg_negative = s.red_07
@@ -87,7 +88,7 @@ local function hi(name, opts)
 end
 
 -- Standard UI Highlights
-hi("Title", { fg = fg_body })
+hi("Title", { fg = fg_primary })
 hi("Normal", { fg = fg_body, bg = bg_main })
 hi("Cursor", { fg = fg_body, bg = bg_inverse })
 hi("TermCursor", { fg = fg_primary, bg = fg_primary })
@@ -97,7 +98,7 @@ hi("Number", { fg = fg_warning })
 hi("Float", { link = "Number" })
 hi("Boolean", { link = "Number" })
 hi("Constant", { fg = fg_body })
-hi("Identifier", { fg = fg_primary })
+hi("Identifier", { fg = fg_body })
 hi("Function", { fg = fg_primary })
 hi("Statement", { fg = fg_primary, bold = true })
 hi("Keyword", { fg = fg_primary, bold = true })
@@ -123,9 +124,9 @@ hi("StatusLine", { fg = fg_muted, bg = bg_main, sp = divider })
 hi("StatusLineNC", { fg = fg_secondary, bg = bg_main })
 
 -- TypeScript
-hi("typescriptTypeReference", { link = "Type" })
-hi("typescriptObjectLabel", { link = "Normal" })
-hi("typescriptVariable", { link = "Keyword" })
+-- hi("typescriptTypeReference", { link = "Type" })
+-- hi("typescriptObjectLabel", { link = "Normal" })
+-- hi("typescriptVariable", { link = "Keyword" })
 
 -- Diff
 hi("DiffAdd", { bg = bg_positive })
@@ -171,17 +172,17 @@ hi("NvimTreeFile", { fg = fg_body })
 hi("NvimTreeExecFile", { link = "NvimTreeFile" })
 hi("NvimTreeImageFile", { link = "NvimTreeFile" })
 hi("NvimTreeFolderName", { fg = fg_body })
-hi("NvimTreeRootFolder", { bold = true, underline = true })
-hi("NvimTreeIndentMarker", { fg = fg_muted })
+hi("NvimTreeRootFolder", { fg = fg_primary, bold = true, underline = true })
+-- hi("NvimTreeIndentMarker", { fg = fg_muted })
 hi("NvimTreeFolderIcon", { fg = fg_body })
-hi("NvimTreeOpenedFolderName", { fg = fg_primary, bold = true })
+hi("NvimTreeOpenedFolderName", { fg = fg_primary })
 hi("NvimTreeOpenedFile", { fg = fg_primary, bold = true })
 hi("NvimTreeWinSeparator", { fg = divider, bg = bg_main })
 hi("NvimTreeGitIgnored", { link = "Comment" })
 
 -- Barbecue
 hi("Barbecue", { bg = bg_main })
-hi("barbecue_separator", { fg = divider })
+-- hi("barbecue_separator", { fg = divider })
 
 -- Lualine
 hi("LualineSeparator", { fg = divider })

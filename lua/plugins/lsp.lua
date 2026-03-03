@@ -17,6 +17,11 @@ return {
 				dynamicRegistration = false,
 				lineFoldingOnly = true,
 			}
+			capabilities.workspace = capabilities.workspace or {}
+			capabilities.workspace.didChangeWatchedFiles = {
+				dynamicRegistration = true,
+				relativePatternSupport = true,
+			}
 
 			lsp_zero.on_attach(function(client, bufnr)
 				lsp_zero.default_keymaps({ buffer = bufnr })
@@ -70,6 +75,8 @@ return {
 					lsp_zero.default_setup,
 					-- Prevent Mason from auto-configuring ts_ls when vtsls is preferred.
 					ts_ls = function() end,
+					cssls = function() end,
+					tailwindcss = function() end,
 				},
 			})
 
@@ -134,11 +141,42 @@ return {
 				capabilities = capabilities,
 			})
 
+			vim.lsp.config("cssls", {
+				settings = {
+					css = {
+						lint = {
+							unknownAtRules = "ignore",
+						},
+					},
+				},
+				on_attach = lsp_zero.on_attach,
+				capabilities = capabilities,
+			})
+
+			vim.lsp.config("tailwindcss", {
+				on_attach = lsp_zero.on_attach,
+				capabilities = capabilities,
+			})
+
+			vim.lsp.config("jsonls", {
+				settings = {
+					json = {
+						validate = { enable = true },
+						schemaDownload = { enable = true },
+					},
+				},
+				on_attach = lsp_zero.on_attach,
+				capabilities = capabilities,
+			})
+
 			-- Enable the configs
-			vim.lsp.enable("vtsls")
-			vim.lsp.enable("biome")
-		end,
-	},
+				vim.lsp.enable("vtsls")
+				vim.lsp.enable("biome")
+				vim.lsp.enable("cssls")
+				vim.lsp.enable("tailwindcss")
+				vim.lsp.enable("jsonls")
+			end,
+		},
 	-- TreeSitter
 	{
 		"nvim-treesitter/nvim-treesitter",
