@@ -169,14 +169,20 @@ return {
 				capabilities = capabilities,
 			})
 
+			vim.lsp.config("gopls", {
+				on_attach = lsp_zero.on_attach,
+				capabilities = capabilities,
+			})
+
 			-- Enable the configs
-				vim.lsp.enable("vtsls")
-				vim.lsp.enable("biome")
-				vim.lsp.enable("cssls")
-				vim.lsp.enable("tailwindcss")
-				vim.lsp.enable("jsonls")
-			end,
-		},
+			vim.lsp.enable("vtsls")
+			vim.lsp.enable("biome")
+			vim.lsp.enable("cssls")
+			vim.lsp.enable("tailwindcss")
+			vim.lsp.enable("jsonls")
+			vim.lsp.enable("gopls")
+		end,
+	},
 	-- TreeSitter
 	{
 		"nvim-treesitter/nvim-treesitter",

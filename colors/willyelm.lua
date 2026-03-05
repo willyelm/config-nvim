@@ -45,7 +45,7 @@ if vim.o.background == "dark" then
 	bg_positive = s.green_08
 	bg_negative = s.red_08
 	fg_primary = s.gray_01
-	fg_body = s.gray_03
+	fg_body = s.gray_02
 	fg_secondary = s.gray_05
 	fg_muted = s.gray_06
 	fg_inverse = s.gray_08
@@ -98,7 +98,7 @@ hi("Number", { fg = fg_warning })
 hi("Float", { link = "Number" })
 hi("Boolean", { link = "Number" })
 hi("Constant", { fg = fg_body })
-hi("Identifier", { fg = fg_body })
+hi("Identifier", { fg = fg_primary })
 hi("Function", { fg = fg_primary })
 hi("Statement", { fg = fg_primary, bold = true })
 hi("Keyword", { fg = fg_primary, bold = true })
