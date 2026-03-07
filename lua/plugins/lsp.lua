@@ -225,9 +225,9 @@ return {
 			require("nvim-treesitter").setup(opts)
 			vim.treesitter.language.register("markdown", "mdx")
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "mdx", "typescriptreact", "typescript", "javascript", "go", "lua", "css", "html" },
+				pattern = "*",
 				callback = function()
-					vim.treesitter.start()
+					pcall(vim.treesitter.start)
 				end,
 			})
 		end,

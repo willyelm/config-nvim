@@ -2,6 +2,10 @@ return {
 	{
 		"github/copilot.vim",
 		event = "InsertEnter",
+		config = function()
+			-- Disable Tab to avoid conflict with nvim-cmp
+			-- vim.g.copilot_no_tab_map = true
+		end,
 	},
 	-- {
 	--   "zbirenbaum/copilot.lua",

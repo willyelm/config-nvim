@@ -54,7 +54,7 @@ if vim.o.background == "dark" then
 	fg_info = s.cyan_01
 	fg_accent = s.purple_01
 	fg_function = s.purple_05
-	fg_string = s.orange_01
+	fg_string = s.green_01
 	fg_warning = s.amber_01
 	fg_positive = s.green_01
 	fg_negative = s.red_01
@@ -102,8 +102,10 @@ hi("Boolean", { link = "Number" })
 -- hi("Constant", { fg = fg_body })
 hi("Identifier", { fg = fg_body })
 hi("Function", { fg = fg_function })
--- hi("Statement", { fg = fg_primary })
-hi("Keyword", { fg = fg_primary, bold = true })
+hi("Statement", { fg = fg_primary })
+-- hi("Keyword", { fg = fg_primary, bold = true })
+hi("Keyword", { fg = fg_accent })
+
 -- hi("Operator", { fg = fg_body, bold = true })
 hi("PreProc", { fg = fg_secondary })
 hi("Type", { fg = fg_accent })
@@ -149,8 +151,8 @@ hi("@type", { fg = fg_accent })
 -- hi("@type.builtin", { fg = fg_accent, bold = true })
 -- hi("@keyword.type", { fg = fg_accent, bold = true })
 
-hi("@keyword", { fg = fg_primary, bold = true })
-hi("@keyword.function", { fg = fg_primary, bold = true })
+hi("@keyword", { link = "Keyword" })
+hi("@keyword.function", { link = "Keyword" })
 hi("@operator", { fg = fg_body, bold = true })
 hi("@method", { fg = fg_function })
 hi("@method.call", { fg = fg_function })
