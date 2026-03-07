@@ -27,13 +27,13 @@ local s = {
 	green_08 = "#242a27",
 	purple_01 = "#d5bbfa",
 	purple_08 = "#402753",
-	yellow_01 = "#f6e191",
-	yellow_08 = "#544719",
+	amber_01 = "#FFE066",
+	amber_08 = "#6B5914",
 }
 -- Semantic variables
 local bg_main, bg_inverse, bg_active, bg_visual, bg_search, bg_positive, bg_negative
 local fg_primary, fg_body, fg_secondary, fg_muted, fg_inverse, fg_contrast
-local fg_link, fg_info, fg_accent, fg_string, fg_warning, fg_positive, fg_negative
+local fg_link, fg_info, fg_accent, fg_function, fg_string, fg_warning, fg_positive, fg_negative
 local divider
 
 if vim.o.background == "dark" then
@@ -41,7 +41,7 @@ if vim.o.background == "dark" then
 	bg_inverse = s.gray_01
 	bg_active = s.gray_08
 	bg_visual = s.gray_02
-	bg_search = s.yellow_01
+	bg_search = s.amber_01
 	bg_positive = s.green_08
 	bg_negative = s.red_08
 	fg_primary = s.gray_01
@@ -53,8 +53,9 @@ if vim.o.background == "dark" then
 	fg_link = s.blue_01
 	fg_info = s.cyan_01
 	fg_accent = s.purple_01
+	fg_function = s.purple_05
 	fg_string = s.orange_01
-	fg_warning = s.yellow_01
+	fg_warning = s.amber_01
 	fg_positive = s.green_01
 	fg_negative = s.red_01
 	divider = s.gray_07
@@ -63,7 +64,7 @@ else
 	bg_inverse = s.gray_08
 	bg_active = s.gray_02
 	bg_visual = s.gray_08
-	bg_search = s.yellow_01
+	bg_search = s.amber_01
 	bg_positive = s.green_01
 	bg_negative = s.red_01
 	fg_primary = s.gray_08
@@ -75,8 +76,9 @@ else
 	fg_link = s.blue_08
 	fg_info = s.cyan_08
 	fg_accent = s.purple_08
+	fg_function = s.purple_05
 	fg_string = s.orange_08
-	fg_warning = s.yellow_08
+	fg_warning = s.amber_08
 	fg_positive = s.green_07
 	fg_negative = s.red_07
 	divider = s.gray_04
@@ -97,19 +99,18 @@ hi("String", { fg = fg_string })
 hi("Number", { fg = fg_warning })
 hi("Float", { link = "Number" })
 hi("Boolean", { link = "Number" })
-hi("Constant", { fg = fg_body })
-hi("Identifier", { fg = fg_primary })
-hi("Function", { fg = fg_primary })
-hi("Statement", { fg = fg_primary, bold = true })
+-- hi("Constant", { fg = fg_body })
+hi("Identifier", { fg = fg_body })
+hi("Function", { fg = fg_function })
+-- hi("Statement", { fg = fg_primary })
 hi("Keyword", { fg = fg_primary, bold = true })
-hi("Operator", { fg = fg_body, bold = true })
+-- hi("Operator", { fg = fg_body, bold = true })
 hi("PreProc", { fg = fg_secondary })
 hi("Type", { fg = fg_accent })
 hi("Special", { link = "Keyword" })
 hi("Underlined", { underline = true })
 hi("Error", { fg = fg_contrast, bg = bg_negative, bold = true })
 hi("Todo", { fg = fg_accent, underline = true })
-hi("Directory", { fg = fg_primary })
 hi("LineNr", { fg = fg_muted })
 hi("CursorLine", { bg = bg_active })
 hi("CursorLineNr", { bg = bg_active })
@@ -122,11 +123,6 @@ hi("WinBar", { bg = bg_main, sp = divider })
 hi("WinBarNC", { bg = bg_main, sp = divider })
 hi("StatusLine", { fg = fg_muted, bg = bg_main, sp = divider })
 hi("StatusLineNC", { fg = fg_secondary, bg = bg_main })
-
--- TypeScript
--- hi("typescriptTypeReference", { link = "Type" })
--- hi("typescriptObjectLabel", { link = "Normal" })
--- hi("typescriptVariable", { link = "Keyword" })
 
 -- Diff
 hi("DiffAdd", { bg = bg_positive })
@@ -141,11 +137,32 @@ hi("GitSignsAdd", { fg = fg_positive, bg = bg_main })
 hi("GitSignsChange", { fg = fg_warning, bg = bg_main })
 hi("GitSignsDelete", { fg = fg_negative, bg = bg_main })
 
--- Treesitter & Web Dev (TS/JSX/Go)
-hi("@tag.builtin.tsx", {})
+-- Semantic Highlights
+hi("@property", { fg = fg_primary })
+hi("@field", { fg = fg_primary })
+hi("@function", { fg = fg_function })
+hi("@function.call", { fg = fg_function })
+hi("@variable", { fg = fg_primary })
+hi("@variable.parameter", { fg = fg_function })
+hi("@parameter", { fg = fg_function })
+hi("@type", { fg = fg_accent })
+-- hi("@type.builtin", { fg = fg_accent, bold = true })
+-- hi("@keyword.type", { fg = fg_accent, bold = true })
+
+hi("@keyword", { fg = fg_primary, bold = true })
+hi("@keyword.function", { fg = fg_primary, bold = true })
+hi("@operator", { fg = fg_body, bold = true })
+hi("@method", { fg = fg_function })
+hi("@method.call", { fg = fg_function })
+hi("@enum", { fg = fg_accent })
+hi("@enumMember", { fg = fg_warning })
+hi("@module", { fg = fg_accent })
+-- hi("@module.builtin", { fg = fg_info })
+hi("@namespace", { fg = fg_accent })
+-- hi("@tag.builtin.tsx", {})
 hi("@tag.tsx", {})
 hi("@tag.attribute.tsx", { link = "Normal" })
-hi("@type.tsx", { link = "Type", force = true })
+hi("@type.tsx", { fg = fg_accent, force = true })
 
 -- Pmenu (Floating Windows/Completion)
 hi("NormalFloat", { bg = bg_main, fg = fg_body, ctermbg = "none" })
