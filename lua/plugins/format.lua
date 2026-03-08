@@ -11,7 +11,7 @@ return {
 				typescriptreact = { "biome" },
 				json = { "biome" },
 				jsonc = { "biome" },
-				go = { "gofmt" },
+				go = { "goimports" },
 				html = { "prettierd", "prettier", stop_after_first = true },
 				css = { "prettierd", "prettier", stop_after_first = true },
 				scss = { "prettierd", "prettier", stop_after_first = true },

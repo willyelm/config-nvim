@@ -170,6 +170,21 @@ return {
 			})
 
 			vim.lsp.config("gopls", {
+				settings = {
+					gopls = {
+						usePlaceholders = true,
+						staticcheck = true,
+						hints = {
+							assignVariableTypes = true,
+							compositeLiteralFields = true,
+							compositeLiteralTypes = true,
+							constantValues = true,
+							functionTypeParameters = true,
+							parameterNames = true,
+							rangeVariableTypes = true,
+						},
+					},
+				},
 				on_attach = lsp_zero.on_attach,
 				capabilities = capabilities,
 			})
