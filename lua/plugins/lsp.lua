@@ -175,7 +175,7 @@ return {
 						usePlaceholders = true,
 						staticcheck = true,
 						hints = {
-							assignVariableTypes = true,
+							-- assignVariableTypes = true,
 							compositeLiteralFields = true,
 							compositeLiteralTypes = true,
 							constantValues = true,
