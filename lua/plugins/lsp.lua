@@ -169,6 +169,24 @@ return {
 				capabilities = capabilities,
 			})
 
+			vim.lsp.config("yamlls", {
+				settings = {
+					yaml = {
+						validate = true,
+						hover = true,
+						completion = true,
+						format = { enable = true },
+						schemaStore = {
+							enable = true,
+							-- Use the server's default catalog URL.
+							url = "",
+						},
+					},
+				},
+				on_attach = lsp_zero.on_attach,
+				capabilities = capabilities,
+			})
+
 			vim.lsp.config("gopls", {
 				settings = {
 					gopls = {
@@ -195,6 +213,7 @@ return {
 			vim.lsp.enable("cssls")
 			vim.lsp.enable("tailwindcss")
 			vim.lsp.enable("jsonls")
+			vim.lsp.enable("yamlls")
 			vim.lsp.enable("gopls")
 		end,
 	},
@@ -215,6 +234,7 @@ return {
 				"css",
 				"postcss",
 				"html",
+				"yaml",
 				"go",
 				"lua",
 				"markdown",

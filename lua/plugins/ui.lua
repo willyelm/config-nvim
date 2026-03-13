@@ -145,7 +145,18 @@ return {
 		"catgoose/nvim-colorizer.lua",
 		event = "BufReadPre",
 		opts = {
-			filetypes = { "css", "scss", "javascript", "typescriptreact", "html", "json", "lua", "markdown" },
+			filetypes = {
+				"css",
+				"scss",
+				"javascript",
+				"typescriptreact",
+				"go",
+				"html",
+				"json",
+				"yml",
+				"lua",
+				"markdown",
+			},
 			options = {
 				parsers = {
 					css_fn = true,
