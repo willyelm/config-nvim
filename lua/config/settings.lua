@@ -33,7 +33,6 @@ vim.opt.cursorline = true
 vim.opt.guicursor = "n:block,v-i-ci-ve:ver10-Cursor"
 vim.opt.mouse = "a"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
-vim.opt.updatetime = 300
 
 -- Folding
 vim.opt.foldmethod = "expr"

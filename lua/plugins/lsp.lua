@@ -17,6 +17,11 @@ return {
 				dynamicRegistration = false,
 				lineFoldingOnly = true,
 			}
+			capabilities.textDocument.synchronization = {
+				didSave = true,
+				willSave = true,
+				willSaveWaitUntil = true,
+			}
 			capabilities.workspace = capabilities.workspace or {}
 			capabilities.workspace.didChangeWatchedFiles = {
 				dynamicRegistration = true,
@@ -83,6 +88,7 @@ return {
 			vim.lsp.config("vtsls", {
 				root_markers = { "package.json", "tsconfig.json", ".git" },
 				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+				sync_kind = "full",
 				settings = {
 					typescript = {
 						updateImportsOnFileMove = { enabled = "always" },
@@ -188,6 +194,7 @@ return {
 			})
 
 			vim.lsp.config("gopls", {
+				sync_kind = "full",
 				settings = {
 					gopls = {
 						usePlaceholders = true,
