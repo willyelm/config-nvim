@@ -1,4 +1,5 @@
 -- LSP
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 vim.keymap.set("n", "<leader>h", function()
 	vim.lsp.buf.document_highlight()
@@ -32,26 +33,6 @@ vim.keymap.set("n", "gl", vim.diagnostic.open_float, {
 	desc = "Show line diagnostics",
 	silent = true,
 })
---
--- vim.keymap.set("n", "K", function()
--- 	local float_settings = {
--- 		border = "rounded",
--- 		wrap = true,
--- 		max_width = 60,
--- 	}
--- 	local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })
--- 	if diagnostics[1] then
--- 		local diagnostic_settings = vim.tbl_extend("force", {
--- 			focusable = false,
--- 			close_events = { "BufLeave", "CursorMoved", "InsertEnter" },
--- 			source = "always",
--- 		}, float_settings)
---
--- 		vim.diagnostic.open_float(nil, diagnostic_settings)
--- 	else
--- 		vim.lsp.buf.hover(float_settings)
--- 	end
--- end, { desc = "Show diagnostics or hover info" })
 
 -- Save
 vim.keymap.set({ "n", "i" }, "<C-s>", "<Esc>:write<CR>", { desc = "Save Changes" })

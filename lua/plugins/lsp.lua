@@ -34,20 +34,6 @@ return {
 				if client.server_capabilities.inlayHintProvider then
 					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 				end
-				-- Enable document highlights
-				-- if client.server_capabilities.documentHighlightProvider then
-				-- 	local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-				-- 	vim.api.nvim_create_autocmd("CursorHold", {
-				-- 		group = group,
-				-- 		buffer = bufnr,
-				-- 		callback = vim.lsp.buf.document_highlight,
-				-- 	})
-				-- 	vim.api.nvim_create_autocmd("CursorMoved", {
-				-- 		group = group,
-				-- 		buffer = bufnr,
-				-- 		callback = vim.lsp.buf.clear_references,
-				-- 	})
-				-- end
 			end)
 
 			require("mason").setup({})
@@ -199,15 +185,6 @@ return {
 					gopls = {
 						usePlaceholders = true,
 						staticcheck = true,
-						hints = {
-							-- assignVariableTypes = true,
-							compositeLiteralFields = true,
-							compositeLiteralTypes = true,
-							constantValues = true,
-							functionTypeParameters = true,
-							parameterNames = true,
-							rangeVariableTypes = true,
-						},
 					},
 				},
 				on_attach = lsp_zero.on_attach,
