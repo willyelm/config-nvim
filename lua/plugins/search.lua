@@ -79,7 +79,7 @@ return {
 	-- Quick Navigation
 	{
 
-		-- dir = "~/Git/pulse.nvim",
+		-- dir = "~/Code/pulse.nvim",
 		"willyelm/pulse.nvim",
 		lazy = false,
 		dependencies = {
