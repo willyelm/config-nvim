@@ -1,5 +1,5 @@
 -- LSP
--- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+vim.keymap.set("n", "<leader>ra", vim.lsp.buf.code_action, { desc = "Code Actions" })
 vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 vim.keymap.set("n", "<leader>h", function()
 	vim.lsp.buf.document_highlight()

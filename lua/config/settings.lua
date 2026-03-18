@@ -57,8 +57,13 @@ vim.opt.fillchars = {
 	fold = " ",
 }
 
-vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
-	command = "if mode() != 'c' | checktime | endif",
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained", "FileChangedShellPost" }, {
+	callback = function()
+		if vim.fn.mode() ~= "c" then
+			vim.cmd("checktime")
+			vim.cmd("LspRestart")
+		end
+	end,
 	pattern = { "*" },
 })
 

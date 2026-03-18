@@ -83,14 +83,13 @@ return {
 		"willyelm/pulse.nvim",
 		lazy = false,
 		dependencies = {
-			"nvim-telescope/telescope.nvim",
 			"nvim-tree/nvim-web-devicons",
 		},
 		opts = {
 			-- cmdline = true,
 			position = "top",
-			height = 0.75,
-			width = 0.65,
+			height = 0.9,
+			width = 0.7,
 		},
 		keys = {
 			{ "<leader>p", "<cmd>Pulse<cr>", desc = "Pulse" },

@@ -1,138 +1,139 @@
 # Neovim Config
 
-This is my personal neovim setup as my primary editor. This config includes
-basic features to start using neovim as IDE.
+My personal Neovim setup configured with Lazy.nvim for plugin management. Optimized for web development, scripting, and general editing with LSP, formatting, git integration, and modern UI enhancements.
 
 ## Requirements
 
 - Neovim >= 0.9.5
 - Git
 - Node.js >= 18
-- NPM
-- Go (for gopls)
 - ripgrep (`rg`)
-- fd (`fdfind`)
 - GCC + make (for telescope-fzf-native)
 
 ## Installation
 
 ```bash
 # Clone this config
-git clone https://github.com/yourusername/nvim ~/.config/nvim
+git clone https://github.com/willyelm/nvim ~/.config/nvim
+cd ~/.config/nvim
+nvim
 ```
 
-## Dependencies
+Lazy.nvim will automatically install all plugins on first launch.
 
-### Global NPM packages
+## Mason Tools (auto-installed via mason.nvim)
 
-```bash
-npm install -g @mdx-js/language-server
-```
+### LSP Servers
 
-### Mason Tools (auto-installed)
+- **vtsls** - TypeScript/JavaScript (with Biome integration)
+- **lua_ls** - Lua
+- **gopls** - Go
+- **pyright** - Python
+- **jsonls** - JSON
+- **yamlls** - YAML
+- **html** - HTML
+- **mdx_analyzer** - MDX
+- **cssls** - CSS/SCSS
+- **tailwindcss** - Tailwind CSS
 
-**LSP Servers:**
+### Formatters
 
-- vtsls (TypeScript/JavaScript)
-- lua_ls (Lua)
-- gopls (Go)
-- pyright (Python)
-- jsonls (JSON)
-- yamlls (YAML)
-- html
-- mdx_analyzer (MDX)
-- cssls (CSS)
-- tailwindcss
-- biome
-- dockerls (Docker)
-
-**Formatters:**
-
-- prettierd
-- stylua
-- shfmt
-
-**Debug Adapters:**
-
-- js-debug-adapter
+- **biome** - TypeScript/JavaScript/JSON (via Conform)
+- **prettierd** - HTML/CSS/YAML/Markdown/GraphQL
+- **goimports** - Go
 
 ## Features
 
-### LSP & Autocomplete
+### LSP & Code Intelligence
 
-- Language Server Protocol support via lsp-zero
-- Auto-completion with nvim-cmp
-- TreeSitter for syntax highlighting and textobjects
-- Auto-pairs and auto-tags
+- Language Server Protocol via lsp-zero
+- Autocompletion with nvim-cmp
+- Treesitter syntax highlighting and text objects
+- Auto-pairs and auto-tag insertion
+- Inline diagnostics with tiny-inline-diagnostic
+- Inlay hints for type information
+- Code actions and symbol renaming
 
-### AI Integration
+### Code Formatting
 
-- Copilot for code suggestions
-- Sidekick for AI agent workflow (OpenCode, Claude, Ollama)
+- Conform.nvim for automated formatting on save
+- Biome for JavaScript/TypeScript/JSON
+- Prettier for styling languages
+- goimports for Go
 
 ### Git Integration
 
-- Gitsigns for inline git indicators
-- Diffview for diff viewing
-- Neogit for git operations
-- Telescope git extensions
+- **Gitsigns** - Inline git indicators and blame
+- **Diffview** - Side-by-side diff viewing
+- **Neogit** - Interactive git operations
+- **Telescope** - Git history, branches, and stash browsing
 
 ### Search & Navigation
 
-- Telescope for fuzzy finding, live grep, file search
-- Grug-far for search and replace
-- Flash for quick navigation
-- Which-key for keybinding hints
+- **Pulse.nvim** - Custom fuzzy finder with live grep
+- **Grug-far** - Search and replace across files
+- **Telescope** - File finding, git integration, undo history
+- **Which-key** - Interactive keybinding hints
 
-### UI
+### UI & UX
 
-- NvimTree file explorer
-- Lualine statusline
-- Barbecue breadcrumbs/winbar
-- Aerial outline sidebar
-- nvim-scrollbar
+- **NvimTree** - File explorer with git status
+- **Lualine** - Statusline with git branch, diagnostics
+- **Barbecue** - Breadcrumb navigation bar
+- **Scrollbar** - Visual scroll indicator with git/diagnostic marks
+- **Nvim-colorizer** - Color preview for CSS/hex values
+- **Bufdelete** - Intelligent buffer deletion
 
-### Debugging
+### Keyboard Shortcuts
 
-- nvim-dap with nvim-dap-ui
-- Breakpoints, step-through debugging
+#### Navigation & Search
 
-### Keymaps
+| Keymap       | Description              |
+| ------------ | ------------------------ |
+| `<leader>\`  | Toggle file explorer     |
+| `<leader>p`  | Pulse menu               |
+| `<leader>f`  | Fuzzy search in buffer   |
+| `<leader>l`  | Live grep                |
+| `<leader>u`  | Undo history             |
+| `<leader>k`  | Keymaps                  |
+| `<leader><Tab>` | Next window           |
 
-| Key          | Description         |
-| ------------ | ------------------- |
-| `<Leader>\`  | Toggle NvimTree     |
-| `<Leader>f`  | Find in buffer      |
-| `<Leader>b`  | Find files          |
-| `<Leader>l`  | Live grep           |
-| `<Leader>u`  | Undo history        |
-| `<Leader>sr` | Search & replace    |
-| `<Leader>gd` | Git diff            |
-| `<Leader>ga` | Toggle diffview     |
-| `<Leader>gz` | Git stash           |
-| `<Leader>o`  | Toggle outline      |
-| `<Leader>x`  | Close buffer        |
-| `<Leader>/`  | Toggle comment      |
-| `<C-s>`      | Save file           |
-| `K`          | Hover documentation |
+#### Search & Replace
 
-### Debug Keys
+| Keymap       | Description              |
+| ------------ | ------------------------ |
+| `<leader>sr` | Search and replace       |
 
-| Key          | Description            |
-| ------------ | ---------------------- |
-| `<F5>`       | Start/Continue debug   |
-| `<F1>`       | Step into              |
-| `<F2>`       | Step over              |
-| `<F3>`       | Step out               |
-| `<Leader>db` | Toggle breakpoint      |
-| `<Leader>dB` | Conditional breakpoint |
+#### Git
 
-### AI Keys
+| Keymap       | Description              |
+| ------------ | ------------------------ |
+| `<leader>gd` | Diff current file        |
+| `<leader>gR` | Reset buffer             |
+| `<leader>ga` | Toggle diffview          |
+| `<leader>gc` | Commit                   |
+| `<leader>gz` | Stash                    |
+| `<leader>gh` | File history             |
+| `<leader>gH` | Project history          |
+| `<leader>gb` | Branches                 |
+| `<leader>gB` | Diff branch              |
+| `<leader>gs` | Stash menu               |
 
-| Key        | Description          |
-| ---------- | -------------------- |
-| `<M-a>`    | Start Sidekick agent |
-| `<M-f>`    | Copilot accept       |
-| `<M-b>`    | Copilot dismiss      |
-| `<M-Down>` | Copilot next         |
-| `<M-Up>`   | Copilot prev         |
+#### Code & Editing
+
+| Keymap       | Description              |
+| ------------ | ------------------------ |
+| `K`          | Hover documentation      |
+| `gl`         | Show line diagnostics    |
+| `<leader>ra` | Code actions             |
+| `<leader>rs` | Rename symbol            |
+| `<leader>h`  | Highlight word           |
+| `<leader>/`  | Toggle comment           |
+| `<leader>x`  | Close buffer             |
+| `<leader>X`  | Close all buffers        |
+| `<C-s>`      | Save file                |
+| `<M-Down>`   | Move line down           |
+| `<M-Up>`     | Move line up             |
+| `<leader>.`  | Increase indent          |
+| `<leader>,`  | Decrease indent          |
+| `<leader>c`  | Copy file location       |
