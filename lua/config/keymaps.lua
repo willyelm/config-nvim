@@ -2,12 +2,15 @@
 vim.keymap.set("n", "<leader>ra", vim.lsp.buf.code_action, { desc = "Code Actions" })
 vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 vim.keymap.set("n", "<leader>h", function()
-	vim.lsp.buf.document_highlight()
-	vim.api.nvim_create_autocmd("CursorMoved", {
-		once = true,
-		callback = vim.lsp.buf.clear_references,
-	})
-end, { desc = "Highlight words" })
+	local ns = vim.api.nvim_create_namespace("lsp_document_highlight")
+	local marks = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1, {})
+
+	if #marks > 0 then
+		vim.lsp.buf.clear_references()
+	else
+		vim.lsp.buf.document_highlight()
+	end
+end, { desc = "Toggle highlight" })
 
 -- Move Text
 vim.keymap.set("v", "<leader>.", ">gv", { desc = "Increase indent" })

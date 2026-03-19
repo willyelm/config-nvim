@@ -86,7 +86,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		opts = {
-			-- cmdline = true,
+			cmdline = true,
 			position = "top",
 			height = 0.9,
 			width = 0.7,

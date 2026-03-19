@@ -61,7 +61,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 	callback = function()
 		if vim.fn.mode() ~= "c" then
 			vim.cmd("checktime")
-			pcall(vim.cmd, "LspRestart")
 		end
 	end,
 	pattern = { "*" },
