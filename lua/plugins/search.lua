@@ -79,8 +79,8 @@ return {
 	-- Quick Navigation
 	{
 
-		-- dir = "~/Code/pulse.nvim",
-		"willyelm/pulse.nvim",
+		dir = "~/Code/pulse.nvim",
+		-- "willyelm/pulse.nvim",
 		lazy = false,
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
