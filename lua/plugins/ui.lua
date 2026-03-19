@@ -27,19 +27,11 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		opts = function()
-			local theme = require("lualine.themes.auto")
-
-			theme.normal.c.bg = "NONE"
-			theme.insert.c.bg = "NONE"
-			theme.visual.c.bg = "NONE"
-			theme.command.c.bg = "NONE"
-			theme.inactive.c.bg = "NONE"
-
 			return {
 				options = {
 					globalstatus = true,
-					theme = theme,
-					-- section_separators = { left = "", right = "" },
+					theme = require("theme.lualine"),
+					section_separators = { left = "", right = "" },
 					component_separators = { left = "/", right = "/" },
 				},
 				sections = {

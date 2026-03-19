@@ -3,228 +3,141 @@ if vim.fn.exists("syntax_on") then
 	vim.cmd("syntax reset")
 end
 vim.g.colors_name = "willyelm"
--- Colors
-local s = {
-	gray_01 = "#BCBCBC",
-	gray_02 = "#A8A8A8",
-	gray_03 = "#949494",
-	gray_04 = "#808080",
-	gray_05 = "#6C6C6C",
-	gray_06 = "#585858",
-	gray_07 = "#444444",
-	gray_08 = "#202020",
-	orange_01 = "#de9084",
-	orange_08 = "#4A2D28",
-	red_01 = "#ec7e90",
-	red_07 = "#632f36",
-	red_08 = "#361f24",
-	blue_01 = "#b6d6fd",
-	blue_08 = "#1c4059",
-	cyan_01 = "#4fb8cc",
-	cyan_08 = "#20424a",
-	green_01 = "#c6f1d4",
-	green_07 = "#334537",
-	green_08 = "#242a27",
-	purple_01 = "#d5bbfa",
-	purple_08 = "#402753",
-	amber_01 = "#FFE066",
-	amber_08 = "#6B5914",
-}
--- Semantic variables
-local bg_main, bg_inverse, bg_active, bg_visual, bg_search, bg_positive, bg_negative
-local fg_primary, fg_body, fg_secondary, fg_muted, fg_inverse, fg_contrast
-local fg_link, fg_info, fg_accent, fg_function, fg_string, fg_warning, fg_positive, fg_negative
-local divider
 
-if vim.o.background == "dark" then
-	bg_main = "NONE"
-	bg_inverse = s.gray_01
-	bg_active = s.gray_08
-	bg_visual = s.gray_02
-	bg_search = s.amber_01
-	bg_positive = s.green_08
-	bg_negative = s.red_08
-	fg_primary = s.gray_01
-	fg_body = s.gray_02
-	fg_secondary = s.gray_05
-	fg_muted = s.gray_06
-	fg_inverse = s.gray_08
-	fg_contrast = s.gray_01
-	fg_link = s.blue_01
-	fg_info = s.cyan_01
-	fg_accent = s.purple_01
-	fg_function = s.purple_05
-	fg_string = s.green_01
-	fg_warning = s.amber_01
-	fg_positive = s.green_01
-	fg_negative = s.red_01
-	divider = s.gray_07
-else
-	bg_main = "NONE"
-	bg_inverse = s.gray_08
-	bg_active = s.gray_02
-	bg_visual = s.gray_08
-	bg_search = s.amber_01
-	bg_positive = s.green_01
-	bg_negative = s.red_01
-	fg_primary = s.gray_08
-	fg_body = s.gray_08
-	fg_secondary = s.gray_06
-	fg_muted = s.gray_05
-	fg_inverse = s.gray_01
-	fg_contrast = s.gray_08
-	fg_link = s.blue_08
-	fg_info = s.cyan_08
-	fg_accent = s.purple_08
-	fg_function = s.purple_05
-	fg_string = s.orange_08
-	fg_warning = s.amber_08
-	fg_positive = s.green_07
-	fg_negative = s.red_07
-	divider = s.gray_04
-end
+local c = require("theme.colors")
 
--- Helper Function
 local function hi(name, opts)
 	vim.api.nvim_set_hl(0, name, opts)
 end
 
 -- Standard UI Highlights
-hi("Title", { fg = fg_primary })
-hi("Normal", { fg = fg_body, bg = bg_main })
-hi("Cursor", { fg = fg_body, bg = bg_inverse })
-hi("TermCursor", { fg = fg_primary, bg = fg_primary })
-hi("Comment", { fg = fg_muted, italic = true })
-hi("String", { fg = fg_string })
-hi("Number", { fg = fg_warning })
+hi("Title", { fg = c.fg_primary })
+hi("Normal", { fg = c.fg_body, bg = c.bg_main })
+hi("Cursor", { fg = c.fg_body, bg = c.bg_inverse })
+hi("TermCursor", { fg = c.fg_primary, bg = c.fg_primary })
+hi("Comment", { fg = c.fg_muted, italic = true })
+hi("String", { fg = c.fg_string })
+hi("Number", { fg = c.fg_warning })
 hi("Float", { link = "Number" })
 hi("Boolean", { link = "Number" })
--- hi("Constant", { fg = fg_body })
-hi("Identifier", { fg = fg_body })
-hi("Function", { fg = fg_function })
-hi("Statement", { fg = fg_primary })
--- hi("Keyword", { fg = fg_primary, bold = true })
-hi("Keyword", { fg = fg_accent })
+-- hi("Constant", { fg = c.fg_body })
+hi("Identifier", { fg = c.fg_body })
+hi("Function", { fg = c.fg_function })
+hi("Statement", { fg = c.fg_primary })
+-- hi("Keyword", { fg = c.fg_primary, bold = true })
+hi("Keyword", { fg = c.fg_accent })
 
--- hi("Operator", { fg = fg_body, bold = true })
-hi("PreProc", { fg = fg_secondary })
-hi("Type", { fg = fg_accent })
+-- hi("Operator", { fg = c.fg_body, bold = true })
+hi("PreProc", { fg = c.fg_secondary })
+hi("Type", { fg = c.fg_accent })
 hi("Special", { link = "Keyword" })
 hi("Underlined", { underline = true })
-hi("Error", { fg = fg_contrast, bg = bg_negative, bold = true })
-hi("Todo", { fg = fg_accent, underline = true })
-hi("LineNr", { fg = fg_muted })
-hi("CursorLine", { bg = bg_active })
-hi("CursorLineNr", { bg = bg_active })
-hi("Visual", { fg = fg_inverse, bg = bg_visual })
-hi("Search", { fg = fg_inverse, bg = bg_search })
-hi("VertSplit", { fg = divider, bg = bg_main })
-hi("WinSeparator", { fg = divider, bg = bg_main })
-hi("ColorColumn", { fg = divider, bg = divider })
-hi("WinBar", { bg = bg_main, sp = divider })
-hi("WinBarNC", { bg = bg_main, sp = divider })
-hi("StatusLine", { fg = fg_muted, bg = bg_main, sp = divider })
-hi("StatusLineNC", { fg = fg_secondary, bg = bg_main })
+hi("Error", { fg = c.fg_contrast, bg = c.bg_negative, bold = true })
+hi("Todo", { fg = c.fg_accent, underline = true })
+hi("LineNr", { fg = c.fg_muted })
+hi("CursorLine", { bg = c.bg_active })
+hi("CursorLineNr", { bg = c.bg_active })
+hi("Visual", { fg = c.fg_inverse, bg = c.bg_visual })
+hi("Search", { fg = c.fg_inverse, bg = c.bg_search })
+hi("VertSplit", { fg = c.divider, bg = c.bg_main })
+hi("WinSeparator", { fg = c.divider, bg = c.bg_main })
+hi("ColorColumn", { fg = c.divider, bg = c.divider })
+hi("WinBar", { bg = c.bg_main, sp = c.divider })
+hi("WinBarNC", { bg = c.bg_main, sp = c.divider })
+hi("StatusLine", { fg = c.fg_muted, bg = c.bg_main, sp = c.divider })
+hi("StatusLineNC", { fg = c.fg_secondary, bg = c.bg_main })
 
 -- Diff
-hi("DiffAdd", { bg = bg_positive })
-hi("DiffDelete", { bg = bg_negative })
-hi("DiffChange", { bg = bg_positive })
-hi("DiffText", { fg = fg_inverse, bg = fg_positive })
+hi("DiffAdd", { bg = c.bg_positive })
+hi("DiffDelete", { bg = c.bg_negative })
+hi("DiffChange", { bg = c.bg_positive })
+hi("DiffText", { fg = c.fg_inverse, bg = c.fg_positive })
 
 -- Git
 hi("GitSignsAddPreview", { link = "DiffAdd" })
 hi("GitSignsDeletePreview", { link = "DiffDelete" })
-hi("GitSignsAdd", { fg = fg_positive, bg = bg_main })
-hi("GitSignsChange", { fg = fg_warning, bg = bg_main })
-hi("GitSignsDelete", { fg = fg_negative, bg = bg_main })
+hi("GitSignsAdd", { fg = c.fg_positive, bg = c.bg_main })
+hi("GitSignsChange", { fg = c.fg_warning, bg = c.bg_main })
+hi("GitSignsDelete", { fg = c.fg_negative, bg = c.bg_main })
 
 -- Semantic Highlights
-hi("@property", { fg = fg_primary })
-hi("@field", { fg = fg_primary })
-hi("@function", { fg = fg_function })
-hi("@function.call", { fg = fg_function })
-hi("@variable", { fg = fg_primary })
-hi("@variable.parameter", { fg = fg_function })
-hi("@parameter", { fg = fg_function })
-hi("@type", { fg = fg_accent })
--- hi("@type.builtin", { fg = fg_accent, bold = true })
--- hi("@keyword.type", { fg = fg_accent, bold = true })
+hi("@property", { fg = c.fg_primary })
+hi("@field", { fg = c.fg_primary })
+hi("@function", { fg = c.fg_function })
+hi("@function.call", { fg = c.fg_function })
+hi("@variable", { fg = c.fg_primary })
+hi("@variable.parameter", { fg = c.fg_function })
+hi("@parameter", { fg = c.fg_function })
+hi("@type", { fg = c.fg_accent })
+-- hi("@type.builtin", { fg = c.fg_accent, bold = true })
+-- hi("@keyword.type", { fg = c.fg_accent, bold = true })
 
 hi("@keyword", { link = "Keyword" })
 hi("@keyword.function", { link = "Keyword" })
-hi("@operator", { fg = fg_body, bold = true })
-hi("@method", { fg = fg_function })
-hi("@method.call", { fg = fg_function })
-hi("@enum", { fg = fg_accent })
-hi("@enumMember", { fg = fg_warning })
-hi("@module", { fg = fg_accent })
--- hi("@module.builtin", { fg = fg_info })
-hi("@namespace", { fg = fg_accent })
+hi("@operator", { fg = c.fg_body, bold = true })
+hi("@method", { fg = c.fg_function })
+hi("@method.call", { fg = c.fg_function })
+hi("@enum", { fg = c.fg_accent })
+hi("@enumMember", { fg = c.fg_warning })
+hi("@module", { fg = c.fg_accent })
+-- hi("@module.builtin", { fg = c.fg_info })
+hi("@namespace", { fg = c.fg_accent })
 -- hi("@tag.builtin.tsx", {})
 hi("@tag.tsx", {})
 hi("@tag.attribute.tsx", { link = "Normal" })
-hi("@type.tsx", { fg = fg_accent, force = true })
+hi("@type.tsx", { fg = c.fg_accent, force = true })
 
 -- Pmenu (Floating Windows/Completion)
-hi("NormalFloat", { bg = bg_main, fg = fg_body, ctermbg = "none" })
-hi("FloatBorder", { fg = divider, bg = bg_main })
-hi("Pmenu", { fg = fg_body, bg = bg_main })
-hi("PmenuSel", { fg = fg_inverse, bg = fg_accent, bold = true })
-hi("PmenuSbar", { bg = bg_main })
-hi("PmenuDoc", { bg = bg_main })
-hi("PmenuThumb", { bg = bg_active })
-hi("PmenuBorder", { fg = divider, bg = bg_main })
-hi("PmenuDocBorder", { fg = divider, bg = bg_main })
+hi("NormalFloat", { bg = c.bg_main, fg = c.fg_body, ctermbg = "none" })
+hi("FloatBorder", { fg = c.divider, bg = c.bg_main })
+hi("Pmenu", { fg = c.fg_body, bg = c.bg_main })
+hi("PmenuSel", { fg = c.fg_inverse, bg = c.fg_accent, bold = true })
+hi("PmenuSbar", { bg = c.bg_main })
+hi("PmenuDoc", { bg = c.bg_main })
+hi("PmenuThumb", { bg = c.bg_active })
+hi("PmenuBorder", { fg = c.divider, bg = c.bg_main })
+hi("PmenuDocBorder", { fg = c.divider, bg = c.bg_main })
 
-hi("CmpItemAbbrMatch", { fg = fg_info, bold = true })
-hi("CmpItemAbbrMatchFuzzy", { fg = fg_info, bold = true })
-hi("CmpItemKindFunction", { fg = fg_accent })
-hi("CmpItemKindMethod", { fg = fg_accent })
-hi("CmpItemKindVariable", { fg = fg_link })
-hi("CmpItemKindKeyword", { fg = fg_primary })
-hi("CmpItemKindType", { fg = fg_warning })
+hi("CmpItemAbbrMatch", { fg = c.fg_info, bold = true })
+hi("CmpItemAbbrMatchFuzzy", { fg = c.fg_info, bold = true })
+hi("CmpItemKindFunction", { fg = c.fg_accent })
+hi("CmpItemKindMethod", { fg = c.fg_accent })
+hi("CmpItemKindVariable", { fg = c.fg_link })
+hi("CmpItemKindKeyword", { fg = c.fg_primary })
+hi("CmpItemKindType", { fg = c.fg_warning })
 
 -- Tree
-hi("NvimTreeNormal", { fg = fg_body })
-hi("NvimTreeFile", { fg = fg_body })
+hi("NvimTreeNormal", { fg = c.fg_body })
+hi("NvimTreeFile", { fg = c.fg_body })
 hi("NvimTreeExecFile", { link = "NvimTreeFile" })
 hi("NvimTreeImageFile", { link = "NvimTreeFile" })
-hi("NvimTreeFolderName", { fg = fg_body })
-hi("NvimTreeRootFolder", { fg = fg_primary, bold = true, underline = true })
--- hi("NvimTreeIndentMarker", { fg = fg_muted })
-hi("NvimTreeFolderIcon", { fg = fg_body })
-hi("NvimTreeOpenedFolderName", { fg = fg_primary })
-hi("NvimTreeOpenedFile", { fg = fg_primary, bold = true })
-hi("NvimTreeWinSeparator", { fg = divider, bg = bg_main })
+hi("NvimTreeFolderName", { fg = c.fg_body })
+hi("NvimTreeRootFolder", { fg = c.fg_primary, bold = true, underline = true })
+-- hi("NvimTreeIndentMarker", { fg = c.fg_muted })
+hi("NvimTreeFolderIcon", { fg = c.fg_body })
+hi("NvimTreeOpenedFolderName", { fg = c.fg_primary })
+hi("NvimTreeOpenedFile", { fg = c.fg_primary, bold = true })
+hi("NvimTreeWinSeparator", { fg = c.divider, bg = c.bg_main })
 hi("NvimTreeGitIgnored", { link = "Comment" })
 
 -- Barbecue
-hi("Barbecue", { bg = bg_main })
--- hi("barbecue_separator", { fg = divider })
-
--- Lualine
-hi("LualineSeparator", { fg = divider })
-hi("lualine_a_normal", { bg = bg_inverse })
-hi("lualine_c_normal", { link = "StatusLine" })
-hi("lualine_c_insert", { link = "StatusLine" })
-hi("lualine_c_visual", { link = "StatusLine" })
+hi("Barbecue", { bg = c.bg_main })
 
 -- Pulse
 if vim.o.background == "dark" then
-	hi("PulseDiffNAdd", { bg = s.green_07, fg = fg_body })
-	hi("PulseDiffNDelete", { bg = s.red_07, fg = fg_body })
+	hi("PulseDiffNAdd", { bg = c.green_07, fg = c.fg_body })
+	hi("PulseDiffNDelete", { bg = c.red_07, fg = c.fg_body })
 	-- else
-	--   hi("PulseDiffNAdd", { fg = s.green_07 })
-	--   hi("PulseDiffNDelete", { fg = s.red_07
+	--   hi("PulseDiffNAdd", { fg = c.green_07 })
+	--   hi("PulseDiffNDelete", { fg = c.red_07
 end
 
 -- Telescope
 -- hi("TelescopeNormal", { link = "NormalFloat" })
-hi("TelescopeBorder", { fg = divider })
+hi("TelescopeBorder", { fg = c.divider })
 -- hi("TelescopePromptNormal", { link = "NormalFloat" })
--- hi("TelescopePromptBorder", { fg = divider })
+-- hi("TelescopePromptBorder", { fg = c.divider })
 -- hi("TelescopeResultsNormal", { link = "NormalFloat" })
--- hi("TelescopeResultsBorder", { fg = divider })
+-- hi("TelescopeResultsBorder", { fg = c.divider })
 -- hi("TelescopePreviewNormal", { link = "NormalFloat" })
--- hi("TelescopePreviewBorder", { fg = divider })
+-- hi("TelescopePreviewBorder", { fg = c.divider })
