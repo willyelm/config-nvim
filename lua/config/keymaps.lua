@@ -40,9 +40,8 @@ vim.keymap.set("n", "gl", vim.diagnostic.open_float, {
 -- Save
 vim.keymap.set({ "n", "i" }, "<C-s>", "<Esc>:write<CR>", { desc = "Save Changes" })
 
--- NvimTree
+-- Cycle Windows
 vim.keymap.set("n", "<leader><Tab>", "<C-w>w", { desc = "Next window" })
-vim.keymap.set("n", "<leader>\\", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle Explorer" })
 
 -- Terminal
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
@@ -65,3 +64,6 @@ vim.keymap.set({ "n", "v" }, "<leader>/", function()
 		vim.api.nvim_feedkeys("gcc", "m", false)
 	end
 end, { desc = "Toggle comment" })
+
+-- NvimTree
+-- vim.keymap.set("n", "<leader>\\", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle Explorer" })

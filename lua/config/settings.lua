@@ -1,6 +1,5 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-
 vim.opt.nu = true
 vim.opt.autoindent = true
 vim.opt.expandtab = true
@@ -31,6 +30,7 @@ vim.opt.autochdir = false
 
 vim.opt.cursorline = true
 vim.opt.guicursor = "n:block,v-i-ci-ve:ver10-Cursor"
+-- vim.opt.guicursor = "n:block-blinkon100,v-i-ci-ve:ver10-Cursor-blinkon100"
 vim.opt.mouse = "a"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 

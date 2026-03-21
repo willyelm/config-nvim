@@ -2,11 +2,11 @@ return {
 	-- Discovery
 	{
 		"nvim-telescope/telescope.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"debugloop/telescope-undo.nvim",
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-		},
+		"nvim-lua/plenary.nvim",
+		"debugloop/telescope-undo.nvim",
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	},
+	dependencies = {
 		opts = {
 			defaults = {
 				winblend = 0,
@@ -78,9 +78,8 @@ return {
 	},
 	-- Quick Navigation
 	{
-
-		dir = "~/Code/pulse.nvim",
-		-- "willyelm/pulse.nvim",
+		-- dir = "~/Code/pulse.nvim",
+		"willyelm/pulse.nvim",
 		lazy = false,
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
@@ -89,12 +88,23 @@ return {
 			cmdline = true,
 			position = "top",
 			height = 0.9,
-			width = 0.7,
+			width = 0.6,
+			navigators = {
+				files = {
+					open_on_directory = true,
+					icons = true,
+					filters = { "^%.git$", "%.DS_Store$" },
+					git = {
+						enable = true,
+						ignore = true,
+					},
+				},
+			},
 		},
 		keys = {
 			{ "<leader>p", "<cmd>Pulse<cr>", desc = "Pulse" },
-			{ "<leader>l", "<cmd>Pulse live_grep<cr>", desc = "Live Grep" },
-			{ "<leader>f", "<cmd>Pulse fuzzy_search<cr>", desc = "Fuzzy Search" },
+			{ "<leader>l", "<cmd>Pulse live_grep<cr>", desc = "Live Grep (Pulse)" },
+			{ "<leader>f", "<cmd>Pulse fuzzy_search<cr>", desc = "Fuzzy Search(Pulse)" },
 		},
 	},
 	{

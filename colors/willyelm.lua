@@ -13,7 +13,7 @@ end
 -- Standard UI Highlights
 hi("Title", { fg = color.fg_primary })
 hi("Normal", { fg = color.fg_body, bg = color.bg_main })
-hi("Cursor", { fg = color.fg_body, bg = color.bg_inverse })
+hi("Cursor", { fg = color.fg_body, bg = color.bg_inverse, bold = true })
 hi("TermCursor", { fg = color.fg_primary, bg = color.fg_primary })
 hi("Comment", { fg = color.fg_muted, italic = true })
 hi("String", { fg = color.fg_string })
@@ -46,7 +46,7 @@ hi("StatusLineNC", { fg = color.fg_secondary, bg = color.bg_main })
 -- Diff
 hi("DiffAdd", { bg = color.bg_positive })
 hi("DiffDelete", { bg = color.bg_negative })
-hi("DiffChange", { bg = color.bg_positive })
+hi("DiffChange", { bg = color.bg_modified })
 hi("DiffText", { fg = color.fg_inverse, bg = color.fg_positive })
 
 -- Git
@@ -84,7 +84,7 @@ hi("NormalFloat", { bg = color.bg_main, fg = color.fg_body, ctermbg = "none" })
 hi("FloatBorder", { fg = color.divider, bg = color.bg_main })
 hi("Pmenu", { fg = color.fg_body, bg = color.bg_main })
 hi("PmenuSel", { fg = color.fg_inverse, bg = color.fg_accent, bold = true })
-hi("PmenuSbar", { bg = color.bg_main })
+hi("PmenuSbar", { bg = color.divider })
 hi("PmenuDoc", { bg = color.bg_main })
 hi("PmenuThumb", { bg = color.bg_active })
 hi("PmenuBorder", { fg = color.divider, bg = color.bg_main })
@@ -115,6 +115,9 @@ hi("NvimTreeGitIgnored", { link = "Comment" })
 hi("Barbecue", { bg = color.bg_main })
 
 -- Pulse
+hi("PulseNormal", { bg = color.bg_action })
+hi("PulseActive", { bg = color.bg_active })
+
 if vim.o.background == "dark" then
 	hi("PulseDiffNAdd", { bg = color.green_07, fg = color.fg_body })
 	hi("PulseDiffNDelete", { bg = color.red_07, fg = color.fg_body })
