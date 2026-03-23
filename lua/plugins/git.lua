@@ -42,34 +42,4 @@ return {
 			},
 		},
 	},
-	{
-		"NeogitOrg/neogit",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"sindrets/diffview.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-		opts = {
-			integrations = {
-				diffview = true,
-			},
-		},
-		config = function()
-			require("neogit").setup({
-				integrations = {
-					diffview = true,
-					telescope = true,
-				},
-				kind = "floating",
-				popup = {
-					kind = "floating",
-				},
-				graph_style = "unicode",
-			})
-		end,
-		keys = {
-			{ "<leader>gc", "<cmd>Neogit commit<cr>", desc = "Stash menu" },
-			{ "<leader>gz", "<cmd>Neogit stash<cr>", desc = "Stash menu" },
-		},
-	},
 }

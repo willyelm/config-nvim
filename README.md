@@ -88,52 +88,52 @@ Lazy.nvim will automatically install all plugins on first launch.
 
 #### Navigation & Search
 
-| Keymap       | Description              |
-| ------------ | ------------------------ |
-| `<leader>\`  | Toggle file explorer     |
-| `<leader>p`  | Pulse menu               |
-| `<leader>f`  | Fuzzy search in buffer   |
-| `<leader>l`  | Live grep                |
-| `<leader>u`  | Undo history             |
-| `<leader>k`  | Keymaps                  |
-| `<leader><Tab>` | Next window           |
+| Keymap          | Description            |
+| --------------- | ---------------------- |
+| `<leader>\`     | Toggle file explorer   |
+| `<leader>p`     | Pulse menu             |
+| `<leader>f`     | Fuzzy search in buffer |
+| `<leader>l`     | Live grep              |
+| `<leader>u`     | Undo history           |
+| `<leader>k`     | Keymaps                |
+| `<leader><Tab>` | Next window            |
 
 #### Search & Replace
 
-| Keymap       | Description              |
-| ------------ | ------------------------ |
-| `<leader>sr` | Search and replace       |
+| Keymap       | Description        |
+| ------------ | ------------------ |
+| `<leader>sr` | Search and replace |
 
 #### Git
 
-| Keymap       | Description              |
-| ------------ | ------------------------ |
-| `<leader>gd` | Diff current file        |
-| `<leader>gR` | Reset buffer             |
-| `<leader>ga` | Toggle diffview          |
-| `<leader>gc` | Commit                   |
-| `<leader>gz` | Stash                    |
-| `<leader>gh` | File history             |
-| `<leader>gH` | Project history          |
-| `<leader>gb` | Branches                 |
-| `<leader>gB` | Diff branch              |
-| `<leader>gs` | Stash menu               |
+| Keymap       | Description       |
+| ------------ | ----------------- |
+| `<leader>gd` | Diff current file |
+| `<leader>gR` | Reset buffer      |
+| `<leader>ga` | Toggle diffview   |
+| `<leader>gc` | Commit            |
+| `<leader>gz` | Stash             |
+| `<leader>gh` | File history      |
+| `<leader>gH` | Project history   |
+| `<leader>gb` | Branches          |
+| `<leader>gB` | Diff branch       |
+| `<leader>gs` | Stash menu        |
 
 #### Code & Editing
 
-| Keymap       | Description              |
-| ------------ | ------------------------ |
-| `K`          | Hover documentation      |
-| `gl`         | Show line diagnostics    |
-| `<leader>ra` | Code actions             |
-| `<leader>rs` | Rename symbol            |
-| `<leader>h`  | Highlight word           |
-| `<leader>/`  | Toggle comment           |
-| `<leader>x`  | Close buffer             |
-| `<leader>X`  | Close all buffers        |
-| `<C-s>`      | Save file                |
-| `<M-Down>`   | Move line down           |
-| `<M-Up>`     | Move line up             |
-| `<leader>.`  | Increase indent          |
-| `<leader>,`  | Decrease indent          |
-| `<leader>c`  | Copy file location       |
+| Keymap       | Description           |
+| ------------ | --------------------- |
+| `K`          | Hover documentation   |
+| `gl`         | Show line diagnostics |
+| `<leader>ra` | Code actions          |
+| `<leader>rs` | Rename symbol         |
+| `<leader>h`  | Highlight word        |
+| `<leader>/`  | Toggle comment        |
+| `<leader>x`  | Close buffer          |
+| `<leader>X`  | Close all buffers     |
+| `<C-s>`      | Save file             |
+| `<M-Down>`   | Move line down        |
+| `<M-Up>`     | Move line up          |
+| `<leader>.`  | Increase indent       |
+| `<leader>,`  | Decrease indent       |
+| `<leader>c`  | Copy file location    |

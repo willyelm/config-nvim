@@ -125,6 +125,3 @@ else
 	hi("PulseDiffNAdd", { bg = color.green_02, fg = color.fg_body })
 	hi("PulseDiffNDelete", { bg = color.red_02, fg = color.fg_body })
 end
-
--- Telescope
-hi("TelescopeBorder", { fg = color.divider })
