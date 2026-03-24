@@ -20,26 +20,8 @@ return {
 			},
 		},
 		keys = {
-			{ "<leader>gd", "<cmd>Gitsigns diffthis<cr>", desc = "Diff This" },
-			{ "<leader>gR", "<cmd>Gitsigns reset_buffer<cr>", desc = "Reset" },
-		},
-	},
-	{
-		"sindrets/diffview.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		keys = {
-			{
-				"<leader>ga",
-				function()
-					local view = require("diffview.lib").get_current_view()
-					if view then
-						vim.cmd("DiffviewClose")
-					else
-						vim.cmd("DiffviewOpen")
-					end
-				end,
-				desc = "Toggle Diffview",
-			},
+			{ "<leader>gd", "<cmd>Gitsigns diffthis<cr>", desc = "Diff File" },
+			{ "<leader>gr", "<cmd>Gitsigns reset_buffer<cr>", desc = "Reset File" },
 		},
 	},
 }

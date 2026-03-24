@@ -44,6 +44,9 @@ return {
 			{ "<leader>l", "<cmd>Pulse live_grep<cr>", desc = "Live Grep" },
 			{ "<leader>f", "<cmd>Pulse fuzzy_search<cr>", desc = "Fuzzy Search" },
 			{ "<leader>o", "<cmd>Pulse files_open<cr>", desc = "Open Buffers" },
+			{ "<leader>gs", "<cmd>Pulse git_status<cr>", desc = "Status" },
+			{ "<leader>gc", "<cmd>Pulse git_project_history<cr>", desc = "Project History" },
+			{ "<leader>gh", "<cmd>Pulse git_file_history<cr>", desc = "File History" },
 		},
 	},
 	{
