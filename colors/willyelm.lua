@@ -98,19 +98,6 @@ hi("CmpItemKindVariable", { fg = color.fg_link })
 hi("CmpItemKindKeyword", { fg = color.fg_primary })
 hi("CmpItemKindType", { fg = color.fg_warning })
 
--- Tree
-hi("NvimTreeNormal", { fg = color.fg_body })
-hi("NvimTreeFile", { fg = color.fg_body })
-hi("NvimTreeExecFile", { link = "NvimTreeFile" })
-hi("NvimTreeImageFile", { link = "NvimTreeFile" })
-hi("NvimTreeFolderName", { fg = color.fg_body })
-hi("NvimTreeRootFolder", { fg = color.fg_primary, bold = true, underline = true })
-hi("NvimTreeFolderIcon", { fg = color.fg_body })
-hi("NvimTreeOpenedFolderName", { fg = color.fg_primary })
-hi("NvimTreeOpenedFile", { fg = color.fg_primary, bold = true })
-hi("NvimTreeWinSeparator", { fg = color.divider, bg = color.bg_main })
-hi("NvimTreeGitIgnored", { link = "Comment" })
-
 -- Barbecue
 hi("Barbecue", { bg = color.bg_main })
 
