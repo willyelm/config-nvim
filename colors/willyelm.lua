@@ -11,7 +11,7 @@ local function hi(name, opts)
 end
 
 -- Standard UI Highlights
-hi("Title", { fg = color.fg_primary })
+hi("Title", { fg = color.fg_primary, bold = true })
 hi("Normal", { fg = color.fg_body, bg = color.bg_main })
 hi("Cursor", { fg = color.fg_body, bg = color.bg_inverse, bold = true })
 hi("TermCursor", { fg = color.fg_primary, bg = color.fg_primary })

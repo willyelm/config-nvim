@@ -73,7 +73,11 @@ return {
 						css_fn = true,
 						css = true,
 						names = { enable = false },
-						tailwind = { enable = true, lsp = true, update_names = true },
+						-- The Tailwind LSP path can return stale/out-of-range columns during
+						-- rehighlight on WinScrolled, which crashes extmark placement.
+						-- Keep bundled Tailwind color parsing enabled and disable the LSP
+						-- documentColor integration until upstream handles those ranges safely.
+						tailwind = { enable = true, lsp = false, update_names = false },
 						custom = {
 							{
 								name = "oklch",
