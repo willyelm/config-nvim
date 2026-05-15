@@ -254,6 +254,7 @@ return {
 	-- TreeSitter Context
 	{
 		"nvim-treesitter/nvim-treesitter-context",
+		main = "treesitter-context",
 		opts = {
 			max_lines = 3, -- Keep it unobtrusive
 			min_window_height = 20,
@@ -332,7 +333,8 @@ return {
 	},
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "VeryLazy",
+		main = "tiny-inline-diagnostic",
+		defer = true,
 		-- priority = 1000,
 		opts = {
 			options = {
@@ -360,6 +362,7 @@ return {
 	-- AutoTag
 	{
 		"windwp/nvim-ts-autotag",
+		main = "nvim-ts-autotag",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
