@@ -20,6 +20,10 @@ local function plugin_name(spec)
 end
 
 local function plugin_src(spec)
+	if spec.url then
+		return spec.url
+	end
+
 	if spec.dir then
 		return spec.dir
 	end
