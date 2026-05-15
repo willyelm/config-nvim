@@ -20,6 +20,10 @@ local function plugin_name(spec)
 end
 
 local function plugin_src(spec)
+	if spec.dir then
+		return spec.dir
+	end
+
 	local repo = spec[1]
 	if type(repo) ~= "string" then
 		error("plugin spec is missing a repository string")
