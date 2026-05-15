@@ -258,7 +258,8 @@ function M.load(name)
 end
 
 local function on_event(events, callback)
-	local group = vim.api.nvim_create_augroup("native-pack-" .. table.concat(events, "-"), { clear = false })
+	local event_name = table.concat(events, "-"):gsub("[^%w_-]", "_")
+	local group = vim.api.nvim_create_augroup("native-pack-" .. event_name, { clear = false })
 	vim.api.nvim_create_autocmd(events, {
 		group = group,
 		once = true,
