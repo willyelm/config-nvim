@@ -2,6 +2,7 @@ return {
 	-- Search/Replace
 	{
 		"MagicDuck/grug-far.nvim",
+		main = "grug-far",
 		opts = { headerMaxWidth = 80 },
 		keys = {
 			{
@@ -17,7 +18,8 @@ return {
 	{
 		-- dir = "~/Code/pulse.nvim",
 		"willyelm/pulse.nvim",
-		lazy = false,
+		main = "pulse",
+		start = true,
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
@@ -51,7 +53,7 @@ return {
 	},
 	{
 		"folke/which-key.nvim",
-		event = "VeryLazy",
+		defer = true,
 		init = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
