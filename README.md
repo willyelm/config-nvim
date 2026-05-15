@@ -1,10 +1,10 @@
 # Neovim Config
 
-My personal Neovim setup configured with Lazy.nvim for plugin management. Optimized for web development, scripting, and general editing with LSP, formatting, git integration, and modern UI enhancements.
+My personal Neovim setup configured with Neovim's built-in `vim.pack` package manager. Optimized for web development, scripting, and general editing with LSP, formatting, git integration, and modern UI enhancements.
 
 ## Requirements
 
-- Neovim >= 0.9.5
+- Neovim >= 0.12.0
 - Git
 - Node.js >= 18
 - ripgrep (`rg`)
@@ -19,7 +19,11 @@ cd ~/.config/nvim
 nvim
 ```
 
-Lazy.nvim will automatically install all plugins on first launch.
+`vim.pack` will automatically install managed plugins on first launch and track them in `nvim-pack-lock.json`.
+
+## Ghostty Theme
+
+If you want your terminal to match this Neovim palette, use `colors/willyelm.ghostty` as your Ghostty config snippet or copy its theme section into your existing Ghostty config.
 
 ## Mason Tools (auto-installed via mason.nvim)
 
