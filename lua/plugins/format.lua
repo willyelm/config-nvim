@@ -1,8 +1,8 @@
 return {
 	{
 		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-		cmd = { "ConformInfo" },
+		main = "conform",
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			formatters_by_ft = {
 				javascript = { "biome" },
