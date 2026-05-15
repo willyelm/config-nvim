@@ -134,7 +134,12 @@ local function collect_specs()
 		end
 	end
 
-	return vim.tbl_values(install_specs_by_name)
+		local install_specs = vim.tbl_values(install_specs_by_name)
+		table.sort(install_specs, function(a, b)
+			return a.name < b.name
+		end)
+
+		return install_specs
 end
 
 local function packadd(name)
