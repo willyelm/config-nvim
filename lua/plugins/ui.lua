@@ -2,6 +2,7 @@ return {
 	-- Icons
 	{
 		"nvim-tree/nvim-web-devicons",
+		main = "nvim-web-devicons",
 		opts = {
 			default = true,
 			strict = true,
@@ -13,7 +14,6 @@ return {
 	{
 		"utilyre/barbecue.nvim",
 		name = "barbecue",
-		version = "*",
 		dependencies = { "SmiteshP/nvim-navic", "nvim-tree/nvim-web-devicons" },
 		opts = {
 			theme = "auto",
@@ -26,6 +26,7 @@ return {
 	-- Statusline with Git Branch and LSP status
 	{
 		"nvim-lualine/lualine.nvim",
+		main = "lualine",
 		opts = function()
 			return {
 				options = {
