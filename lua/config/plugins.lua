@@ -308,8 +308,11 @@ function M.setup()
 	local install_specs = collect_specs()
 	vim.pack.add(install_specs)
 
-	for _, spec in pairs(specs_by_name) do
-		setup_spec(spec)
+	local spec_names = vim.tbl_keys(specs_by_name)
+	table.sort(spec_names)
+
+	for _, name in ipairs(spec_names) do
+		setup_spec(specs_by_name[name])
 	end
 
 	if next(missing_plugins) then
