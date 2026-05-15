@@ -296,6 +296,10 @@ local function setup_spec(spec)
 end
 
 function M.setup()
+	specs_by_name = {}
+	install_specs_by_name = {}
+	missing_plugins = {}
+
 	local install_specs = collect_specs()
 	vim.pack.add(install_specs)
 
