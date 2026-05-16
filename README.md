@@ -22,10 +22,6 @@ nvim
 `vim.pack` will automatically install managed plugins on first launch and track them in `nvim-pack-lock.json`.
 Restart Neovim once after the first install pass so newly added packages are available to `:packadd`.
 
-## Ghostty Theme
-
-If you want your terminal to match this Neovim palette, use `colors/willyelm.ghostty` as your Ghostty config snippet or copy its theme section into your existing Ghostty config.
-
 ## Mason Tools (auto-installed via mason.nvim)
 
 ### LSP Servers
@@ -51,7 +47,7 @@ If you want your terminal to match this Neovim palette, use `colors/willyelm.gho
 
 ### LSP & Code Intelligence
 
-- Language Server Protocol via lsp-zero
+- Language Server Protocol via Neovim 0.12 and nvim-lspconfig
 - Autocompletion with nvim-cmp
 - Treesitter syntax highlighting and text objects
 - Auto-pairs and auto-tag insertion
