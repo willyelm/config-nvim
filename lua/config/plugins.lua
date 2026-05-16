@@ -122,6 +122,10 @@ local function collect_specs()
 		end
 
 		for _, spec in ipairs(flatten_spec(module_specs)) do
+			if spec.enabled == false then
+				goto continue
+			end
+
 			local name = plugin_name(spec)
 			spec._name = name
 			specs_by_name[name] = spec
@@ -131,6 +135,8 @@ local function collect_specs()
 			end
 
 			add_install_spec(spec)
+
+			::continue::
 		end
 	end
 
