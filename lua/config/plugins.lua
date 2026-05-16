@@ -194,7 +194,12 @@ local function default_setup(spec, opts)
 	end
 
 	local main = spec.main or spec._name:gsub("%.nvim$", "")
-	require(main).setup(opts)
+	local module = require(main)
+	if type(module.setup) ~= "function" then
+		error(("plugin %s does not expose setup()"):format(spec._name))
+	end
+
+	module.setup(opts)
 end
 
 local function run_mapping(rhs)
