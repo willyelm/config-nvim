@@ -69,7 +69,7 @@ If you want your terminal to match this Neovim palette, use `colors/willyelm.gho
 ### Git Integration
 
 - **Gitsigns** - Inline git indicators and blame
-- **Telescope** - Git history, branches, and stash browsing
+- **Pulse.nvim** - Git history, branches, and stash browsing
 
 ### Search & Navigation
 
