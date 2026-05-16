@@ -332,7 +332,7 @@ function M.setup()
 			local names = vim.tbl_keys(missing_plugins)
 			table.sort(names)
 			vim.notify(
-				("Installed plugins are not available until restart: %s"):format(table.concat(names, ", ")),
+				("Installed plugins are not available until restart Neovim: %s"):format(table.concat(names, ", ")),
 				vim.log.levels.WARN
 			)
 		end)
