@@ -75,7 +75,7 @@ If you want your terminal to match this Neovim palette, use `colors/willyelm.gho
 
 - **Pulse.nvim** - Custom fuzzy finder with live grep
 - **Grug-far** - Search and replace across files
-- **Telescope** - File finding, git integration, undo history
+- **Pulse.nvim** - File finding and open buffer navigation
 - **Which-key** - Interactive keybinding hints
 
 ### UI & UX
