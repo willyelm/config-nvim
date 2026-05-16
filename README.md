@@ -20,6 +20,7 @@ nvim
 ```
 
 `vim.pack` will automatically install managed plugins on first launch and track them in `nvim-pack-lock.json`.
+Restart Neovim once after the first install pass so newly added packages are available to `:packadd`.
 
 ## Ghostty Theme
 
