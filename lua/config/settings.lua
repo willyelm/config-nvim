@@ -1,5 +1,27 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- Keep older plugins from triggering Neovim's deprecated vim.tbl_flatten().
+vim.tbl_flatten = function(t)
+	if vim.iter then
+		return vim.iter(t):flatten(math.huge):totable()
+	end
+
+	local result = {}
+	local function flatten(items)
+		for _, item in ipairs(items) do
+			if vim.islist(item) then
+				flatten(item)
+			else
+				result[#result + 1] = item
+			end
+		end
+	end
+
+	flatten(t)
+	return result
+end
+
 vim.opt.nu = true
 vim.opt.autoindent = true
 vim.opt.expandtab = true
