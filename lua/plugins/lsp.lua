@@ -1,17 +1,15 @@
 return {
 	{
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v3.x",
+		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "neovim/nvim-lspconfig" },
 			{ "williamboman/mason.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
+			{ "hrsh7th/cmp-nvim-lsp" },
 		},
 		config = function()
-			local lsp_zero = require("lsp-zero")
-			local capabilities = lsp_zero.get_capabilities()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			capabilities.textDocument = capabilities.textDocument or {}
 			capabilities.textDocument.foldingRange = {
 				dynamicRegistration = false,
@@ -28,13 +26,24 @@ return {
 				relativePatternSupport = true,
 			}
 
-			lsp_zero.on_attach(function(client, bufnr)
-				lsp_zero.default_keymaps({ buffer = bufnr })
+			local on_attach = function(client, bufnr)
+				local opts = { buffer = bufnr, silent = true }
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
+				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Go to declaration" }))
+				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", opts, { desc = "Go to implementation" }))
+				vim.keymap.set("n", "go", vim.lsp.buf.type_definition, vim.tbl_extend("force", opts, { desc = "Go to type definition" }))
+				vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "Go to reference" }))
+				vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
+				vim.keymap.set({ "n", "x" }, "<F3>", function()
+					vim.lsp.buf.format({ async = true })
+				end, vim.tbl_extend("force", opts, { desc = "Format file" }))
+				vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Execute code action" }))
+
 				-- Enable inlays
 				if client.server_capabilities.inlayHintProvider then
 					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 				end
-			end)
+			end
 
 			require("mason").setup({})
 			require("mason-tool-installer").setup({
@@ -63,7 +72,9 @@ return {
 					exclude = { "ts_ls" },
 				},
 				handlers = {
-					lsp_zero.default_setup,
+					function(server_name)
+						vim.lsp.enable(server_name)
+					end,
 					-- Prevent Mason from auto-configuring ts_ls when vtsls is preferred.
 					ts_ls = function() end,
 					cssls = function() end,
@@ -100,7 +111,7 @@ return {
 						},
 					},
 				},
-				on_attach = lsp_zero.on_attach,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 
@@ -117,7 +128,7 @@ return {
 						telemetry = { enable = false },
 					},
 				},
-				on_attach = lsp_zero.on_attach,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 
@@ -126,7 +137,7 @@ return {
 				root_markers = { "biome.json", "biome.jsonc" },
 				single_file_support = true,
 				on_attach = function(client, bufnr)
-					lsp_zero.on_attach(client, bufnr)
+					on_attach(client, bufnr)
 					client.server_capabilities.documentFormattingProvider = false
 					client.server_capabilities.documentRangeFormattingProvider = false
 				end,
@@ -141,12 +152,12 @@ return {
 						},
 					},
 				},
-				on_attach = lsp_zero.on_attach,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 
 			vim.lsp.config("tailwindcss", {
-				on_attach = lsp_zero.on_attach,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 
@@ -157,7 +168,7 @@ return {
 						schemaDownload = { enable = true },
 					},
 				},
-				on_attach = lsp_zero.on_attach,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 
@@ -175,7 +186,7 @@ return {
 						},
 					},
 				},
-				on_attach = lsp_zero.on_attach,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 
@@ -187,7 +198,7 @@ return {
 						staticcheck = true,
 					},
 				},
-				on_attach = lsp_zero.on_attach,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 
