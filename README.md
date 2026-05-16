@@ -69,8 +69,6 @@ If you want your terminal to match this Neovim palette, use `colors/willyelm.gho
 ### Git Integration
 
 - **Gitsigns** - Inline git indicators and blame
-- **Diffview** - Side-by-side diff viewing
-- **Neogit** - Interactive git operations
 - **Telescope** - Git history, branches, and stash browsing
 
 ### Search & Navigation
