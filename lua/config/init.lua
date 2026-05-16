@@ -3,4 +3,4 @@ vim.g.maplocalleader = "\\"
 
 require("config.settings")
 require("config.keymaps")
-require("config.plugins").setup()
+require("config.pack").setup()
