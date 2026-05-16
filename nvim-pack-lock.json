@@ -34,8 +34,7 @@
     },
     "lsp-zero.nvim": {
       "rev": "77550f2f6cbf0959ef1583d845661af075f3442b",
-      "src": "https://github.com/VonHeikemen/lsp-zero.nvim",
-      "version": "'v3.x'"
+      "src": "https://github.com/VonHeikemen/lsp-zero.nvim"
     },
     "lualine.nvim": {
       "rev": "131a558e13f9f28b15cd235557150ccb23f89286",
