@@ -64,6 +64,3 @@ vim.keymap.set({ "n", "v" }, "<leader>/", function()
 		vim.api.nvim_feedkeys("gcc", "m", false)
 	end
 end, { desc = "Toggle comment" })
-
--- NvimTree
--- vim.keymap.set("n", "<leader>\\", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle Explorer" })

@@ -8,6 +8,7 @@ function M.setup()
 		position = "top",
 		height = 0.90,
 		width = 0.75,
+		-- workspace_label = true,
 		navigators = {
 			files = {
 				compact_dirs = true,
@@ -46,11 +47,11 @@ function M.setup()
 		require("grug-far").open()
 	end, { desc = "Search & Replace" })
 	vim.keymap.set("n", "<leader>p", "<cmd>Pulse<cr>", { desc = "Pulse" })
-	vim.keymap.set("n", "<leader>l", "<cmd>Pulse live_grep<cr>", { desc = "Live Grep" })
-	vim.keymap.set("n", "<leader>sf", "<cmd>Pulse fuzzy_search<cr>", { desc = "Fuzzy Search" })
-	vim.keymap.set("n", "<leader>o", "<cmd>Pulse files_open<cr>", { desc = "Open Buffers" })
-	vim.keymap.set("n", "<leader>gs", "<cmd>Pulse git_status<cr>", { desc = "Status" })
-	vim.keymap.set("n", "<leader>gc", "<cmd>Pulse git_project_history<cr>", { desc = "Project History" })
+	vim.keymap.set("n", "<leader>l", "<cmd>Pulse! live_grep<cr>", { desc = "Live Grep" })
+	vim.keymap.set("n", "<leader>f", "<cmd>Pulse fuzzy_search<cr>", { desc = "Fuzzy Search" })
+	vim.keymap.set("n", "<leader>o", "<cmd>Pulse! files_open<cr>", { desc = "Open Buffers" })
+	vim.keymap.set("n", "<leader>gs", "<cmd>Pulse! git_status<cr>", { desc = "Status" })
+	vim.keymap.set("n", "<leader>gc", "<cmd>Pulse! git_project_history<cr>", { desc = "Project History" })
 	vim.keymap.set("n", "<leader>gh", "<cmd>Pulse git_file_history<cr>", { desc = "File History" })
 end
 

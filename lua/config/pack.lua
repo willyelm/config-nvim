@@ -31,6 +31,9 @@ local plugins = {
 function M.setup()
 	vim.pack.add(plugins, { load = true, confirm = false })
 
+	-- Local dev: load pulse.nvim directly from source
+	-- vim.opt.rtp:prepend("/Users/willyelm/Git/pulse.nvim")
+
 	require("plugins.ai").setup()
 	require("plugins.format").setup()
 	require("plugins.git").setup()
