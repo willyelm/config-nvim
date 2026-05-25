@@ -22,37 +22,34 @@ nvim
 `vim.pack` will automatically install managed plugins on first launch and track them in `nvim-pack-lock.json`.
 Restart Neovim once after the first install pass so newly added packages are available to `:packadd`.
 
-## Mason Tools (auto-installed via mason.nvim)
+## LSP Servers
 
-### LSP Servers
+This config uses **Neovim's native LSP client** (v0.11+). Install language servers on your system:
 
-- **vtsls** - TypeScript/JavaScript (with Biome integration)
-- **lua_ls** - Lua
-- **gopls** - Go
-- **pyright** - Python
-- **jsonls** - JSON
-- **yamlls** - YAML
-- **html** - HTML
-- **mdx_analyzer** - MDX
-- **cssls** - CSS/SCSS
-- **tailwindcss** - Tailwind CSS
+```bash
+# Go / Lua / Python
+brew install gopls pyright lua-language-server
 
-### Formatters
+# TypeScript / Others (as needed)
 
-- **biome** - TypeScript/JavaScript/JSON (via Conform)
-- **prettierd** - HTML/CSS/YAML/Markdown/GraphQL
-- **goimports** - Go
+npm install -g @vtsls/language-server vscode-langservers-extracted
+npm install -g yaml-language-server              # YAML
+npm install -g @tailwindcss/language-server      # Tailwind CSS
+npm install -g @mdx-js/language-server           # MDX
+npm install -g dockerfile-language-server-nodejs # Docker
+npm install -g @biomejs/biome                    # Biome formatter
+```
 
 ## Features
 
 ### LSP & Code Intelligence
 
-- Language Server Protocol via Neovim 0.12 and nvim-lspconfig
-- Autocompletion with nvim-cmp
+- **Neovim's native LSP client** (v0.11+) - no external wrappers
+- Intelligent code completion with nvim-cmp
 - Treesitter syntax highlighting and text objects
 - Auto-pairs and auto-tag insertion
 - Inline diagnostics with tiny-inline-diagnostic
-- Inlay hints for type information
+- Type information inlay hints
 - Code actions and symbol renaming
 
 ### Code Formatting

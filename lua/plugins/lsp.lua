@@ -36,41 +36,11 @@ local function setup_lsp()
 		relativePatternSupport = true,
 	}
 
-	require("mason").setup({})
-	require("mason-tool-installer").setup({
-		ensure_installed = {
-			"vtsls",
-			"lua_ls",
-			"gopls",
-			"pyright",
-			"jsonls",
-			"yamlls",
-			"html",
-			"mdx_analyzer",
-			"cssls",
-			"tailwindcss",
-			"biome",
-			"dockerls",
-			"prettierd",
-			"stylua",
-			"shfmt",
-		},
-	})
-	require("mason-lspconfig").setup({
-		automatic_enable = {
-			exclude = { "ts_ls" },
-		},
-		handlers = {
-			function(server_name)
-				vim.lsp.enable(server_name)
-			end,
-			ts_ls = function() end,
-			cssls = function() end,
-			tailwindcss = function() end,
-		},
-	})
-
 	vim.lsp.config("vtsls", {
+		cmd = { "vtsls", "--stdio" },
+		init_options = {
+			hostInfo = "neovim",
+		},
 		root_markers = { "package.json", "tsconfig.json", ".git" },
 		filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 		sync_kind = "full",
@@ -104,6 +74,8 @@ local function setup_lsp()
 	})
 
 	vim.lsp.config("lua_ls", {
+		cmd = { "lua-language-server" },
+		filetypes = { "lua" },
 		settings = {
 			Lua = {
 				diagnostics = {
@@ -122,6 +94,7 @@ local function setup_lsp()
 
 	vim.lsp.config("biome", {
 		cmd = { "biome", "lsp-proxy" },
+		filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "json" },
 		root_markers = { "biome.json", "biome.jsonc" },
 		single_file_support = true,
 		on_attach = function(client, bufnr)
@@ -133,6 +106,8 @@ local function setup_lsp()
 	})
 
 	vim.lsp.config("cssls", {
+		cmd = { "css-languageserver", "--stdio" },
+		filetypes = { "css", "scss", "less" },
 		settings = {
 			css = {
 				lint = {
@@ -145,11 +120,15 @@ local function setup_lsp()
 	})
 
 	vim.lsp.config("tailwindcss", {
+		cmd = { "tailwindcss-language-server", "--stdio" },
+		filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact" },
 		on_attach = on_attach,
 		capabilities = capabilities,
 	})
 
 	vim.lsp.config("jsonls", {
+		cmd = { "vscode-json-language-server", "--stdio" },
+		filetypes = { "json" },
 		settings = {
 			json = {
 				validate = { enable = true },
@@ -161,6 +140,8 @@ local function setup_lsp()
 	})
 
 	vim.lsp.config("yamlls", {
+		cmd = { "yaml-language-server", "--stdio" },
+		filetypes = { "yaml" },
 		settings = {
 			yaml = {
 				validate = true,
@@ -178,6 +159,8 @@ local function setup_lsp()
 	})
 
 	vim.lsp.config("gopls", {
+		cmd = { "gopls" },
+		filetypes = { "go", "gomod", "gowork", "gotmpl" },
 		sync_kind = "full",
 		settings = {
 			gopls = {
@@ -190,6 +173,7 @@ local function setup_lsp()
 	})
 
 	vim.lsp.enable("vtsls")
+	vim.lsp.enable("lua_ls")
 	vim.lsp.enable("biome")
 	vim.lsp.enable("cssls")
 	vim.lsp.enable("tailwindcss")
