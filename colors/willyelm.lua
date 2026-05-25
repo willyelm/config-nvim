@@ -1,13 +1,13 @@
 vim.cmd("highlight clear")
 if vim.fn.exists("syntax_on") then
-	vim.cmd("syntax reset")
+  vim.cmd("syntax reset")
 end
 vim.g.colors_name = "willyelm"
 
 local color = require("theme.colors")()
 
 local function hi(name, opts)
-	vim.api.nvim_set_hl(0, name, opts)
+  vim.api.nvim_set_hl(0, name, opts)
 end
 
 -- Standard UI Highlights
@@ -37,7 +37,7 @@ hi("Visual", { fg = color.fg_inverse, bg = color.bg_visual })
 hi("Search", { fg = color.fg_inverse, bg = color.bg_search })
 hi("VertSplit", { fg = color.divider, bg = color.bg_main })
 hi("WinSeparator", { fg = color.divider, bg = color.bg_main })
-hi("ColorColumn", { fg = color.divider, bg = color.divider })
+hi("ColorColumn", { fg = color.fg_muted })
 hi("WinBar", { bg = color.bg_main, sp = color.divider })
 hi("WinBarNC", { bg = color.bg_main, sp = color.divider })
 hi("StatusLine", { fg = color.fg_muted, bg = color.bg_main, sp = color.divider })
@@ -106,9 +106,9 @@ hi("PulseNormal", { bg = color.bg_action })
 hi("PulseActive", { bg = color.bg_active })
 
 if vim.o.background == "dark" then
-	hi("PulseDiffNAdd", { bg = color.green_07, fg = color.fg_body })
-	hi("PulseDiffNDelete", { bg = color.red_07, fg = color.fg_body })
+  hi("PulseDiffNAdd", { bg = color.green_07, fg = color.fg_body })
+  hi("PulseDiffNDelete", { bg = color.red_07, fg = color.fg_body })
 else
-	hi("PulseDiffNAdd", { bg = color.green_02, fg = color.fg_body })
-	hi("PulseDiffNDelete", { bg = color.red_02, fg = color.fg_body })
+  hi("PulseDiffNAdd", { bg = color.green_02, fg = color.fg_body })
+  hi("PulseDiffNDelete", { bg = color.red_02, fg = color.fg_body })
 end

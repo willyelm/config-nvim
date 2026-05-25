@@ -4,7 +4,7 @@ function M.setup()
   require("grug-far").setup({ headerMaxWidth = 80 })
 
   require("pulse").setup({
-    -- cmdline = true,
+    cmdline = true,
     position = "top",
     height = 0.90,
     width = 0.75,
