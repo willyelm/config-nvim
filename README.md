@@ -1,13 +1,15 @@
 # Neovim Config
 
-My personal Neovim setup configured with Neovim's built-in `vim.pack` package manager. Optimized for web development, scripting, and general editing with LSP, formatting, git integration, and modern UI enhancements.
+My personal Neovim setup configured with Neovim's built-in `vim.pack` package
+manager. Optimized for web development, scripting, and general editing with LSP,
+formatting, git integration, and modern UI enhancements.
 
 ## Requirements
 
 - Neovim >= 0.12.0
 - Git
 - Node.js >= 18
-- ripgrep (`rg`)
+- Ripgrep (`rg`)
 - GCC + make (for telescope-fzf-native)
 
 ## Installation
@@ -19,12 +21,14 @@ cd ~/.config/nvim
 nvim
 ```
 
-`vim.pack` will automatically install managed plugins on first launch and track them in `nvim-pack-lock.json`.
-Restart Neovim once after the first install pass so newly added packages are available to `:packadd`.
+`vim.pack` will automatically install managed plugins on first launch and track
+them in `nvim-pack-lock.json`. Restart Neovim once after the first install pass
+so newly added packages are available to `:packadd`.
 
-## LSP Servers
+## LSP & Formatters
 
-This config uses **Neovim's native LSP client** (v0.11+). Install language servers on your system:
+This config uses **Neovim's native LSP client** (v0.11+). Install language
+servers on your system:
 
 ```bash
 # Go / Lua / Python
@@ -38,6 +42,10 @@ npm install -g @tailwindcss/language-server      # Tailwind CSS
 npm install -g @mdx-js/language-server           # MDX
 npm install -g dockerfile-language-server-nodejs # Docker
 npm install -g @biomejs/biome                    # Biome formatter
+npm install -g @fsouza/prettierd                 # Prettierd for faster formatting
+
+# Go Formatters
+go install golang.org/x/tools/cmd/goimports@latest
 ```
 
 ## Features

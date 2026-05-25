@@ -10,13 +10,12 @@ function M.setup()
 			json = { "biome" },
 			jsonc = { "biome" },
 			go = { "goimports" },
-			html = { "prettierd", "prettier", stop_after_first = true },
-			css = { "prettierd", "prettier", stop_after_first = true },
-			scss = { "prettierd", "prettier", stop_after_first = true },
-			svg = { "prettierd", "prettier", stop_after_first = true },
-			yaml = { "prettierd", "prettier", stop_after_first = true },
-			markdown = { "prettierd", "prettier", stop_after_first = true },
-			graphql = { "prettierd", "prettier", stop_after_first = true },
+			html = { "prettierd" },
+			css = { "prettierd" },
+			scss = { "prettierd" },
+			svg = { "prettierd" },
+			yaml = { "prettierd" },
+			graphql = { "prettierd" },
 		},
 		formatters = {
 			biome = {
@@ -26,9 +25,13 @@ function M.setup()
 				end,
 				args = { "check", "--write", "--stdin-file-path", "$FILENAME" },
 			},
+			prettierd_md = {
+				command = "prettierd",
+				args = { "--prose-wrap=always", "--print-width=80", "--stdin-filepath", "$FILENAME" },
+			},
 		},
 		format_on_save = {
-			timeout_ms = 500,
+			timeout_ms = 1000,
 			lsp_fallback = true,
 		},
 	})
