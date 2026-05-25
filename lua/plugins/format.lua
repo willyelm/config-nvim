@@ -16,6 +16,8 @@ function M.setup()
 			svg = { "prettierd" },
 			yaml = { "prettierd" },
 			graphql = { "prettierd" },
+			markdown = { "prettierd_md" },
+			mdx = { "prettierd_md" },
 		},
 		formatters = {
 			biome = {
