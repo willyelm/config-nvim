@@ -1,7 +1,7 @@
 # Neovim Config
 
-My personal Neovim setup configured with Neovim's built-in `vim.pack` package 
-manager. Optimized for web development, scripting, and general editing with LSP, 
+My personal Neovim setup configured with Neovim's built-in `vim.pack` package
+manager. Optimized for web development, scripting, and general editing with LSP,
 formatting, git integration, and modern UI enhancements.
 
 ## Requirements
@@ -42,7 +42,7 @@ npm install -g @tailwindcss/language-server      # Tailwind CSS
 npm install -g @mdx-js/language-server           # MDX
 npm install -g dockerfile-language-server-nodejs # Docker
 npm install -g @biomejs/biome                    # Biome formatter
-npm install -g @fsouza/prettierd                 # Prettierd for faster 
+npm install -g @fsouza/prettierd                 # Prettierd for faster
 formatting
 
 # Go Formatters
@@ -129,14 +129,11 @@ go install golang.org/x/tools/cmd/goimports@latest
 | Keymap       | Description           |
 | ------------ | --------------------- |
 | `K`          | Hover documentation   |
-| `gl`         | Show line diagnostics |
+| `<leader>i`  | Show diagnostics/docs |
 | `<leader>ra` | Code actions          |
 | `<leader>rs` | Rename symbol         |
 | `<leader>h`  | Highlight word        |
 | `<leader>/`  | Toggle comment        |
-| `<leader>x`  | Close buffer          |
-| `<leader>X`  | Close all buffers     |
-| `<C-s>`      | Save file             |
 | `<M-Down>`   | Move line down        |
 | `<M-Up>`     | Move line up          |
 | `<leader>.`  | Increase indent       |

@@ -1,15 +1,17 @@
 -- LSP
-vim.keymap.set("n", "<leader>ra", vim.lsp.buf.code_action, { desc = "Code Actions" })
+vim.keymap.set("n", "<leader>ra", function()
+  vim.lsp.buf.code_action({ context = { diagnostics = vim.diagnostic.get(0) } })
+end, { desc = "Code Actions" })
 vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 vim.keymap.set("n", "<leader>h", function()
-	local ns = vim.api.nvim_create_namespace("lsp_document_highlight")
-	local marks = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1, {})
+  local ns = vim.api.nvim_create_namespace("lsp_document_highlight")
+  local marks = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1, {})
 
-	if #marks > 0 then
-		vim.lsp.buf.clear_references()
-	else
-		vim.lsp.buf.document_highlight()
-	end
+  if #marks > 0 then
+    vim.lsp.buf.clear_references()
+  else
+    vim.lsp.buf.document_highlight()
+  end
 end, { desc = "Toggle highlight" })
 
 -- Move Text
@@ -22,23 +24,28 @@ vim.keymap.set("v", "<M-Up>", ":m '<-2<cr>gv=gv", { desc = "Move block up" })
 
 -- Hovers
 vim.keymap.set("n", "K", function()
-	vim.lsp.buf.hover({
-		border = "rounded",
-		wrap = true,
-		max_width = 60,
-	})
+  vim.lsp.buf.hover({
+    border = "rounded",
+    wrap = true,
+    max_width = 60,
+  })
 end, {
-	noremap = true,
-	desc = "Hover Documentation",
-	silent = true,
+  noremap = true,
+  desc = "Hover Documentation",
+  silent = true,
 })
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, {
-	desc = "Show line diagnostics",
-	silent = true,
+  desc = "Show line diagnostics",
+  silent = true,
 })
 
+vim.keymap.set("n", "<leader>i", function()
+  vim.diagnostic.open_float({ border = "rounded" })
+  vim.lsp.buf.hover({ border = "rounded" })
+end, { desc = "Diagnostics + Docs", silent = true })
+
 -- Save
-vim.keymap.set({ "n", "i" }, "<C-s>", "<Esc>:write<CR>", { desc = "Save Changes" })
+-- vim.keymap.set({ "n", "i" }, "<C-s>", "<Esc>:write<CR>", { desc = "Save Changes" })
 
 -- Cycle Windows
 vim.keymap.set("n", "<leader><Tab>", "<C-w>w", { desc = "Next window" })
@@ -48,19 +55,19 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 
 -- Copy Location
 vim.keymap.set("n", "<leader>c", function()
-	local path = vim.fn.expand("%")
-	local line = vim.fn.line(".")
-	local coordinates = path .. ":" .. line
-	vim.fn.setreg("+", coordinates)
-	print("Copied: " .. coordinates)
+  local path = vim.fn.expand("%")
+  local line = vim.fn.line(".")
+  local coordinates = path .. ":" .. line
+  vim.fn.setreg("+", coordinates)
+  print("Copied: " .. coordinates)
 end, { desc = "Copy location" })
 
 -- Toggle Comments
 vim.keymap.set({ "n", "v" }, "<leader>/", function()
-	local mode = vim.api.nvim_get_mode().mode
-	if mode == "v" or mode == "V" then
-		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>gvgc", true, false, true), "m", false)
-	else
-		vim.api.nvim_feedkeys("gcc", "m", false)
-	end
+  local mode = vim.api.nvim_get_mode().mode
+  if mode == "v" or mode == "V" then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>gvgc", true, false, true), "m", false)
+  else
+    vim.api.nvim_feedkeys("gcc", "m", false)
+  end
 end, { desc = "Toggle comment" })
