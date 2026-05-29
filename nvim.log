@@ -1,0 +1,4 @@
+WRN 2026-05-27T19:39:09.095 ?.7423     server_start:197: Failed to start server: operation not permitted: /var/folders/t_/vx8qf25j48g627lvq7tngy740000gn/T/nvim.willyelm/JfYS64/nvim.7423.0
+WRN 2026-05-27T19:39:09.096 ?.7424     server_start:197: Failed to start server: operation not permitted: /var/folders/t_/vx8qf25j48g627lvq7tngy740000gn/T/nvim.willyelm/c18dZz/nvim.7424.0
+WRN 2026-05-27T19:39:14.277 ?.7469     server_start:197: Failed to start server: operation not permitted: /var/folders/t_/vx8qf25j48g627lvq7tngy740000gn/T/nvim.willyelm/YV61PO/nvim.7469.0
+WRN 2026-05-27T19:39:14.277 ?.7470     server_start:197: Failed to start server: operation not permitted: /var/folders/t_/vx8qf25j48g627lvq7tngy740000gn/T/nvim.willyelm/34VkEC/nvim.7470.0

@@ -42,8 +42,7 @@ npm install -g @tailwindcss/language-server      # Tailwind CSS
 npm install -g @mdx-js/language-server           # MDX
 npm install -g dockerfile-language-server-nodejs # Docker
 npm install -g @biomejs/biome                    # Biome formatter
-npm install -g @fsouza/prettierd                 # Prettierd for faster
-formatting
+npm install -g @fsouza/prettierd                 # Prettierd for faster formatting
 
 # Go Formatters
 go install golang.org/x/tools/cmd/goimports@latest
@@ -132,7 +131,6 @@ go install golang.org/x/tools/cmd/goimports@latest
 | `<leader>i`  | Show diagnostics/docs |
 | `<leader>ra` | Code actions          |
 | `<leader>rs` | Rename symbol         |
-| `<leader>h`  | Highlight word        |
 | `<leader>/`  | Toggle comment        |
 | `<M-Down>`   | Move line down        |
 | `<M-Up>`     | Move line up          |

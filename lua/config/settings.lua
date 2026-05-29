@@ -38,7 +38,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- Folding
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldcolumn = "0"
 vim.opt.signcolumn = "auto:1"
 vim.opt.foldlevel = 99
