@@ -24,7 +24,12 @@ local plugins = {
 }
 
 function M.setup()
+  local colorizer_path = vim.fn.stdpath("data") .. "/site/pack/core/opt/nvim-colorizer.lua"
+  local stale_colorizer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/nvim-colorizer.lua"
+
   vim.pack.add(plugins, { load = true, confirm = false })
+  vim.opt.runtimepath:remove(stale_colorizer_path)
+  vim.opt.runtimepath:prepend(colorizer_path)
 
   -- Local dev: load pulse.nvim directly from source
   -- vim.opt.rtp:prepend("/Users/willyelm/Git/pulse.nvim")

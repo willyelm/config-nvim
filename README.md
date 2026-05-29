@@ -35,14 +35,7 @@ servers on your system:
 brew install gopls pyright lua-language-server
 
 # TypeScript / Others (as needed)
-
-npm install -g @vtsls/language-server vscode-langservers-extracted
-npm install -g yaml-language-server              # YAML
-npm install -g @tailwindcss/language-server      # Tailwind CSS
-npm install -g @mdx-js/language-server           # MDX
-npm install -g dockerfile-language-server-nodejs # Docker
-npm install -g @biomejs/biome                    # Biome formatter
-npm install -g @fsouza/prettierd                 # Prettierd for faster formatting
+npm install -g @vtsls/language-server vscode-langservers-extracted yaml-language-server @tailwindcss/language-server @mdx-js/language-server dockerfile-language-server-nodejs @biomejs/biome prettier @fsouza/prettierd
 
 # Go Formatters
 go install golang.org/x/tools/cmd/goimports@latest

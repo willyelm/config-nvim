@@ -38,18 +38,30 @@ function M.setup()
     },
   })
 
-  require("colorizer").setup({
+  local colorizer_filetypes = {
+    "css",
+    "scss",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "go",
+    "html",
+    "json",
+    "jsonc",
+    "json5",
+    "yaml",
+    "yml",
+    "lua",
+    "markdown",
+    "mdx",
+  }
+
+  local colorizer = require("colorizer")
+
+  colorizer.setup({
     filetypes = {
-      "css",
-      "scss",
-      "javascript",
-      "typescriptreact",
-      "go",
-      "html",
-      "json",
-      "yml",
-      "lua",
-      "markdown",
+      unpack(colorizer_filetypes),
     },
     options = {
       parsers = {
@@ -64,10 +76,10 @@ function M.setup()
         custom = {
           {
             name = "oklch",
-            prefixes = { "Oklch" },
+            prefixes = { "oklch", "Oklch" },
             parse = function(ctx)
               local start, end_pos, l, c, h = ctx.line:find(
-                "Oklch%s*%(%s*([%d.]+)%s*,%s*([%d.]+)%s*,%s*([%d.]+)%s*%)",
+                "[Oo]klch%s*%(%s*([%d.]+)%%?%s*[, ]%s*([%d.]+)%s*[, ]%s*([%d.]+)%s*%)",
                 ctx.col
               )
               if not start then
@@ -114,6 +126,10 @@ function M.setup()
       },
     },
   })
+
+  if vim.tbl_contains(colorizer_filetypes, vim.bo.filetype) then
+    colorizer.attach_to_buffer(0)
+  end
 end
 
 return M
