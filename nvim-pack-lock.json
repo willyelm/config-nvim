@@ -72,6 +72,10 @@
       "rev": "bff0f2924d361a49a5014206e5231ada256f12ca",
       "src": "https://github.com/willyelm/pulse.nvim"
     },
+    "tiny-inline-diagnostic.nvim": {
+      "rev": "6bdbc9a2f5a846ff5fc55a998ff97c0e2968b7e5",
+      "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
+    },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "https://github.com/folke/which-key.nvim"

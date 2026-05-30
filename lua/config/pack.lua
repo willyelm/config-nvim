@@ -13,7 +13,7 @@ local plugins = {
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
-  -- { src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
+  { src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
   { src = "https://github.com/willyelm/pulse.nvim" },
   { src = "https://github.com/folke/which-key.nvim" },
   { src = "https://github.com/nvim-tree/nvim-web-devicons" },
@@ -35,6 +35,7 @@ function M.setup()
   -- vim.opt.rtp:prepend("/Users/willyelm/Git/pulse.nvim")
 
   require("setup.cmp").setup()
+  require("setup.diagnostics").setup()
   require("setup.treesitter").setup()
   require("setup.lsp").setup()
   require("setup.format").setup()
