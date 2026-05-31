@@ -7,7 +7,7 @@ function M.setup()
     position = "top",
     height = 0.90,
     width = 0.75,
-    cmdline = true,
+    -- cmdline = true,
     -- workspace_label = true,
     navigators = {
       files = {

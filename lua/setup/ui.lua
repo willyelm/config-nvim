@@ -8,13 +8,7 @@ function M.setup()
     icons = true,
   })
 
-  require("barbecue").setup({
-    theme = "auto",
-    show_modified = true,
-    show_dirname = true,
-    show_basename = true,
-    symbols = { separator = "/", modified = "*", ellipsis = "..." },
-  })
+  require("dropbar").setup()
 
   require("lualine").setup({
     options = {
@@ -24,7 +18,8 @@ function M.setup()
       component_separators = { left = "/", right = "/" },
     },
     sections = {
-      lualine_b = { "branch", "diff", "diagnostics" },
+      lualine_a = { "branch" },
+      lualine_b = { "diff", "diagnostics" },
       lualine_x = {
         {
           "filesize",
