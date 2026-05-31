@@ -8,7 +8,14 @@ function M.setup()
     icons = true,
   })
 
-  require("dropbar").setup()
+  require("dropbar").setup({
+    menu = {
+      win_configs = {
+        border = "rounded",
+        style = "minimal",
+      },
+    },
+  })
 
   require("lualine").setup({
     options = {
