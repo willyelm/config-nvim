@@ -130,3 +130,13 @@ go install golang.org/x/tools/cmd/goimports@latest
 | `<leader>.`  | Increase indent       |
 | `<leader>,`  | Decrease indent       |
 | `<leader>c`  | Copy file location    |
+
+# Syncing update with vim.pack
+
+at times vim.pack will keep updates in pending. to get around it clean up lock files:
+
+```
+find ~/.local/share/nvim/site/pack/ -name "index.lock" -delete
+```
+
+then run `:lua vim.pack.update()`
