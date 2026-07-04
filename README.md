@@ -1,8 +1,8 @@
 # Neovim Config
 
-My personal Neovim setup configured with Neovim's built-in `vim.pack` package
-manager. Optimized for web development, scripting, and general editing with LSP,
-formatting, git integration, and modern UI enhancements.
+My personal setup configured with Neovim's built-in `vim.pack` package manager.
+Optimized for web development, TypeScript, Go, Python, scripting, and general
+editing with LSP, formatting, git integration, and modern UI enhancements.
 
 ## Requirements
 
@@ -45,7 +45,7 @@ go install golang.org/x/tools/cmd/goimports@latest
 
 ### LSP & Code Intelligence
 
-- **Neovim's native LSP client** (v0.11+) - no external wrappers
+- **Neovim's native LSP client** (v0.12+) - no external wrappers
 - Intelligent code completion with nvim-cmp
 - Treesitter syntax highlighting and text objects
 - Auto-pairs and auto-tag insertion
@@ -133,7 +133,8 @@ go install golang.org/x/tools/cmd/goimports@latest
 
 # Syncing update with vim.pack
 
-at times vim.pack will keep updates in pending. to get around it clean up lock files:
+at times vim.pack will keep updates in pending. to get around it clean up lock
+files:
 
 ```
 find ~/.local/share/nvim/site/pack/ -name "index.lock" -delete

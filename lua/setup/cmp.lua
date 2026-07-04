@@ -5,6 +5,10 @@ function M.get_lsp_capabilities()
 end
 
 function M.setup()
+  -- vim.pack has no `build` hook (unlike lazy.nvim), so blink.cmp's Rust
+  -- fuzzy matcher must be built manually before setup.
+  require("blink.cmp").build():wait(60000)
+
   require("blink.cmp").setup({
     keymap = {
       preset = "default",
