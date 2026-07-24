@@ -41,6 +41,14 @@ npm install -g @vtsls/language-server vscode-langservers-extracted yaml-language
 go install golang.org/x/tools/cmd/goimports@latest
 ```
 
+## Tree Sitter
+
+Make sure tree-sitter-cli is installed `npm i -g tree-sitter-cli` and then in neo vim, install if not getting syntax highlight:
+
+```
+:TSInstall json typescript tsx go markdown markdown_inline html css javascript yaml toml dockerfile bash sql python
+```
+
 ## Features
 
 ### LSP & Code Intelligence
