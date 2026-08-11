@@ -39,7 +39,6 @@ function M.setup()
   wk.add({
     { "<leader>s", group = "Search & Replace" },
     { "<leader>g", group = "Git" },
-    { "<leader>d", group = "Debug" },
     { "<leader>r", group = "Refactor" },
   })
 

@@ -66,9 +66,12 @@ vim.keymap.set("n", "gl", vim.diagnostic.open_float, {
 })
 
 vim.keymap.set("n", "<leader>i", function()
-  vim.diagnostic.open_float({ border = "rounded" })
   vim.lsp.buf.hover({ border = "rounded" })
-end, { desc = "Diagnostics + Docs", silent = true })
+end, { desc = "Docs", silent = true })
+
+vim.keymap.set("n", "<leader>d", function()
+  vim.diagnostic.open_float({ border = "rounded" })
+end, { desc = "Diagnostics", silent = true })
 
 -- Save
 -- vim.keymap.set({ "n", "i" }, "<C-s>", "<Esc>:write<CR>", { desc = "Save Changes" })
@@ -78,6 +81,9 @@ vim.keymap.set("n", "<leader><Tab>", "<C-w>w", { desc = "Next window" })
 
 -- Terminal
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- Clipboard
+vim.keymap.set("x", "p", '"_dP', { desc = "Paste over selection without overwriting register" })
 
 -- Copy Location
 vim.keymap.set("n", "<leader>c", function()
