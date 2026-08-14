@@ -44,7 +44,6 @@ function M.setup()
     },
     root_markers = { "package.json", "tsconfig.json", ".git" },
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-    sync_kind = "full",
     settings = {
       typescript = {
         updateImportsOnFileMove = { enabled = "always" },
