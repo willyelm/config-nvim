@@ -82,6 +82,42 @@ function M.setup()
       vim.lsp.buf.hover({ border = "rounded" })
     end
   end, "Peek fold / hover")
+
+  M.persist_views()
+end
+
+-- Save/restore fold (and cursor) state per file across sessions. ufo applies
+-- its folds as manual folds, so `mkview` captures which ones are closed.
+function M.persist_views()
+  vim.opt.viewoptions = { "folds", "cursor" }
+
+  local group = vim.api.nvim_create_augroup("willyelm_fold_view", { clear = true })
+
+  local function eligible(buf)
+    local name = vim.api.nvim_buf_get_name(buf)
+    return vim.bo[buf].buftype == ""
+      and vim.bo[buf].filetype ~= ""
+      and name ~= ""
+      and vim.fn.filereadable(name) == 1
+  end
+
+  vim.api.nvim_create_autocmd("BufWinLeave", {
+    group = group,
+    callback = function(args)
+      if eligible(args.buf) then
+        pcall(vim.cmd.mkview, { mods = { emsg_silent = true } })
+      end
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("BufWinEnter", {
+    group = group,
+    callback = function(args)
+      if eligible(args.buf) then
+        pcall(vim.cmd.loadview, { mods = { emsg_silent = true } })
+      end
+    end,
+  })
 end
 
 return M
