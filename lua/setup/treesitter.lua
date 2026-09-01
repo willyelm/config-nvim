@@ -27,10 +27,20 @@ function M.setup()
   pcall(ts.install, ensure_installed)
 
   vim.treesitter.language.register("markdown", "mdx")
+
+  -- `main` removed the `highlight`/`indent` modules, so wire them per-buffer:
+  -- start treesitter highlighting when a parser is available and hand indenting
+  -- to treesitter, keeping `smartindent` as the fallback for everything else.
+  local group = vim.api.nvim_create_augroup("willyelm_treesitter", { clear = true })
   vim.api.nvim_create_autocmd("FileType", {
-    pattern = "*",
-    callback = function()
-      pcall(vim.treesitter.start)
+    group = group,
+    callback = function(args)
+      local lang = vim.treesitter.language.get_lang(args.match) or args.match
+      if not vim.treesitter.language.add(lang) then
+        return
+      end
+      pcall(vim.treesitter.start, args.buf, lang)
+      vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end,
   })
 
