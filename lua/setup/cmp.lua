@@ -84,14 +84,39 @@ function M.setup()
     sources = {
       default = { "lsp", "snippets", "path", "buffer", "copilot" },
       providers = {
+        lsp = { max_items = 20 },
+        buffer = {
+          min_keyword_length = 4,
+          max_items = 5,
+          opts = {
+            -- Only complete words from buffers that are actually on screen.
+            get_bufnrs = function()
+              local bufs = {}
+              for _, win in ipairs(vim.api.nvim_list_wins()) do
+                bufs[vim.api.nvim_win_get_buf(win)] = true
+              end
+              return vim.tbl_keys(bufs)
+            end,
+          },
+        },
         copilot = {
           name = "copilot",
           module = "blink-copilot",
           score_offset = 100,
           async = true,
+          max_items = 3,
         },
       },
     },
+    cmdline = {
+      enabled = true,
+      keymap = { preset = "cmdline" },
+      completion = {
+        menu = { auto_show = true },
+        list = { selection = { preselect = false } },
+      },
+    },
+    term = { enabled = false },
   })
 
   require("nvim-autopairs").setup({})
