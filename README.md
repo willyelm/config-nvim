@@ -149,3 +149,16 @@ find ~/.local/share/nvim/site/pack/ -name "index.lock" -delete
 ```
 
 then run `:lua vim.pack.update()`
+
+# Clean reinstall
+
+If plugin state gets inconsistent (e.g. leftovers from a previous plugin
+manager, or stale treesitter queries mixing into the runtimepath), run:
+
+```
+./scripts/clean-reinstall.sh
+```
+
+It removes old `lazy/`, `pack/packer/`, `mason/` trees and the symlinked query
+directory, then you launch `nvim` once to let `vim.pack` and nvim-treesitter
+rebuild everything. Your persistent undo history is left untouched.
