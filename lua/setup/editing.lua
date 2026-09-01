@@ -22,6 +22,19 @@ function M.setup()
     n_lines = 50,
     search_method = "cover_or_next",
   })
+
+  -- Split / join the treesitter node under the cursor: JSX attributes, object
+  -- literals, arrays, call args, ...
+  require("treesj").setup({
+    use_default_keymaps = false,
+    max_join_length = 120,
+  })
+  vim.keymap.set("n", "<leader>j", function()
+    require("treesj").toggle()
+  end, { desc = "Split/join node" })
+  vim.keymap.set("n", "<leader>J", function()
+    require("treesj").join()
+  end, { desc = "Join node" })
 end
 
 return M
