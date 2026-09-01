@@ -21,9 +21,39 @@ local function fold_selector(bufnr)
     end)
 end
 
+-- Keep the fold's first line, then a " 󰁂 N lines" counter, clamped to width.
+local function fold_virt_text(virt_text, lnum, end_lnum, width, truncate)
+  local result = {}
+  local suffix = (" 󰁂 %d lines "):format(end_lnum - lnum)
+  local suffix_width = vim.fn.strdisplaywidth(suffix)
+  local target_width = width - suffix_width
+  local cur_width = 0
+
+  for _, chunk in ipairs(virt_text) do
+    local text = chunk[1]
+    local chunk_width = vim.fn.strdisplaywidth(text)
+    if target_width > cur_width + chunk_width then
+      table.insert(result, chunk)
+    else
+      text = truncate(text, target_width - cur_width)
+      table.insert(result, { text, chunk[2] })
+      chunk_width = vim.fn.strdisplaywidth(text)
+      if cur_width + chunk_width < target_width then
+        suffix = suffix .. (" "):rep(target_width - cur_width - chunk_width)
+      end
+      break
+    end
+    cur_width = cur_width + chunk_width
+  end
+
+  table.insert(result, { suffix, "UfoFoldedEllipsis" })
+  return result
+end
+
 function M.setup()
   require("ufo").setup({
     open_fold_hl_timeout = 150,
+    fold_virt_text_handler = fold_virt_text,
     provider_selector = function()
       return fold_selector
     end,
