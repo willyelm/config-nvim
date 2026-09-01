@@ -64,6 +64,24 @@ function M.setup()
       },
     },
   })
+
+  local ufo = require("ufo")
+  local map = function(lhs, rhs, desc)
+    vim.keymap.set("n", lhs, rhs, { desc = desc })
+  end
+
+  map("<leader>z", "za", "Toggle fold under cursor")
+  map("zR", ufo.openAllFolds, "Open all folds")
+  map("zM", ufo.closeAllFolds, "Close all folds")
+  map("zr", ufo.openFoldsExceptKinds, "Open folds one level")
+  map("zm", ufo.closeFoldsWith, "Close folds one level")
+  map("<leader>K", function()
+    -- Peek the folded lines; if the cursor is not on a fold, fall through to
+    -- the LSP hover so the key is always useful.
+    if not ufo.peekFoldedLinesUnderCursor() then
+      vim.lsp.buf.hover({ border = "rounded" })
+    end
+  end, "Peek fold / hover")
 end
 
 return M
