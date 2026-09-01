@@ -65,8 +65,9 @@ function M.setup()
         },
       },
     },
+    snippets = { preset = "default" },
     sources = {
-      default = { "lsp", "path", "buffer", "copilot" },
+      default = { "lsp", "snippets", "path", "buffer", "copilot" },
       providers = {
         copilot = {
           name = "copilot",
@@ -83,6 +84,18 @@ function M.setup()
   vim.keymap.set("n", "<leader>cp", function()
     require("copilot.panel").open()
   end, { desc = "Copilot panel" })
+
+  -- Jump between snippet placeholders regardless of the completion menu state.
+  vim.keymap.set({ "i", "s" }, "<C-l>", function()
+    if vim.snippet.active({ direction = 1 }) then
+      vim.snippet.jump(1)
+    end
+  end, { desc = "Snippet: next placeholder" })
+  vim.keymap.set({ "i", "s" }, "<C-h>", function()
+    if vim.snippet.active({ direction = -1 }) then
+      vim.snippet.jump(-1)
+    end
+  end, { desc = "Snippet: previous placeholder" })
 end
 
 return M
