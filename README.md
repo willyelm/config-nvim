@@ -1,164 +1,164 @@
 # Neovim Config
 
-My personal setup configured with Neovim's built-in `vim.pack` package manager.
-Optimized for web development, TypeScript, Go, Python, scripting, and general
-editing with LSP, formatting, git integration, and modern UI enhancements.
+Personal setup built on Neovim's built-in `vim.pack` package manager. Optimized
+for web development (TypeScript / JSX), Go, and general editing with the native
+LSP client, treesitter, folding, completion, formatting and git integration.
 
 ## Requirements
 
-- Neovim >= 0.12.0
-- Git
-- Node.js >= 18
-- Ripgrep (`rg`)
-- GCC + make (for telescope-fzf-native)
+- Neovim >= 0.12
+- Git, [ripgrep](https://github.com/BurntSushi/ripgrep) (`rg`)
+- Node.js >= 18 and a C compiler (`cc`/`gcc`) for treesitter parsers
+- [`tree-sitter` CLI](https://github.com/tree-sitter/tree-sitter) (`npm i -g tree-sitter-cli`)
+- A Nerd Font (for completion / statusline / breadcrumb icons)
 
 ## Installation
 
 ```bash
-# Clone this config
 git clone https://github.com/willyelm/nvim ~/.config/nvim
 cd ~/.config/nvim
 nvim
 ```
 
-`vim.pack` will automatically install managed plugins on first launch and track
-them in `nvim-pack-lock.json`. Restart Neovim once after the first install pass
-so newly added packages are available to `:packadd`.
+`vim.pack` installs the managed plugins on first launch and records them in
+`nvim-pack-lock.json`. Restart Neovim once after the first install pass. On the
+first start after that, `blink.cmp` compiles its Rust fuzzy matcher once and
+nvim-treesitter installs parsers in the background (`:TSUpdate` to refresh).
 
-## LSP & Formatters
+## LSP & formatters
 
-This config uses **Neovim's native LSP client** (v0.11+). Install language
-servers on your system:
+Uses the **native LSP client**. Install the servers you need on your system:
 
 ```bash
-# Go / Lua / Python
-brew install gopls pyright lua-language-server
+# Go / Lua
+brew install gopls lua-language-server
 
-# TypeScript / Others (as needed)
-npm install -g @vtsls/language-server vscode-langservers-extracted yaml-language-server @tailwindcss/language-server @mdx-js/language-server dockerfile-language-server-nodejs @biomejs/biome prettier @fsouza/prettierd
+# Web (as needed)
+npm install -g @vtsls/language-server vscode-langservers-extracted \
+  yaml-language-server @tailwindcss/language-server @biomejs/biome \
+  prettier @fsouza/prettierd
 
-# Go Formatters
+# Go formatter
 go install golang.org/x/tools/cmd/goimports@latest
 ```
 
-## Tree Sitter
+Formatting runs on save via **conform.nvim**: `biome` for JS/TS/JSON, `prettierd`
+for CSS/HTML/YAML/Markdown, `goimports` for Go, `stylua` for Lua.
 
-Make sure tree-sitter-cli is installed `npm i -g tree-sitter-cli` and then in neo vim, install if not getting syntax highlight:
+## Treesitter
+
+Parsers install automatically for the languages in `lua/setup/treesitter.lua`.
+For anything else:
 
 ```
-:TSInstall json typescript tsx go markdown markdown_inline html css javascript yaml toml dockerfile bash sql python
+:TSInstall <lang>
 ```
 
 ## Features
 
-### LSP & Code Intelligence
+| Area | Plugins |
+| --- | --- |
+| Completion | `blink.cmp`, `blink-copilot` + `copilot.lua` (menu only), `friendly-snippets` |
+| Treesitter | `nvim-treesitter` (main), `-textobjects`, `-context`, `nvim-ts-context-commentstring` |
+| Folding | `nvim-ufo` (LSP → treesitter → indent), folds persist per file |
+| Editing | `mini.surround`, `treesj` (split/join), `vim-matchup`, `nvim-autopairs`, `nvim-ts-autotag` |
+| Diagnostics | `tiny-inline-diagnostic` |
+| Git | `gitsigns`, `pulse.nvim` (history / status) |
+| Search | `pulse.nvim` (files / grep / buffers), `grug-far` (search & replace) |
+| UI | `lualine`, `dropbar` (breadcrumbs), `nvim-colorizer`, `which-key`, custom `willyelm` colorscheme |
 
-- **Neovim's native LSP client** (v0.12+) - no external wrappers
-- Intelligent code completion with nvim-cmp
-- Treesitter syntax highlighting and text objects
-- Auto-pairs and auto-tag insertion
-- Inline diagnostics with tiny-inline-diagnostic
-- Type information inlay hints
-- Code actions and symbol renaming
+## Keymaps
 
-### Code Formatting
+Leader is `<Space>`.
 
-- Conform.nvim for automated formatting on save
-- Biome for JavaScript/TypeScript/JSON
-- Prettier for styling languages
-- goimports for Go
+### Navigation & search
 
-### Git Integration
+| Key | Action |
+| --- | --- |
+| `<leader>p` | Pulse menu |
+| `<leader>f` | Fuzzy search in buffer |
+| `<leader>l` | Live grep |
+| `<leader>b` | Open buffers |
+| `<leader>sr` | Search & replace (grug-far) |
+| `<leader><Tab>` | Next window |
 
-- **Gitsigns** - Inline git indicators and blame
-- **Pulse.nvim** - Git history, branches, and stash browsing
+### LSP (buffer-local)
 
-### Search & Navigation
+| Key | Action |
+| --- | --- |
+| `gd` / `gD` / `gi` / `go` / `gr` | Definition / declaration / implementation / type / references |
+| `K` | Hover docs · `<leader>K` peek fold, else hover |
+| `<leader>ra` / `<F4>` / `<leader>a` | Code actions (native / native / Pulse) |
+| `<leader>rs` / `<F2>` | Rename symbol |
+| `<F3>` | Format buffer |
+| `<leader>d` / `gl` | Line diagnostics float |
+| `]d` / `[d` | Next / prev diagnostic |
+| `]e` / `[e` | Next / prev error |
 
-- **Pulse.nvim** - Custom fuzzy finder with live grep
-- **Grug-far** - Search and replace across files
-- **Pulse.nvim** - File finding and open buffer navigation
-- **Which-key** - Interactive keybinding hints
+### Editing
 
-### UI & UX
+| Key | Action |
+| --- | --- |
+| `<leader>/` | Toggle comment (JSX-aware) |
+| `af`/`if` `ac`/`ic` `aa`/`ia` `ai`/`ii` `al`/`il` | function / class / parameter / conditional / loop textobjects |
+| `]f` / `[f`, `]a` / `[a` | Jump to next / prev function, parameter |
+| `<leader>rp` / `<leader>rP` | Swap parameter with next / prev |
+| `sa` / `sd` / `sr` | Add / delete / replace surround (`sat` for JSX tags) |
+| `<leader>j` / `<leader>J` | Split-join / join the node under the cursor |
+| `%` | Jump between matching tags / keywords |
+| `<M-Up>` / `<M-Down>` | Move line or block |
+| `<leader>.` / `<leader>,` | Indent / dedent selection |
 
-- **NvimTree** - File explorer with git status
-- **Lualine** - Statusline with git branch, diagnostics
-- **Barbecue** - Breadcrumb navigation bar
-- **Scrollbar** - Visual scroll indicator with git/diagnostic marks
-- **Nvim-colorizer** - Color preview for CSS/hex values
-- **Bufdelete** - Intelligent buffer deletion
+### Folding
 
-### Keyboard Shortcuts
+| Key | Action |
+| --- | --- |
+| `za` / `<leader>z` | Toggle fold under cursor |
+| `zR` / `zM` | Open / close all folds |
+| `zr` / `zm` | Open / close one level |
+| `<leader>K` | Peek folded lines |
 
-#### Navigation & Search
+### Git
 
-| Keymap          | Description            |
-| --------------- | ---------------------- |
-| `<leader>\`     | Toggle file explorer   |
-| `<leader>p`     | Pulse menu             |
-| `<leader>f`     | Fuzzy search in buffer |
-| `<leader>l`     | Live grep              |
-| `<leader>u`     | Undo history           |
-| `<leader>k`     | Keymaps                |
-| `<leader><Tab>` | Next window            |
-
-#### Search & Replace
-
-| Keymap       | Description        |
-| ------------ | ------------------ |
-| `<leader>sr` | Search and replace |
-
-#### Git
-
-| Keymap       | Description       |
-| ------------ | ----------------- |
+| Key | Action |
+| --- | --- |
 | `<leader>gd` | Diff current file |
-| `<leader>gR` | Reset buffer      |
-| `<leader>ga` | Toggle diffview   |
-| `<leader>gc` | Commit            |
-| `<leader>gz` | Stash             |
-| `<leader>gh` | File history      |
-| `<leader>gH` | Project history   |
-| `<leader>gb` | Branches          |
-| `<leader>gB` | Diff branch       |
-| `<leader>gs` | Stash menu        |
+| `<leader>gr` | Reset file |
+| `<leader>gs` | Git status (Pulse) |
+| `<leader>gh` / `<leader>gp` | File / project history |
 
-#### Code & Editing
+### Completion (insert mode)
 
-| Keymap       | Description           |
-| ------------ | --------------------- |
-| `K`          | Hover documentation   |
-| `<leader>i`  | Show diagnostics/docs |
-| `<leader>ra` | Code actions          |
-| `<leader>rs` | Rename symbol         |
-| `<leader>/`  | Toggle comment        |
-| `<M-Down>`   | Move line down        |
-| `<M-Up>`     | Move line up          |
-| `<leader>.`  | Increase indent       |
-| `<leader>,`  | Decrease indent       |
-| `<leader>c`  | Copy file location    |
+| Key | Action |
+| --- | --- |
+| `<C-y>` | Accept · `<CR>` accepts only an explicit selection |
+| `<Tab>` / `<S-Tab>` | Select next / prev, then jump snippet placeholder |
+| `<C-l>` / `<C-h>` | Jump snippet placeholder |
+| `<C-Space>` | Toggle menu · `<C-k>` signature help |
 
-# Syncing update with vim.pack
+## Maintenance
 
-at times vim.pack will keep updates in pending. to get around it clean up lock
-files:
+### Syncing updates with vim.pack
+
+If `vim.pack` leaves updates pending, clear lock files then update:
 
 ```
 find ~/.local/share/nvim/site/pack/ -name "index.lock" -delete
 ```
 
-then run `:lua vim.pack.update()`
+```
+:lua vim.pack.update()
+```
 
-# Clean reinstall
+### Clean reinstall
 
-If plugin state gets inconsistent (e.g. leftovers from a previous plugin
-manager, or stale treesitter queries mixing into the runtimepath), run:
+If plugin state gets inconsistent (leftovers from a previous plugin manager,
+stale treesitter queries on the runtimepath):
 
 ```
 ./scripts/clean-reinstall.sh
 ```
 
 It removes old `lazy/`, `pack/packer/`, `mason/` trees and the symlinked query
-directory, then you launch `nvim` once to let `vim.pack` and nvim-treesitter
-rebuild everything. Your persistent undo history is left untouched.
+directory, then you launch `nvim` once so `vim.pack` and nvim-treesitter rebuild
+everything. Persistent undo history is left untouched.
