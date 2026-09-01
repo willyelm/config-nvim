@@ -5,6 +5,13 @@ function M.get_lsp_capabilities()
 end
 
 function M.setup()
+  -- Copilot runs headless (no inline ghost text, no keymaps); its suggestions
+  -- are surfaced only as ranked items in the blink.cmp menu via blink-copilot.
+  require("copilot").setup({
+    suggestion = { enabled = false },
+    panel = { enabled = true, auto_refresh = false },
+  })
+
   local blink = require("blink.cmp")
 
   -- vim.pack has no post-install `build` hook (unlike lazy.nvim), so blink.cmp's
@@ -64,6 +71,10 @@ function M.setup()
   })
 
   require("nvim-autopairs").setup({})
+
+  vim.keymap.set("n", "<leader>cp", function()
+    require("copilot.panel").open()
+  end, { desc = "Copilot panel" })
 end
 
 return M

@@ -1,7 +1,7 @@
 local M = {}
 
 local plugins = {
-  { src = "https://github.com/github/copilot.vim" },
+  { src = "https://github.com/zbirenbaum/copilot.lua" },
   { src = "https://github.com/Saghen/blink.lib" },
   { src = "https://github.com/Saghen/blink.cmp" },
   { src = "https://github.com/fang2hou/blink-copilot" },
