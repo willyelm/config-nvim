@@ -33,14 +33,22 @@ function M.setup()
   end
 
   blink.setup({
+    -- default preset already binds <C-y> accept, <C-e> hide, <C-n>/<C-p>
+    -- select, <C-space> show/docs, <C-k> signature.
     keymap = {
       preset = "default",
       ["<C-Space>"] = { "show", "hide" },
       ["<CR>"] = { "accept", "fallback" },
-      ["<Tab>"] = { "select_next", "fallback" },
-      ["<S-Tab>"] = { "select_prev", "fallback" },
+      ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+      ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
     },
     completion = {
+      -- Nothing is preselected, so <CR> only accepts after an explicit
+      -- <Tab>/<C-n>; a bare <CR> stays a newline and nvim-autopairs keeps
+      -- working.
+      list = {
+        selection = { preselect = false, auto_insert = true },
+      },
       menu = {
         border = "rounded",
         winblend = 15,
