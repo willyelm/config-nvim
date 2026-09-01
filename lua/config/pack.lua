@@ -24,8 +24,7 @@ local plugins = {
   { src = "https://github.com/willyelm/pulse.nvim" },
   { src = "https://github.com/folke/which-key.nvim" },
   { src = "https://github.com/nvim-tree/nvim-web-devicons" },
-  { src = "https://github.com/Bekaboo/dropbar.nvim",                       name = "dropbar" },
-  { src = "https://github.com/SmiteshP/nvim-navic" },
+  { src = "https://github.com/Bekaboo/dropbar.nvim", name = "dropbar" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
   { src = "https://github.com/catgoose/nvim-colorizer.lua" },
 }

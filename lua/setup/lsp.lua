@@ -94,7 +94,7 @@ function M.setup()
 
   vim.lsp.config("biome", {
     cmd = { "biome", "lsp-proxy" },
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "json" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     root_markers = { "biome.json", "biome.jsonc" },
     single_file_support = true,
     on_attach = function(client, bufnr)
@@ -106,7 +106,7 @@ function M.setup()
   })
 
   vim.lsp.config("cssls", {
-    cmd = { "css-languageserver", "--stdio" },
+    cmd = { "vscode-css-language-server", "--stdio" },
     filetypes = { "css", "scss", "less" },
     settings = {
       css = {
@@ -122,6 +122,19 @@ function M.setup()
   vim.lsp.config("tailwindcss", {
     cmd = { "tailwindcss-language-server", "--stdio" },
     filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    root_markers = {
+      "tailwind.config.js",
+      "tailwind.config.cjs",
+      "tailwind.config.mjs",
+      "tailwind.config.ts",
+      "package.json",
+    },
+    settings = {
+      tailwindCSS = {
+        validate = true,
+        classFunctions = { "cva", "cx", "clsx", "cn", "tw" },
+      },
+    },
     on_attach = on_attach,
     capabilities = capabilities,
   })
