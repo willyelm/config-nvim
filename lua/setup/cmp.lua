@@ -5,11 +5,27 @@ function M.get_lsp_capabilities()
 end
 
 function M.setup()
-  -- vim.pack has no `build` hook (unlike lazy.nvim), so blink.cmp's Rust
-  -- fuzzy matcher must be built manually before setup.
-  require("blink.cmp").build():wait(60000)
+  local blink = require("blink.cmp")
 
-  require("blink.cmp").setup({
+  -- vim.pack has no post-install `build` hook (unlike lazy.nvim), so blink.cmp's
+  -- Rust fuzzy matcher is built here. The built library is keyed by commit, so
+  -- `library_available()` is false only on a fresh install or right after a
+  -- blink.cmp update -- that is the only time this actually blocks to compile.
+  -- Any other startup skips straight to `setup()`.
+  if not blink.library_available() then
+    vim.notify("blink.cmp: building native fuzzy matcher (one-time)…", vim.log.levels.INFO)
+    local ok, err = pcall(function()
+      blink.build():wait(120000)
+    end)
+    if not ok then
+      vim.notify(
+        "blink.cmp: native build failed, falling back to Lua matcher (" .. tostring(err) .. ")",
+        vim.log.levels.WARN
+      )
+    end
+  end
+
+  blink.setup({
     keymap = {
       preset = "default",
       ["<C-Space>"] = { "show", "hide" },
