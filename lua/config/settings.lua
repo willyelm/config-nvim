@@ -36,13 +36,12 @@ vim.opt.guicursor = "n:block,v-i-ci-ve:ver10-Cursor"
 vim.opt.mouse = "a"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
--- Folding
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldcolumn = "0"
+-- Folding (managed by nvim-ufo; see lua/setup/folding.lua)
+vim.opt.foldcolumn = "auto:3"
 vim.opt.signcolumn = "auto:1"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
+vim.opt.foldnestmax = 20
 vim.opt.foldenable = true
 
 vim.opt.termguicolors = true
