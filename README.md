@@ -133,7 +133,6 @@ Leader is `<Space>`.
 | --- | --- |
 | `<C-y>` | Accept · `<CR>` accepts only an explicit selection |
 | `<Tab>` / `<S-Tab>` | Select next / prev, then jump snippet placeholder |
-| `<C-l>` / `<C-h>` | Jump snippet placeholder |
 | `<C-Space>` | Toggle menu · `<C-k>` signature help |
 
 ## Maintenance

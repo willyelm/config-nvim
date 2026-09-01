@@ -125,17 +125,8 @@ function M.setup()
     require("copilot.panel").open()
   end, { desc = "Copilot panel" })
 
-  -- Jump between snippet placeholders regardless of the completion menu state.
-  vim.keymap.set({ "i", "s" }, "<C-l>", function()
-    if vim.snippet.active({ direction = 1 }) then
-      vim.snippet.jump(1)
-    end
-  end, { desc = "Snippet: next placeholder" })
-  vim.keymap.set({ "i", "s" }, "<C-h>", function()
-    if vim.snippet.active({ direction = -1 }) then
-      vim.snippet.jump(-1)
-    end
-  end, { desc = "Snippet: previous placeholder" })
+  -- Snippet placeholders are jumped with <Tab>/<S-Tab> (blink in insert,
+  -- Neovim's built-in default in select mode); no extra maps needed.
 end
 
 return M
