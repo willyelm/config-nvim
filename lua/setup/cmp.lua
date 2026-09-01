@@ -52,6 +52,14 @@ function M.setup()
       menu = {
         border = "rounded",
         winblend = 15,
+        draw = {
+          treesitter = { "lsp" },
+          columns = {
+            { "kind_icon" },
+            { "label", "label_description", gap = 1 },
+            { "source_name" },
+          },
+        },
       },
       ghost_text = {
         enabled = true,
@@ -64,6 +72,13 @@ function M.setup()
           winblend = 15,
         },
       },
+    },
+    signature = {
+      enabled = true,
+      window = { border = "rounded" },
+    },
+    appearance = {
+      nerd_font_variant = "mono",
     },
     snippets = { preset = "default" },
     sources = {
