@@ -1,8 +1,16 @@
--- LSP
-vim.keymap.set("n", "<leader>ra", function()
-  vim.lsp.buf.code_action({ context = { diagnostics = vim.diagnostic.get(0) } })
-end, { desc = "Code Actions" })
-vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+-- Diagnostics navigation
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Next diagnostic" })
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Prev diagnostic" })
+vim.keymap.set("n", "]e", function()
+  vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Next error" })
+vim.keymap.set("n", "[e", function()
+  vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Prev error" })
 
 local word_highlight_group = vim.api.nvim_create_augroup("willyelm_word_highlight", { clear = true })
 

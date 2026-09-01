@@ -14,6 +14,13 @@ local function on_attach(client, bufnr)
   end, vim.tbl_extend("force", opts, { desc = "Format file" }))
   vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Execute code action" }))
 
+  -- Buffer-local so they only exist where a server is attached (these used to
+  -- be unguarded globals in config/keymaps.lua).
+  vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
+  vim.keymap.set("n", "<leader>ra", function()
+    vim.lsp.buf.code_action({ context = { diagnostics = vim.diagnostic.get(0) } })
+  end, vim.tbl_extend("force", opts, { desc = "Code actions" }))
+
   if client.server_capabilities.inlayHintProvider then
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
