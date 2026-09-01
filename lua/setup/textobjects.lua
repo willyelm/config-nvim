@@ -16,6 +16,13 @@ local select_objects = {
   ["il"] = "@loop.inner",
 }
 
+-- Jump to the next/prev start of these objects with ]x / [x.
+-- (class movement is left unbound so ]c / [c keep their diff-mode meaning)
+local move_objects = {
+  ["f"] = "@function.outer",
+  ["a"] = "@parameter.inner",
+}
+
 function M.setup()
   require("nvim-treesitter-textobjects").setup({
     select = {
@@ -25,6 +32,9 @@ function M.setup()
         ["@class.outer"] = "V",
       },
     },
+    move = {
+      set_jumps = true,
+    },
   })
 
   local select = require("nvim-treesitter-textobjects.select")
@@ -33,6 +43,24 @@ function M.setup()
       select.select_textobject(query, "textobjects")
     end, { desc = "textobject " .. query })
   end
+
+  local move = require("nvim-treesitter-textobjects.move")
+  for key, query in pairs(move_objects) do
+    vim.keymap.set({ "n", "x", "o" }, "]" .. key, function()
+      move.goto_next_start(query, "textobjects")
+    end, { desc = "Next " .. query })
+    vim.keymap.set({ "n", "x", "o" }, "[" .. key, function()
+      move.goto_previous_start(query, "textobjects")
+    end, { desc = "Prev " .. query })
+  end
+
+  local swap = require("nvim-treesitter-textobjects.swap")
+  vim.keymap.set("n", "<leader>rp", function()
+    swap.swap_next("@parameter.inner")
+  end, { desc = "Swap parameter with next" })
+  vim.keymap.set("n", "<leader>rP", function()
+    swap.swap_previous("@parameter.inner")
+  end, { desc = "Swap parameter with previous" })
 end
 
 return M
