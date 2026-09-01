@@ -1,36 +1,30 @@
 local M = {}
 
+-- Parsers to keep installed. The `main` branch dropped `ensure_installed` /
+-- `auto_install`, so we install missing ones explicitly below.
+local ensure_installed = {
+  "tsx",
+  "typescript",
+  "javascript",
+  "css",
+  "html",
+  "yaml",
+  "go",
+  "lua",
+  "markdown",
+  "markdown_inline",
+  "json",
+  "bash",
+}
+
 function M.setup()
-  require("nvim-treesitter").setup({
-    ensure_installed = {
-      "tsx",
-      "typescript",
-      "javascript",
-      "css",
-      "postcss",
-      "html",
-      "yaml",
-      "go",
-      "lua",
-      "markdown",
-      "markdown_inline",
-    },
-    auto_install = true,
-    indent = { enable = true },
-    highlight = { enable = true },
-    textobjects = {
-      select = {
-        enable = true,
-        lookahead = true,
-        keymaps = {
-          ["af"] = "@function.outer",
-          ["if"] = "@function.inner",
-          ["ac"] = "@class.outer",
-          ["ic"] = "@class.inner",
-        },
-      },
-    },
-  })
+  local ts = require("nvim-treesitter")
+  ts.setup()
+
+  -- vim.pack has no post-install build hook. install() skips parsers that are
+  -- already present, so this only compiles anything on a fresh checkout; it runs
+  -- async and does not block startup.
+  pcall(ts.install, ensure_installed)
 
   vim.treesitter.language.register("markdown", "mdx")
   vim.api.nvim_create_autocmd("FileType", {
