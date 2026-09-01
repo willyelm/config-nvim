@@ -1,6 +1,11 @@
 local M = {}
 
 function M.setup()
+  -- `%` matches JSX open/close tags, if/end, etc.; show the match target in a
+  -- popup when its opening line is off screen.
+  vim.g.matchup_matchparen_offscreen = { method = "popup" }
+  vim.g.matchup_matchparen_deferred = 1
+
   -- JSX/TSX-aware `commentstring`. Neovim 0.10+ does the actual commenting
   -- (`gc` / `gcc`); this just resolves the right delimiters for the node under
   -- the cursor (e.g. `{/* */}` inside JSX).

@@ -100,6 +100,10 @@
       "rev": "79aedb401bbdc7e4202f7881eab5f6feb2105b0a",
       "src": "https://github.com/Wansmer/treesj"
     },
+    "vim-matchup": {
+      "rev": "5e3c4a3274a9766aee520caebb52572c007fc4f8",
+      "src": "https://github.com/andymass/vim-matchup"
+    },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "https://github.com/folke/which-key.nvim"
