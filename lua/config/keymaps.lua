@@ -94,12 +94,7 @@ vim.keymap.set("n", "<leader>c", function()
   print("Copied: " .. coordinates)
 end, { desc = "Copy location" })
 
--- Toggle Comments
-vim.keymap.set({ "n", "v" }, "<leader>/", function()
-  local mode = vim.api.nvim_get_mode().mode
-  if mode == "v" or mode == "V" then
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>gvgc", true, false, true), "m", false)
-  else
-    vim.api.nvim_feedkeys("gcc", "m", false)
-  end
-end, { desc = "Toggle comment" })
+-- Toggle Comments (native gc/gcc; commentstring is resolved per-node by
+-- nvim-ts-context-commentstring, so JSX comments as {/* */})
+vim.keymap.set("n", "<leader>/", "gcc", { remap = true, desc = "Toggle comment" })
+vim.keymap.set("x", "<leader>/", "gc", { remap = true, desc = "Toggle comment" })

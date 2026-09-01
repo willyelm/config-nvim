@@ -13,6 +13,7 @@ local plugins = {
   { src = "https://github.com/MagicDuck/grug-far.nvim" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
+  { src = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
   { src = "https://github.com/kevinhwang91/promise-async" },
   { src = "https://github.com/kevinhwang91/nvim-ufo" },
@@ -37,6 +38,7 @@ function M.setup()
   require("setup.treesitter").setup()
   require("setup.textobjects").setup()
   require("setup.folding").setup()
+  require("setup.editing").setup()
   require("setup.lsp").setup()
   require("setup.format").setup()
   require("setup.git").setup()
