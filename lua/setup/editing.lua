@@ -15,6 +15,13 @@ function M.setup()
     local ok, cs = pcall(require("ts_context_commentstring.internal").calculate_commentstring)
     return (ok and cs) or get_option(filetype, option)
   end
+
+  -- Surround: sa (add, takes a motion), sd (delete), sr (replace), sf/sF
+  -- (find), sn (update n_lines). Works on JSX tags via the `t` target.
+  require("mini.surround").setup({
+    n_lines = 50,
+    search_method = "cover_or_next",
+  })
 end
 
 return M
