@@ -103,7 +103,7 @@ Leader is `<Space>`.
 | `af`/`if` `ac`/`ic` `aa`/`ia` `ai`/`ii` `al`/`il` | function / class / parameter / conditional / loop textobjects |
 | `]f` / `[f`, `]a` / `[a` | Jump to next / prev function, parameter |
 | `<leader>rp` / `<leader>rP` | Swap parameter with next / prev |
-| `sa` / `sd` / `sr` | Add / delete / replace surround (`sat` for JSX tags) |
+| `gsa` / `gsd` / `gsr` | Add / delete / replace surround (`gsat` for JSX tags) |
 | `<leader>j` / `<leader>J` | Split-join / join the node under the cursor |
 | `%` | Jump between matching tags / keywords |
 | `<M-Up>` / `<M-Down>` | Move line or block |
