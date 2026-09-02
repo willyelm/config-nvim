@@ -121,8 +121,9 @@ function M.setup()
 
   require("nvim-autopairs").setup({})
 
-  -- copilot.lua registers `:Copilot panel` (and auth/status/etc.); no keymap
-  -- needed, and a <leader>c* map would add a timeoutlen delay to <leader>c.
+  -- copilot.lua registers `:Copilot panel` (and auth/status/etc.). Bound to
+  -- <leader><Left> rather than a <leader>c* map so <leader>c stays instant.
+  vim.keymap.set("n", "<leader><Left>", "<cmd>Copilot panel<cr>", { desc = "Copilot panel" })
 
   -- Snippet placeholders are jumped with <Tab>/<S-Tab> (blink in insert,
   -- Neovim's built-in default in select mode); no extra maps needed.
