@@ -93,11 +93,12 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 -- Clipboard
 vim.keymap.set("x", "p", '"_dP', { desc = "Paste over selection without overwriting register" })
 
--- Copy Location
+-- Copy Location (path:line:col)
 vim.keymap.set("n", "<leader>c", function()
   local path = vim.fn.expand("%")
   local line = vim.fn.line(".")
-  local coordinates = path .. ":" .. line
+  local col = vim.fn.col(".")
+  local coordinates = path .. ":" .. line .. ":" .. col
   vim.fn.setreg("+", coordinates)
   print("Copied: " .. coordinates)
 end, { desc = "Copy location" })
