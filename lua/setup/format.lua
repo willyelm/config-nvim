@@ -14,7 +14,14 @@ function M.setup()
       html = { "prettierd" },
       css = { "prettierd" },
       scss = { "prettierd" },
-      svg = { "prettierd" },
+      -- prettier has no dedicated SVG parser; see prettier_xml below. Real
+      -- SVG files only use actual SVG tag names, which prettier's HTML
+      -- printer already treats as block-level, so this reads well.
+      svg = { "prettier_xml" },
+      -- Generic XML has arbitrary tag names, which prettier's HTML printer
+      -- treats as inline by default and leaves squashed onto one line, so it
+      -- gets a real XML formatter instead.
+      xml = { "xmllint" },
       yaml = { "prettierd" },
       graphql = { "prettierd" },
       markdown = { "prettierd" },
@@ -36,6 +43,28 @@ function M.setup()
           end
           return {}
         end,
+      },
+      -- prettierd infers its parser purely from the filename it's given, and
+      -- there is no "svg"/"xml" parser -- it just no-ops. Appending a fake
+      -- ".html" extension gets it to use the HTML parser (SVG/XML are close
+      -- enough); the real buffer content still comes in over stdin.
+      prettier_xml = {
+        command = "prettierd",
+        args = { "$FILENAME.html" },
+        cwd = require("conform.util").root_file({
+          ".prettierrc",
+          ".prettierrc.json",
+          ".prettierrc.yml",
+          ".prettierrc.yaml",
+          ".prettierrc.js",
+          "prettier.config.js",
+          "package.json",
+          ".git",
+        }),
+      },
+      xmllint = {
+        command = "xmllint",
+        args = { "--format", "--nonet", "-" },
       },
     },
     format_on_save = {

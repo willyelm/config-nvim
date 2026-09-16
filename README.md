@@ -43,7 +43,13 @@ go install golang.org/x/tools/cmd/goimports@latest
 ```
 
 Formatting runs on save via **conform.nvim**: `biome` for JS/TS/JSON, `prettierd`
-for CSS/HTML/YAML/Markdown, `goimports` for Go, `stylua` for Lua.
+for CSS/HTML/YAML/Markdown, `goimports` for Go, `stylua` for Lua. SVG is also
+`prettierd` (prettier has no SVG parser, so it's forced through the HTML one,
+which works because real SVGs only use real SVG tag names); generic XML uses
+`xmllint --format` instead, since prettier's HTML parser doesn't know which
+arbitrary XML tags are block-level and leaves them squashed on one line.
+Needs `libxml2` (`xmllint`) — ships with macOS, `apt install libxml2-utils` on
+Debian/Ubuntu.
 
 ## Treesitter
 
