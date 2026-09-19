@@ -96,6 +96,7 @@ Leader is `<Space>`.
 | `K` | Hover docs · `<leader>K` peek fold, else hover |
 | `<leader>ra` / `<F4>` / `<leader>a` | Code actions (native / native / Pulse) |
 | `<leader>rs` / `<F2>` | Rename symbol |
+| `<leader>rl` | Restart LSP clients for buffer |
 | `<F3>` | Format buffer |
 | `gl` | Line diagnostics float |
 | `]d` / `[d` | Next / prev diagnostic |

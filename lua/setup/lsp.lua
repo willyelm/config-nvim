@@ -46,6 +46,13 @@ function M.setup()
 
   vim.lsp.config("vtsls", {
     cmd = { "vtsls", "--stdio" },
+    -- Force full-document sync instead of incremental: nvim-ts-autotag and
+    -- autopairs fire several small edits per keystroke on JSX tags, which is
+    -- a known trigger for incremental-sync desync between the buffer and
+    -- tsserver's copy — that desync shows up as bogus "parsing" diagnostics
+    -- that only clear on a full restart. Full sync resends the whole buffer
+    -- each time, so there's nothing to desync.
+    flags = { allow_incremental_sync = false },
     init_options = {
       hostInfo = "neovim",
     },
@@ -104,6 +111,7 @@ function M.setup()
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     root_markers = { "biome.json", "biome.jsonc" },
     single_file_support = true,
+    flags = { allow_incremental_sync = false },
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
@@ -181,7 +189,7 @@ function M.setup()
   vim.lsp.config("gopls", {
     cmd = { "gopls" },
     filetypes = { "go", "gomod", "gowork", "gotmpl" },
-    sync_kind = "full",
+    flags = { allow_incremental_sync = false },
     settings = {
       gopls = {
         usePlaceholders = true,
@@ -200,6 +208,21 @@ function M.setup()
   vim.lsp.enable("jsonls")
   vim.lsp.enable("yamlls")
   vim.lsp.enable("gopls")
+
+  -- There's no nvim-lspconfig here, so no built-in `:LspRestart`. Stop the
+  -- buffer's clients and re-run BufReadPost so `vim.lsp.enable` reattaches
+  -- fresh ones — a full document resync without quitting Neovim.
+  vim.api.nvim_create_user_command("LspRestart", function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+      client:stop(true)
+    end
+    vim.defer_fn(function()
+      vim.cmd("edit")
+    end, 200)
+  end, { desc = "Restart LSP clients for the current buffer" })
+
+  vim.keymap.set("n", "<leader>rl", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
 end
 
 return M
