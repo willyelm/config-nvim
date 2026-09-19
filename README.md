@@ -66,9 +66,9 @@ For anything else:
 | --- | --- |
 | Completion | `blink.cmp`, `blink-copilot` + `copilot.lua` (menu only), `friendly-snippets` |
 | Treesitter | `nvim-treesitter` (main), `-textobjects`, `-context`, `nvim-ts-context-commentstring` |
-| Folding | `nvim-ufo` (LSP → treesitter → indent), folds persist per file |
+| Folding | native `vim.treesitter.foldexpr()`, upgraded to `vim.lsp.foldexpr()` per-buffer when the server supports folding ranges; folds persist per file |
 | Editing | `mini.surround`, `treesj` (split/join), `vim-matchup`, `nvim-autopairs`, `nvim-ts-autotag` |
-| Diagnostics | `tiny-inline-diagnostic` |
+| Diagnostics | native `vim.diagnostic` virtual lines (current line only) |
 | Git | `gitsigns`, `pulse.nvim` (history / status) |
 | Search | `pulse.nvim` (files / grep / buffers), `grug-far` (search & replace) |
 | UI | `lualine`, `dropbar` (breadcrumbs), `nvim-colorizer`, `which-key`, custom `willyelm` colorscheme |
@@ -93,7 +93,7 @@ Leader is `<Space>`.
 | Key | Action |
 | --- | --- |
 | `gd` / `gD` / `gi` / `go` / `gr` | Definition / declaration / implementation / type / references |
-| `K` | Hover docs · `<leader>K` peek fold, else hover |
+| `K` | Hover docs · `<leader>K` open fold, else hover |
 | `<leader>ra` / `<F4>` / `<leader>a` | Code actions (native / native / Pulse) |
 | `<leader>rs` / `<F2>` | Rename symbol |
 | `<F3>` | Format buffer |
@@ -122,7 +122,7 @@ Leader is `<Space>`.
 | `za` / `<leader>z` | Toggle fold under cursor |
 | `zR` / `zM` | Open / close all folds |
 | `zr` / `zm` | Open / close one level |
-| `<leader>K` | Peek folded lines |
+| `<leader>K` | Open fold under cursor |
 
 ### Git
 

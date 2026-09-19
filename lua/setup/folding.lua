@@ -1,93 +1,35 @@
 local M = {}
 
--- Try LSP folding ranges first, fall back to treesitter, then indentation.
--- (ufo raises `UfoFallbackException` when a provider has nothing to offer.)
-local function fold_selector(bufnr)
-  local ufo = require("ufo")
-  local function fallback(err, next_provider)
-    if type(err) == "string" and err:match("UfoFallbackException") then
-      return ufo.getFolds(bufnr, next_provider)
-    end
-    return require("promise").reject(err)
-  end
-
-  return ufo
-    .getFolds(bufnr, "lsp")
-    :catch(function(err)
-      return fallback(err, "treesitter")
-    end)
-    :catch(function(err)
-      return fallback(err, "indent")
-    end)
-end
-
--- Keep the fold's first line, then a " 󰁂 N lines" counter, clamped to width.
-local function fold_virt_text(virt_text, lnum, end_lnum, width, truncate)
-  local result = {}
-  local suffix = (" 󰁂 %d lines "):format(end_lnum - lnum)
-  local suffix_width = vim.fn.strdisplaywidth(suffix)
-  local target_width = width - suffix_width
-  local cur_width = 0
-
-  for _, chunk in ipairs(virt_text) do
-    local text = chunk[1]
-    local chunk_width = vim.fn.strdisplaywidth(text)
-    if target_width > cur_width + chunk_width then
-      table.insert(result, chunk)
-    else
-      text = truncate(text, target_width - cur_width)
-      table.insert(result, { text, chunk[2] })
-      chunk_width = vim.fn.strdisplaywidth(text)
-      if cur_width + chunk_width < target_width then
-        suffix = suffix .. (" "):rep(target_width - cur_width - chunk_width)
-      end
-      break
-    end
-    cur_width = cur_width + chunk_width
-  end
-
-  table.insert(result, { suffix, "UfoFoldedEllipsis" })
-  return result
-end
-
 function M.setup()
-  require("ufo").setup({
-    open_fold_hl_timeout = 150,
-    fold_virt_text_handler = fold_virt_text,
-    provider_selector = function()
-      return fold_selector
+  -- Native treesitter folding, upgraded to LSP folding ranges per-buffer
+  -- when the attached server supports them (mirrors :h lsp.foldexpr()).
+  vim.o.foldmethod = "expr"
+  vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("willyelm_lsp_fold", { clear = true }),
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client and client:supports_method("textDocument/foldingRange") then
+        vim.wo[0][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+      end
     end,
-    preview = {
-      win_config = {
-        border = "rounded",
-        winblend = 0,
-      },
-    },
   })
 
-  local ufo = require("ufo")
-  local map = function(lhs, rhs, desc)
-    vim.keymap.set("n", lhs, rhs, { desc = desc })
-  end
-
-  map("<leader>z", "za", "Toggle fold under cursor")
-  map("zR", ufo.openAllFolds, "Open all folds")
-  map("zM", ufo.closeAllFolds, "Close all folds")
-  map("zr", ufo.openFoldsExceptKinds, "Open folds one level")
-  map("zm", ufo.closeFoldsWith, "Close folds one level")
-  map("<leader>K", function()
-    -- Peek the folded lines; if the cursor is not on a fold, fall through to
-    -- the LSP hover so the key is always useful.
-    if not ufo.peekFoldedLinesUnderCursor() then
+  -- zR/zM/zr/zm are native fold commands already; only these need mapping.
+  vim.keymap.set("n", "<leader>z", "za", { desc = "Toggle fold under cursor" })
+  vim.keymap.set("n", "<leader>K", function()
+    if vim.fn.foldclosed(".") ~= -1 then
+      vim.cmd("normal! zv")
+    else
       vim.lsp.buf.hover({ border = "rounded" })
     end
-  end, "Peek fold / hover")
+  end, { desc = "Open fold / hover" })
 
   M.persist_views()
 end
 
--- Save/restore fold (and cursor) state per file across sessions. ufo applies
--- its folds as manual folds, so `mkview` captures which ones are closed.
+-- Save/restore fold (and cursor) state per file across sessions.
 function M.persist_views()
   vim.opt.viewoptions = { "folds", "cursor" }
 
