@@ -208,21 +208,6 @@ function M.setup()
   vim.lsp.enable("jsonls")
   vim.lsp.enable("yamlls")
   vim.lsp.enable("gopls")
-
-  -- There's no nvim-lspconfig here, so no built-in `:LspRestart`. Stop the
-  -- buffer's clients and re-run BufReadPost so `vim.lsp.enable` reattaches
-  -- fresh ones — a full document resync without quitting Neovim.
-  vim.api.nvim_create_user_command("LspRestart", function()
-    local bufnr = vim.api.nvim_get_current_buf()
-    for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
-      client:stop(true)
-    end
-    vim.defer_fn(function()
-      vim.cmd("edit")
-    end, 200)
-  end, { desc = "Restart LSP clients for the current buffer" })
-
-  vim.keymap.set("n", "<leader>rl", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
 end
 
 return M
