@@ -97,7 +97,7 @@ Leader is `<Space>`.
 | `<leader>ra` / `<F4>` / `<leader>a` | Code actions (native / native / Pulse) |
 | `<leader>rs` / `<F2>` | Rename symbol |
 | `<F3>` | Format buffer |
-| `<leader>d` / `gl` | Line diagnostics float |
+| `gl` | Line diagnostics float |
 | `]d` / `[d` | Next / prev diagnostic |
 | `]e` / `[e` | Next / prev error |
 
