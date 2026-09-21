@@ -12,13 +12,6 @@ LSP client, treesitter, folding, completion, formatting and git integration.
 - [`tree-sitter` CLI](https://github.com/tree-sitter/tree-sitter) (`npm i -g tree-sitter-cli`)
 - A Nerd Font (for completion / statusline / breadcrumb icons)
 
-Optional -- see [AI completion](#ai-completion):
-
-- An OpenAI-`/v1/completions`-compatible server; [Ollama](https://ollama.com)
-  running `qwen2.5-coder:7b` locally by default. Not installed, not running,
-  and not required for anything else in this config -- the source starts
-  disabled (`<leader><Right>` to turn it on)
-
 ## Installation
 
 ```bash
@@ -58,18 +51,21 @@ arbitrary XML tags are block-level and leaves them squashed on one line.
 Needs `libxml2` (`xmllint`) — ships with macOS, `apt install libxml2-utils` on
 Debian/Ubuntu.
 
-## AI completion
+## AI Completion
+
+A feature you turn on if you need it, starts disabled: `<leader><Right>`
+toggles it (`:Minuet blink toggle`).
 
 `minuet-ai.nvim` (`lua/setup/cmp.lua`) plugs into `blink.cmp` as a completion
 source, the same slot `lsp` / `buffer` / `path` occupy. It's a thin client:
 it formats the buffer around the cursor into a fill-in-the-middle (FIM)
 request, sends it to whatever server you point it at, and turns the response
-into a normal completion item. It doesn't run any model itself and isn't
-tied to Ollama specifically -- it's `provider = "openai_fim_compatible"`, so
-**any server that speaks the OpenAI `/v1/completions` API with `prompt` +
-`suffix`** works: Ollama (what's configured now), llama.cpp's server,
-vLLM, LM Studio, or a hosted endpoint. Point it at OpenAI/Claude/Gemini's
-own APIs instead and it switches to their native protocols.
+into a normal completion item. It doesn't run any model itself, and it isn't
+tied to Ollama specifically, since `provider = "openai_fim_compatible"` means
+**any server that speaks the OpenAI `/v1/completions` API with `prompt` and
+`suffix`** works: Ollama (what's configured now), llama.cpp's server, vLLM,
+LM Studio, or a hosted endpoint. Point it at OpenAI/Claude/Gemini's own APIs
+instead and it switches to their native protocols.
 
 To change server/model, edit `provider_options.openai_fim_compatible` in
 `lua/setup/cmp.lua`:
@@ -84,7 +80,7 @@ openai_fim_compatible = {
 },
 ```
 
-Only swap the model if the server confirms it supports `insert`/FIM --
+Only swap the model if the server confirms it supports `insert`/FIM, since
 that's model-specific, not universal (`qwen3-coder:30b` failed this on
 Ollama with "does not support insert"; verify with a raw request first):
 
@@ -97,12 +93,13 @@ curl -s http://localhost:11434/v1/completions -d '{
 
 **Multiple servers/providers**: `minuet.setup()` takes as many entries under
 `provider_options` as you want (`openai_fim_compatible`, `openai`, `claude`,
-`gemini`, ...) in the same call -- only the one named by the top-level
+`gemini`, ...) in the same call. Only the one named by the top-level
 `provider` field is active, but you can switch at runtime with
 `:Minuet change_provider <name>` without restarting Neovim.
 
-Starts disabled -- `<leader><Right>` toggles it on/off (`:Minuet blink
-toggle`).
+Requires a running server to actually get suggestions, e.g.
+[Ollama](https://ollama.com) with a FIM-capable model pulled
+(`ollama pull qwen2.5-coder:7b`) — nothing else in this config depends on it.
 
 ## Treesitter
 
