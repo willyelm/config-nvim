@@ -14,6 +14,11 @@ function M.setup()
     context_window = 512,
     throttle = 1000,
     debounce = 400,
+    -- Both default to 0 for this provider, which disables minuet's own
+    -- dedup filter -- lets the model re-echo code already before/after
+    -- the cursor as part of the completion.
+    after_cursor_filter_length = 15,
+    before_cursor_filter_length = 15,
     provider_options = {
       openai_fim_compatible = {
         api_key = "TERM",
@@ -117,13 +122,24 @@ function M.setup()
           timeout_ms = 3000,
           score_offset = 100,
           -- openai_fim_compatible doesn't trim trailing whitespace itself.
+          -- openai_fim_compatible skips the leading/trailing whitespace
+          -- trim minuet's other backends apply, so stray blank lines and
+          -- indentation duplication land in accepted completions verbatim.
           transform_items = function(_, items)
+            local trim = require("minuet.utils").trim_completion_item
+            local out = {}
             for _, item in ipairs(items) do
               if item.insertText then
-                item.insertText = item.insertText:gsub("[ \t]+\n", "\n"):gsub("[ \t]+$", "")
+                local trimmed = trim(item.insertText)
+                if trimmed then
+                  item.insertText = trimmed
+                  table.insert(out, item)
+                end
+              else
+                table.insert(out, item)
               end
             end
-            return items
+            return out
           end,
         },
       },
