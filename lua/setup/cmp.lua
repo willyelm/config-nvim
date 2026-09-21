@@ -1,5 +1,10 @@
 local M = {}
 
+-- Set to true to turn on AI completion (needs a running FIM server -- see
+-- README "AI Completion"). Off by default so a machine without one is
+-- unaffected.
+local AI_COMPLETION_ENABLED = false
+
 function M.get_lsp_capabilities()
   return require("blink.cmp").get_lsp_capabilities()
 end
@@ -9,9 +14,7 @@ function M.setup()
   -- itself -- no separate frontend, no new keymaps. qwen2.5-coder is used
   -- specifically because Ollama's `insert` (FIM/suffix) capability is
   -- model-dependent -- qwen3-coder:30b returned "does not support insert"
-  -- against the same endpoint. Optional addon, not a dependency of this
-  -- config -- starts disabled so a machine without Ollama running is
-  -- unaffected; toggle with <leader><Right>.
+  -- against the same endpoint.
   require("minuet").setup({
     provider = "openai_fim_compatible",
     n_completions = 1,
@@ -31,7 +34,9 @@ function M.setup()
       },
     },
   })
-  vim.cmd("Minuet blink disable")
+  if not AI_COMPLETION_ENABLED then
+    vim.cmd("Minuet blink disable")
+  end
 
   local blink = require("blink.cmp")
 
@@ -159,8 +164,6 @@ function M.setup()
   })
 
   require("nvim-autopairs").setup({})
-
-  vim.keymap.set("n", "<leader><Right>", "<cmd>Minuet blink toggle<cr>", { desc = "Toggle AI completion" })
 
   -- Snippet placeholders are jumped with <Tab>/<S-Tab> (blink in insert,
   -- Neovim's built-in default in select mode); no extra maps needed.
