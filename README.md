@@ -11,9 +11,10 @@ LSP client, treesitter, folding, completion, formatting and git integration.
 - Node.js >= 18 and a C compiler (`cc`/`gcc`) for treesitter parsers
 - [`tree-sitter` CLI](https://github.com/tree-sitter/tree-sitter) (`npm i -g tree-sitter-cli`)
 - A Nerd Font (for completion / statusline / breadcrumb icons)
-- [Ollama](https://ollama.com) running locally with a FIM-capable model (e.g.
-  `qwen3-coder:30b`) for AI completion (`<leader><Right>` to toggle; off by
-  default)
+- [Ollama](https://ollama.com) running locally with a FIM-capable model
+  (`qwen2.5-coder:7b` -- Ollama's `insert`/FIM support is model-specific, not
+  every coder model implements it) for AI completion (`<leader><Right>` to
+  toggle; off by default)
 
 ## Installation
 

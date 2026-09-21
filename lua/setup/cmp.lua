@@ -5,23 +5,24 @@ function M.get_lsp_capabilities()
 end
 
 function M.setup()
-  -- FIM code completion against local Ollama (qwen3-coder:30b), surfaced as
-  -- ranked items in the blink.cmp menu -- no cloud dependency, no Copilot
-  -- subscription. Starts disabled -- toggle with <leader><Right> -- since a
-  -- 30B local model has real latency and shouldn't fire on every keystroke
-  -- uninvited.
+  -- FIM code completion against local Ollama, surfaced as ranked items in
+  -- the blink.cmp menu -- no cloud dependency, no Copilot subscription.
+  -- qwen2.5-coder is used specifically because Ollama's `insert` (FIM/suffix)
+  -- capability is model-dependent -- qwen3-coder:30b returned "does not
+  -- support insert" against the same endpoint. Starts disabled -- toggle
+  -- with <leader><Right>.
   require("minuet").setup({
     provider = "openai_fim_compatible",
     n_completions = 1,
     context_window = 512,
-    throttle = 1500,
-    debounce = 600,
+    throttle = 1000,
+    debounce = 400,
     provider_options = {
       openai_fim_compatible = {
         api_key = "TERM",
         name = "Ollama",
         end_point = "http://localhost:11434/v1/completions",
-        model = "qwen3-coder:30b",
+        model = "qwen2.5-coder:7b",
         optional = {
           max_tokens = 56,
           top_p = 0.9,
