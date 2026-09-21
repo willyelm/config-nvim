@@ -186,6 +186,15 @@ function M.setup()
     capabilities = capabilities,
   })
 
+  vim.lsp.config("marksman", {
+    cmd = { "marksman", "server" },
+    filetypes = { "markdown", "mdx" },
+    root_markers = { ".marksman.toml", ".git" },
+    single_file_support = true,
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+
   vim.lsp.config("gopls", {
     cmd = { "gopls" },
     filetypes = { "go", "gomod", "gowork", "gotmpl" },
@@ -208,6 +217,7 @@ function M.setup()
   vim.lsp.enable("jsonls")
   vim.lsp.enable("yamlls")
   vim.lsp.enable("gopls")
+  vim.lsp.enable("marksman")
 end
 
 return M

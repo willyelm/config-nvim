@@ -31,7 +31,7 @@ Uses the **native LSP client**. Install the servers you need on your system:
 
 ```bash
 # Go / Lua
-brew install gopls lua-language-server
+brew install gopls lua-language-server marksman
 
 # Web (as needed)
 npm install -g @vtsls/language-server vscode-langservers-extracted \
