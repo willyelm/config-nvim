@@ -1,8 +1,6 @@
 local M = {}
 
--- Set to true to turn on AI completion (needs a running FIM server -- see
--- README "AI Completion"). Off by default so a machine without one is
--- unaffected.
+-- AI completion (needs a running FIM server, see README).
 local AI_COMPLETION_ENABLED = false
 
 function M.get_lsp_capabilities()
@@ -10,11 +8,6 @@ function M.get_lsp_capabilities()
 end
 
 function M.setup()
-  -- FIM code completion against local Ollama, surfaced through blink.cmp
-  -- itself -- no separate frontend, no new keymaps. qwen2.5-coder is used
-  -- specifically because Ollama's `insert` (FIM/suffix) capability is
-  -- model-dependent -- qwen3-coder:30b returned "does not support insert"
-  -- against the same endpoint.
   require("minuet").setup({
     provider = "openai_fim_compatible",
     n_completions = 1,
@@ -40,11 +33,7 @@ function M.setup()
 
   local blink = require("blink.cmp")
 
-  -- vim.pack has no post-install `build` hook (unlike lazy.nvim), so blink.cmp's
-  -- Rust fuzzy matcher is built here. The built library is keyed by commit, so
-  -- `library_available()` is false only on a fresh install or right after a
-  -- blink.cmp update -- that is the only time this actually blocks to compile.
-  -- Any other startup skips straight to `setup()`.
+  -- Compiles blink.cmp's fuzzy matcher on first install / after updates.
   if not blink.library_available() then
     vim.notify("blink.cmp: building native fuzzy matcher (one-time)…", vim.log.levels.INFO)
     local ok, err = pcall(function()
@@ -59,8 +48,6 @@ function M.setup()
   end
 
   blink.setup({
-    -- default preset already binds <C-y> accept, <C-e> hide, <C-n>/<C-p>
-    -- select, <C-space> show/docs, <C-k> signature.
     keymap = {
       preset = "default",
       ["<C-Space>"] = { "show", "hide" },
@@ -69,9 +56,6 @@ function M.setup()
       ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
     },
     completion = {
-      -- Nothing is preselected, so <CR> only accepts after an explicit
-      -- <Tab>/<C-n>; a bare <CR> stays a newline and nvim-autopairs keeps
-      -- working.
       list = {
         selection = { preselect = false, auto_insert = true },
       },
@@ -89,10 +73,6 @@ function M.setup()
       },
       ghost_text = {
         enabled = true,
-        -- Preview the top-ranked item (usually minuet, given its
-        -- score_offset below) inline without requiring <Tab> first --
-        -- <C-y> already accepts whatever's previewed (preset default:
-        -- "select first item if none selected, then accept").
         show_without_selection = true,
       },
       documentation = {
@@ -120,7 +100,6 @@ function M.setup()
           min_keyword_length = 4,
           max_items = 5,
           opts = {
-            -- Only complete words from buffers that are actually on screen.
             get_bufnrs = function()
               local bufs = {}
               for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -131,16 +110,12 @@ function M.setup()
           },
         },
         minuet = {
-          -- Shown as the source_name column in the menu; name it after the
-          -- model actually answering, not the plugin routing the request.
           name = "qwen2.5-coder",
           module = "minuet.blink",
           async = true,
           timeout_ms = 3000,
           score_offset = 100,
-          -- openai_fim_compatible (unlike minuet's other backends) doesn't
-          -- trim trailing whitespace from the model's raw output, so stray
-          -- double-spaces at line ends show up as literal completion text.
+          -- openai_fim_compatible doesn't trim trailing whitespace itself.
           transform_items = function(_, items)
             for _, item in ipairs(items) do
               if item.insertText then
@@ -164,9 +139,6 @@ function M.setup()
   })
 
   require("nvim-autopairs").setup({})
-
-  -- Snippet placeholders are jumped with <Tab>/<S-Tab> (blink in insert,
-  -- Neovim's built-in default in select mode); no extra maps needed.
 end
 
 return M
