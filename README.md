@@ -11,10 +11,9 @@ LSP client, treesitter, folding, completion, formatting and git integration.
 - Node.js >= 18 and a C compiler (`cc`/`gcc`) for treesitter parsers
 - [`tree-sitter` CLI](https://github.com/tree-sitter/tree-sitter) (`npm i -g tree-sitter-cli`)
 - A Nerd Font (for completion / statusline / breadcrumb icons)
-- [Ollama](https://ollama.com) running locally with a FIM-capable model
-  (`qwen2.5-coder:7b` -- Ollama's `insert`/FIM support is model-specific, not
-  every coder model implements it) for AI completion, ranked into the normal
-  `blink.cmp` menu (`<leader><Right>` to toggle off)
+- An OpenAI-`/v1/completions`-compatible server for AI completion -- see
+  [AI completion](#ai-completion); [Ollama](https://ollama.com) running
+  `qwen2.5-coder:7b` locally by default
 
 ## Installation
 
@@ -55,6 +54,51 @@ arbitrary XML tags are block-level and leaves them squashed on one line.
 Needs `libxml2` (`xmllint`) — ships with macOS, `apt install libxml2-utils` on
 Debian/Ubuntu.
 
+## AI completion
+
+`minuet-ai.nvim` (`lua/setup/cmp.lua`) plugs into `blink.cmp` as a completion
+source, the same slot `lsp` / `buffer` / `path` occupy. It's a thin client:
+it formats the buffer around the cursor into a fill-in-the-middle (FIM)
+request, sends it to whatever server you point it at, and turns the response
+into a normal completion item. It doesn't run any model itself and isn't
+tied to Ollama specifically -- it's `provider = "openai_fim_compatible"`, so
+**any server that speaks the OpenAI `/v1/completions` API with `prompt` +
+`suffix`** works: Ollama (what's configured now), llama.cpp's server,
+vLLM, LM Studio, or a hosted endpoint. Point it at OpenAI/Claude/Gemini's
+own APIs instead and it switches to their native protocols.
+
+To change server/model, edit `provider_options.openai_fim_compatible` in
+`lua/setup/cmp.lua`:
+
+```lua
+openai_fim_compatible = {
+  api_key = "TERM",        -- name of an env var to read; "TERM" is a dummy
+                            -- value since local servers don't check it
+  name = "Ollama",
+  end_point = "http://localhost:11434/v1/completions",
+  model = "qwen2.5-coder:7b",
+},
+```
+
+Only swap the model if the server confirms it supports `insert`/FIM --
+that's model-specific, not universal (`qwen3-coder:30b` failed this on
+Ollama with "does not support insert"; verify with a raw request first):
+
+```bash
+curl -s http://localhost:11434/v1/completions -d '{
+  "model": "<model>", "prompt": "function add(a, b) {\n  return",
+  "suffix": "\n}", "max_tokens": 10
+}'
+```
+
+**Multiple servers/providers**: `minuet.setup()` takes as many entries under
+`provider_options` as you want (`openai_fim_compatible`, `openai`, `claude`,
+`gemini`, ...) in the same call -- only the one named by the top-level
+`provider` field is active, but you can switch at runtime with
+`:Minuet change_provider <name>` without restarting Neovim.
+
+`<leader><Right>` toggles the source on/off (`:Minuet blink toggle`).
+
 ## Treesitter
 
 Parsers install automatically for the languages in `lua/setup/treesitter.lua`.
@@ -68,7 +112,7 @@ For anything else:
 
 | Area | Plugins |
 | --- | --- |
-| Completion | `blink.cmp`, `minuet-ai.nvim` (local Ollama FIM, ranked into the same menu), `friendly-snippets` |
+| Completion | `blink.cmp`, `minuet-ai.nvim` (see [AI completion](#ai-completion)), `friendly-snippets` |
 | Treesitter | `nvim-treesitter` (main), `-textobjects`, `-context`, `nvim-ts-context-commentstring` |
 | Folding | native `vim.treesitter.foldexpr()`, upgraded to `vim.lsp.foldexpr()` per-buffer when the server supports folding ranges; folds persist per file |
 | Editing | `mini.surround`, `treesj` (split/join), `vim-matchup`, `nvim-autopairs`, `nvim-ts-autotag` |
