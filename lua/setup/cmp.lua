@@ -7,10 +7,13 @@ end
 function M.setup()
   -- Copilot runs headless (no inline ghost text, no keymaps); its suggestions
   -- are surfaced only as ranked items in the blink.cmp menu via blink-copilot.
+  -- Starts disabled -- toggle with <leader><Right> -- so it's opt-in per
+  -- session instead of always running.
   require("copilot").setup({
     suggestion = { enabled = false },
     panel = { enabled = true, auto_refresh = false },
   })
+  require("copilot.command").disable()
 
   local blink = require("blink.cmp")
 
@@ -124,6 +127,18 @@ function M.setup()
   -- copilot.lua registers `:Copilot panel` (and auth/status/etc.). Bound to
   -- <leader><Left> rather than a <leader>c* map so <leader>c stays instant.
   vim.keymap.set("n", "<leader><Left>", "<cmd>Copilot panel<cr>", { desc = "Copilot panel" })
+
+  vim.keymap.set("n", "<leader><Right>", function()
+    local command = require("copilot.command")
+    local client = require("copilot.client")
+    if client.is_disabled() then
+      command.enable()
+      vim.notify("Copilot enabled")
+    else
+      command.disable()
+      vim.notify("Copilot disabled")
+    end
+  end, { desc = "Toggle Copilot" })
 
   -- Snippet placeholders are jumped with <Tab>/<S-Tab> (blink in insert,
   -- Neovim's built-in default in select mode); no extra maps needed.
