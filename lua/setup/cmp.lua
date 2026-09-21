@@ -5,12 +5,12 @@ function M.get_lsp_capabilities()
 end
 
 function M.setup()
-  -- FIM code completion against local Ollama, surfaced as ranked items in
-  -- the blink.cmp menu -- no cloud dependency, no Copilot subscription.
-  -- qwen2.5-coder is used specifically because Ollama's `insert` (FIM/suffix)
-  -- capability is model-dependent -- qwen3-coder:30b returned "does not
-  -- support insert" against the same endpoint. Starts disabled -- toggle
-  -- with <leader><Right>.
+  -- FIM code completion against local Ollama -- Copilot-style floating ghost
+  -- text via minuet's virtualtext frontend (not the blink.cmp menu; minuet's
+  -- own docs say not to run both at once). qwen2.5-coder is used specifically
+  -- because Ollama's `insert` (FIM/suffix) capability is model-dependent --
+  -- qwen3-coder:30b returned "does not support insert" against the same
+  -- endpoint. Keymaps mirror copilot.lua's own defaults.
   require("minuet").setup({
     provider = "openai_fim_compatible",
     n_completions = 1,
@@ -29,8 +29,17 @@ function M.setup()
         },
       },
     },
+    virtualtext = {
+      auto_trigger_ft = { "*" },
+      keymap = {
+        accept = "<M-l>",
+        accept_line = "<M-L>",
+        next = "<M-]>",
+        prev = "<M-[>",
+        dismiss = "<C-]>",
+      },
+    },
   })
-  vim.cmd("Minuet blink disable")
 
   local blink = require("blink.cmp")
 
@@ -102,7 +111,7 @@ function M.setup()
     },
     snippets = { preset = "default" },
     sources = {
-      default = { "lsp", "snippets", "path", "buffer", "minuet" },
+      default = { "lsp", "snippets", "path", "buffer" },
       providers = {
         lsp = { max_items = 20 },
         buffer = {
@@ -119,13 +128,6 @@ function M.setup()
             end,
           },
         },
-        minuet = {
-          name = "minuet",
-          module = "minuet.blink",
-          async = true,
-          timeout_ms = 3000,
-          score_offset = 50,
-        },
       },
     },
     cmdline = {
@@ -141,7 +143,7 @@ function M.setup()
 
   require("nvim-autopairs").setup({})
 
-  vim.keymap.set("n", "<leader><Right>", "<cmd>Minuet blink toggle<cr>", { desc = "Toggle AI completion" })
+  vim.keymap.set("n", "<leader><Right>", "<cmd>Minuet virtualtext toggle<cr>", { desc = "Toggle AI completion" })
 
   -- Snippet placeholders are jumped with <Tab>/<S-Tab> (blink in insert,
   -- Neovim's built-in default in select mode); no extra maps needed.

@@ -68,7 +68,7 @@ For anything else:
 
 | Area | Plugins |
 | --- | --- |
-| Completion | `blink.cmp`, `minuet-ai.nvim` (local Ollama FIM, menu only), `friendly-snippets` |
+| Completion | `blink.cmp`, `minuet-ai.nvim` (local Ollama FIM, floating ghost text), `friendly-snippets` |
 | Treesitter | `nvim-treesitter` (main), `-textobjects`, `-context`, `nvim-ts-context-commentstring` |
 | Folding | native `vim.treesitter.foldexpr()`, upgraded to `vim.lsp.foldexpr()` per-buffer when the server supports folding ranges; folds persist per file |
 | Editing | `mini.surround`, `treesj` (split/join), `vim-matchup`, `nvim-autopairs`, `nvim-ts-autotag` |
@@ -144,6 +144,9 @@ Leader is `<Space>`.
 | `<C-y>` | Accept · `<CR>` accepts only an explicit selection |
 | `<Tab>` / `<S-Tab>` | Select next / prev, then jump snippet placeholder |
 | `<C-Space>` | Toggle menu · `<C-k>` signature help |
+| `<M-l>` / `<M-L>` | Accept AI suggestion (full / line) |
+| `<M-]>` / `<M-[>` | Next / prev AI suggestion |
+| `<C-]>` | Dismiss AI suggestion |
 
 ## Maintenance
 
