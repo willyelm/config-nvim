@@ -5,15 +5,31 @@ function M.get_lsp_capabilities()
 end
 
 function M.setup()
-  -- Copilot runs headless (no inline ghost text, no keymaps); its suggestions
-  -- are surfaced only as ranked items in the blink.cmp menu via blink-copilot.
-  -- Starts disabled -- toggle with <leader><Right> -- so it's opt-in per
-  -- session instead of always running.
-  require("copilot").setup({
-    suggestion = { enabled = false },
-    panel = { enabled = true, auto_refresh = false },
+  -- FIM code completion against local Ollama (qwen3-coder:30b), surfaced as
+  -- ranked items in the blink.cmp menu -- no cloud dependency, no Copilot
+  -- subscription. Starts disabled -- toggle with <leader><Right> -- since a
+  -- 30B local model has real latency and shouldn't fire on every keystroke
+  -- uninvited.
+  require("minuet").setup({
+    provider = "openai_fim_compatible",
+    n_completions = 1,
+    context_window = 512,
+    throttle = 1500,
+    debounce = 600,
+    provider_options = {
+      openai_fim_compatible = {
+        api_key = "TERM",
+        name = "Ollama",
+        end_point = "http://localhost:11434/v1/completions",
+        model = "qwen3-coder:30b",
+        optional = {
+          max_tokens = 56,
+          top_p = 0.9,
+        },
+      },
+    },
   })
-  require("copilot.command").disable()
+  vim.cmd("Minuet blink disable")
 
   local blink = require("blink.cmp")
 
@@ -85,7 +101,7 @@ function M.setup()
     },
     snippets = { preset = "default" },
     sources = {
-      default = { "lsp", "snippets", "path", "buffer", "copilot" },
+      default = { "lsp", "snippets", "path", "buffer", "minuet" },
       providers = {
         lsp = { max_items = 20 },
         buffer = {
@@ -102,12 +118,12 @@ function M.setup()
             end,
           },
         },
-        copilot = {
-          name = "copilot",
-          module = "blink-copilot",
-          score_offset = 100,
+        minuet = {
+          name = "minuet",
+          module = "minuet.blink",
           async = true,
-          max_items = 3,
+          timeout_ms = 3000,
+          score_offset = 50,
         },
       },
     },
@@ -124,21 +140,7 @@ function M.setup()
 
   require("nvim-autopairs").setup({})
 
-  -- copilot.lua registers `:Copilot panel` (and auth/status/etc.). Bound to
-  -- <leader><Left> rather than a <leader>c* map so <leader>c stays instant.
-  vim.keymap.set("n", "<leader><Left>", "<cmd>Copilot panel<cr>", { desc = "Copilot panel" })
-
-  vim.keymap.set("n", "<leader><Right>", function()
-    local command = require("copilot.command")
-    local client = require("copilot.client")
-    if client.is_disabled() then
-      command.enable()
-      vim.notify("Copilot enabled")
-    else
-      command.disable()
-      vim.notify("Copilot disabled")
-    end
-  end, { desc = "Toggle Copilot" })
+  vim.keymap.set("n", "<leader><Right>", "<cmd>Minuet blink toggle<cr>", { desc = "Toggle AI completion" })
 
   -- Snippet placeholders are jumped with <Tab>/<S-Tab> (blink in insert,
   -- Neovim's built-in default in select mode); no extra maps needed.

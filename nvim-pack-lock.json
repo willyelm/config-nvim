@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "blink-copilot": {
-      "rev": "7ad8209b2f880a2840c94cdcd80ab4dc511d4f39",
-      "src": "https://github.com/fang2hou/blink-copilot"
-    },
     "blink.cmp": {
       "rev": "473c928d8b9b5b3f638cd085a01899972cf205c6",
       "src": "https://github.com/Saghen/blink.cmp"
@@ -15,10 +11,6 @@
     "conform.nvim": {
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
-    },
-    "copilot.lua": {
-      "rev": "6483be53397611b63259ce08a35108a47d4fc794",
-      "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "dropbar": {
       "rev": "808ba31cde89aec8833e9789f5e04557cd31c9e1",
@@ -43,6 +35,10 @@
     "mini.surround": {
       "rev": "8d5d0c5aa92449368ac251e85451d79d8f69d296",
       "src": "https://github.com/echasnovski/mini.surround"
+    },
+    "minuet-ai.nvim": {
+      "rev": "3b0a4c5f97b7124d94302c608fbe01c0270d4fbe",
+      "src": "https://github.com/milanglacier/minuet-ai.nvim"
     },
     "nvim-autopairs": {
       "rev": "430522f95fe4fb7c511ec64f8c1a90cc6a66c05c",

@@ -11,6 +11,9 @@ LSP client, treesitter, folding, completion, formatting and git integration.
 - Node.js >= 18 and a C compiler (`cc`/`gcc`) for treesitter parsers
 - [`tree-sitter` CLI](https://github.com/tree-sitter/tree-sitter) (`npm i -g tree-sitter-cli`)
 - A Nerd Font (for completion / statusline / breadcrumb icons)
+- [Ollama](https://ollama.com) running locally with a FIM-capable model (e.g.
+  `qwen3-coder:30b`) for AI completion (`<leader><Right>` to toggle; off by
+  default)
 
 ## Installation
 
@@ -64,7 +67,7 @@ For anything else:
 
 | Area | Plugins |
 | --- | --- |
-| Completion | `blink.cmp`, `blink-copilot` + `copilot.lua` (menu only), `friendly-snippets` |
+| Completion | `blink.cmp`, `minuet-ai.nvim` (local Ollama FIM, menu only), `friendly-snippets` |
 | Treesitter | `nvim-treesitter` (main), `-textobjects`, `-context`, `nvim-ts-context-commentstring` |
 | Folding | native `vim.treesitter.foldexpr()`, upgraded to `vim.lsp.foldexpr()` per-buffer when the server supports folding ranges; folds persist per file |
 | Editing | `mini.surround`, `treesj` (split/join), `vim-matchup`, `nvim-autopairs`, `nvim-ts-autotag` |
