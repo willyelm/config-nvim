@@ -14,6 +14,9 @@ local function bottom_dock(width, height)
     height = height,
     style = "minimal",
     border = "rounded",
+    -- Above pulse.nvim's own windows (zindex up to ~61), so it stays on
+    -- top even when triggered from inside a fullscreen Pulse panel.
+    zindex = 200,
   }
 end
 
