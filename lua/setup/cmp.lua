@@ -123,11 +123,24 @@ function M.setup()
           },
         },
         minuet = {
-          name = "minuet",
+          -- Shown as the source_name column in the menu; name it after the
+          -- model actually answering, not the plugin routing the request.
+          name = "qwen2.5-coder",
           module = "minuet.blink",
           async = true,
           timeout_ms = 3000,
           score_offset = 100,
+          -- openai_fim_compatible (unlike minuet's other backends) doesn't
+          -- trim trailing whitespace from the model's raw output, so stray
+          -- double-spaces at line ends show up as literal completion text.
+          transform_items = function(_, items)
+            for _, item in ipairs(items) do
+              if item.insertText then
+                item.insertText = item.insertText:gsub("[ \t]+\n", "\n"):gsub("[ \t]+$", "")
+              end
+            end
+            return items
+          end,
         },
       },
     },
