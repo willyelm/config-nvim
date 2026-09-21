@@ -1,8 +1,22 @@
 local M = {}
 
 -- Native vim.ui.input/select render as plain bottom-line prompts; give them
--- a rounded-border float instead. Interaction stays native: prompt-buffer's
--- own <CR>-submits/<Esc>-cancels, no new keymaps.
+-- a rounded box docked at the bottom of the screen instead. Interaction
+-- stays native: prompt-buffer's own <CR>-submits/<Esc>-cancels, no new
+-- keymaps.
+local function bottom_dock(width, height)
+  return {
+    relative = "editor",
+    anchor = "SW",
+    row = vim.o.lines - vim.o.cmdheight - (vim.o.laststatus == 3 and 1 or 0),
+    col = math.floor((vim.o.columns - width) / 2),
+    width = width,
+    height = height,
+    style = "minimal",
+    border = "rounded",
+  }
+end
+
 local function setup_prompts()
   vim.ui.input = function(opts, on_confirm)
     opts = opts or {}
@@ -23,15 +37,7 @@ local function setup_prompts()
       vim.api.nvim_buf_set_lines(buf, 0, 1, false, { prompt .. opts.default })
     end
 
-    vim.api.nvim_open_win(buf, true, {
-      relative = "cursor",
-      row = 1,
-      col = 0,
-      width = math.max(40, #prompt + 30),
-      height = 1,
-      style = "minimal",
-      border = "rounded",
-    })
+    vim.api.nvim_open_win(buf, true, bottom_dock(math.min(80, vim.o.columns - 4), 1))
     vim.cmd("startinsert!")
   end
 
@@ -44,22 +50,16 @@ local function setup_prompts()
       lines[i] = string.format("%d. %s", i, format_item(item))
       width = math.max(width, #lines[i] + 2)
     end
+    width = math.min(width, vim.o.columns - 4)
 
     local buf = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
     vim.bo[buf].modifiable = false
 
-    local win = vim.api.nvim_open_win(buf, true, {
-      relative = "cursor",
-      row = 1,
-      col = 0,
-      width = width,
-      height = math.min(#lines, 15),
-      style = "minimal",
-      border = "rounded",
-      title = opts.prompt or "Select",
-      title_pos = "center",
-    })
+    local win_config = bottom_dock(width, math.min(#lines, 15))
+    win_config.title = opts.prompt or "Select"
+    win_config.title_pos = "center"
+    local win = vim.api.nvim_open_win(buf, true, win_config)
 
     vim.keymap.set("n", "<CR>", function()
       local idx = vim.api.nvim_win_get_cursor(win)[1]
