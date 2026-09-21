@@ -53,36 +53,15 @@ Debian/Ubuntu.
 
 ## AI Completion
 
-A feature you turn on if you need it, starts disabled: `<leader><Right>`
-toggles it (`:Minuet blink toggle`).
+Off by default, `<leader><Right>` to toggle. `minuet-ai.nvim`
+(`lua/setup/cmp.lua`) feeds an `openai_fim_compatible` source into
+`blink.cmp` — works with any OpenAI-`/v1/completions`-compatible server
+(Ollama, llama.cpp, vLLM, LM Studio, hosted). Requires a running server;
+nothing else in this config depends on it.
 
-`minuet-ai.nvim` (`lua/setup/cmp.lua`) plugs into `blink.cmp` as a completion
-source, the same slot `lsp` / `buffer` / `path` occupy. It's a thin client:
-it formats the buffer around the cursor into a fill-in-the-middle (FIM)
-request, sends it to whatever server you point it at, and turns the response
-into a normal completion item. It doesn't run any model itself, and it isn't
-tied to Ollama specifically, since `provider = "openai_fim_compatible"` means
-**any server that speaks the OpenAI `/v1/completions` API with `prompt` and
-`suffix`** works: Ollama (what's configured now), llama.cpp's server, vLLM,
-LM Studio, or a hosted endpoint. Point it at OpenAI/Claude/Gemini's own APIs
-instead and it switches to their native protocols.
-
-To change server/model, edit `provider_options.openai_fim_compatible` in
-`lua/setup/cmp.lua`:
-
-```lua
-openai_fim_compatible = {
-  api_key = "TERM",        -- name of an env var to read; "TERM" is a dummy
-                            -- value since local servers don't check it
-  name = "Ollama",
-  end_point = "http://localhost:11434/v1/completions",
-  model = "qwen2.5-coder:7b",
-},
-```
-
-Only swap the model if the server confirms it supports `insert`/FIM, since
-that's model-specific, not universal (`qwen3-coder:30b` failed this on
-Ollama with "does not support insert"; verify with a raw request first):
+To change server/model, edit `provider_options.openai_fim_compatible`. Only
+switch models that confirm `insert`/FIM support (`qwen3-coder:30b` doesn't;
+`qwen2.5-coder:7b` does) — test with:
 
 ```bash
 curl -s http://localhost:11434/v1/completions -d '{
@@ -91,15 +70,8 @@ curl -s http://localhost:11434/v1/completions -d '{
 }'
 ```
 
-**Multiple servers/providers**: `minuet.setup()` takes as many entries under
-`provider_options` as you want (`openai_fim_compatible`, `openai`, `claude`,
-`gemini`, ...) in the same call. Only the one named by the top-level
-`provider` field is active, but you can switch at runtime with
-`:Minuet change_provider <name>` without restarting Neovim.
-
-Requires a running server to actually get suggestions, e.g.
-[Ollama](https://ollama.com) with a FIM-capable model pulled
-(`ollama pull qwen2.5-coder:7b`) — nothing else in this config depends on it.
+Multiple `provider_options` entries can coexist; switch at runtime with
+`:Minuet change_provider <name>`.
 
 ## Treesitter
 
