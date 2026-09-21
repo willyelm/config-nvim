@@ -13,8 +13,8 @@ LSP client, treesitter, folding, completion, formatting and git integration.
 - A Nerd Font (for completion / statusline / breadcrumb icons)
 - [Ollama](https://ollama.com) running locally with a FIM-capable model
   (`qwen2.5-coder:7b` -- Ollama's `insert`/FIM support is model-specific, not
-  every coder model implements it) for AI completion (`<leader><Right>` to
-  toggle; off by default)
+  every coder model implements it) for AI completion, ranked into the normal
+  `blink.cmp` menu (`<leader><Right>` to toggle off)
 
 ## Installation
 
@@ -68,7 +68,7 @@ For anything else:
 
 | Area | Plugins |
 | --- | --- |
-| Completion | `blink.cmp`, `minuet-ai.nvim` (local Ollama FIM, floating ghost text), `friendly-snippets` |
+| Completion | `blink.cmp`, `minuet-ai.nvim` (local Ollama FIM, ranked into the same menu), `friendly-snippets` |
 | Treesitter | `nvim-treesitter` (main), `-textobjects`, `-context`, `nvim-ts-context-commentstring` |
 | Folding | native `vim.treesitter.foldexpr()`, upgraded to `vim.lsp.foldexpr()` per-buffer when the server supports folding ranges; folds persist per file |
 | Editing | `mini.surround`, `treesj` (split/join), `vim-matchup`, `nvim-autopairs`, `nvim-ts-autotag` |
@@ -144,9 +144,6 @@ Leader is `<Space>`.
 | `<C-y>` | Accept · `<CR>` accepts only an explicit selection |
 | `<Tab>` / `<S-Tab>` | Select next / prev, then jump snippet placeholder |
 | `<C-Space>` | Toggle menu · `<C-k>` signature help |
-| `<M-l>` / `<M-L>` | Accept AI suggestion (full / line) |
-| `<M-]>` / `<M-[>` | Next / prev AI suggestion |
-| `<C-]>` | Dismiss AI suggestion |
 
 ## Maintenance
 
