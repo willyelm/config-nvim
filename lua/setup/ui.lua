@@ -1,6 +1,81 @@
 local M = {}
 
+-- Native vim.ui.input/select render as plain bottom-line prompts; give them
+-- a rounded-border float instead. Interaction stays native: prompt-buffer's
+-- own <CR>-submits/<Esc>-cancels, no new keymaps.
+local function setup_prompts()
+  vim.ui.input = function(opts, on_confirm)
+    opts = opts or {}
+    local prompt = (opts.prompt or "Input") .. ": "
+
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.bo[buf].buftype = "prompt"
+    vim.fn.prompt_setprompt(buf, prompt)
+    vim.fn.prompt_setcallback(buf, function(value)
+      vim.api.nvim_win_close(0, true)
+      on_confirm(value)
+    end)
+    vim.fn.prompt_setinterrupt(buf, function()
+      vim.api.nvim_win_close(0, true)
+      on_confirm(nil)
+    end)
+    if opts.default then
+      vim.api.nvim_buf_set_lines(buf, 0, 1, false, { prompt .. opts.default })
+    end
+
+    vim.api.nvim_open_win(buf, true, {
+      relative = "cursor",
+      row = 1,
+      col = 0,
+      width = math.max(40, #prompt + 30),
+      height = 1,
+      style = "minimal",
+      border = "rounded",
+    })
+    vim.cmd("startinsert!")
+  end
+
+  vim.ui.select = function(items, opts, on_choice)
+    opts = opts or {}
+    local format_item = opts.format_item or tostring
+
+    local lines, width = {}, 20
+    for i, item in ipairs(items) do
+      lines[i] = string.format("%d. %s", i, format_item(item))
+      width = math.max(width, #lines[i] + 2)
+    end
+
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+    vim.bo[buf].modifiable = false
+
+    local win = vim.api.nvim_open_win(buf, true, {
+      relative = "cursor",
+      row = 1,
+      col = 0,
+      width = width,
+      height = math.min(#lines, 15),
+      style = "minimal",
+      border = "rounded",
+      title = opts.prompt or "Select",
+      title_pos = "center",
+    })
+
+    vim.keymap.set("n", "<CR>", function()
+      local idx = vim.api.nvim_win_get_cursor(win)[1]
+      vim.api.nvim_win_close(win, true)
+      on_choice(items[idx], idx)
+    end, { buffer = buf })
+    vim.keymap.set("n", "<Esc>", function()
+      vim.api.nvim_win_close(win, true)
+      on_choice(nil, nil)
+    end, { buffer = buf })
+  end
+end
+
 function M.setup()
+  setup_prompts()
+
   require("nvim-web-devicons").setup({
     default = true,
     strict = true,
