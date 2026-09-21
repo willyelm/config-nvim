@@ -110,7 +110,7 @@ function M.setup()
           },
         },
         minuet = {
-          name = "Q7b",
+          name = "fim",
           module = "minuet.blink",
           async = true,
           timeout_ms = 3000,
