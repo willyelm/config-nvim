@@ -56,10 +56,9 @@ Debian/Ubuntu.
 
 Off by default. Set `AI_COMPLETION_ENABLED = true` at the top of
 `lua/setup/cmp.lua` to turn it on. `minuet-ai.nvim` feeds an
-`openai_fim_compatible` source into `blink.cmp` — works with any
-OpenAI-`/v1/completions`-compatible server (Ollama, llama.cpp, vLLM,
-LM Studio, hosted). Requires a running server; nothing else in this config
-depends on it.
+`openai_fim_compatible` source into `blink.cmp`. works with any
+OpenAI-`/v1/completions`-compatible server (Ollama, llama.cpp, vLLM, LM Studio,
+hosted). Requires a running server; nothing else in this config depends on it.
 
 To change server/model, edit `provider_options.openai_fim_compatible`. Only
 switch models that confirm `insert`/FIM support (`qwen3-coder:30b` doesn't;
