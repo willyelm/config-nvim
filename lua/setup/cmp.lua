@@ -64,6 +64,7 @@ function M.setup()
         winblend = 15,
         draw = {
           treesitter = { "lsp" },
+          padding = { 2, 2 },
           columns = {
             { "kind_icon" },
             { "label",      "label_description", gap = 1 },
