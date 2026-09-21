@@ -116,7 +116,7 @@ function M.setup()
           },
         },
         minuet = {
-          name = "fim",
+          name = "FIM",
           module = "minuet.blink",
           async = true,
           timeout_ms = 3000,
