@@ -11,9 +11,13 @@ LSP client, treesitter, folding, completion, formatting and git integration.
 - Node.js >= 18 and a C compiler (`cc`/`gcc`) for treesitter parsers
 - [`tree-sitter` CLI](https://github.com/tree-sitter/tree-sitter) (`npm i -g tree-sitter-cli`)
 - A Nerd Font (for completion / statusline / breadcrumb icons)
-- An OpenAI-`/v1/completions`-compatible server for AI completion -- see
-  [AI completion](#ai-completion); [Ollama](https://ollama.com) running
-  `qwen2.5-coder:7b` locally by default
+
+Optional -- see [AI completion](#ai-completion):
+
+- An OpenAI-`/v1/completions`-compatible server; [Ollama](https://ollama.com)
+  running `qwen2.5-coder:7b` locally by default. Not installed, not running,
+  and not required for anything else in this config -- the source starts
+  disabled (`<leader><Right>` to turn it on)
 
 ## Installation
 
@@ -97,7 +101,8 @@ curl -s http://localhost:11434/v1/completions -d '{
 `provider` field is active, but you can switch at runtime with
 `:Minuet change_provider <name>` without restarting Neovim.
 
-`<leader><Right>` toggles the source on/off (`:Minuet blink toggle`).
+Starts disabled -- `<leader><Right>` toggles it on/off (`:Minuet blink
+toggle`).
 
 ## Treesitter
 

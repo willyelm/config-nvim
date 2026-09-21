@@ -9,7 +9,9 @@ function M.setup()
   -- itself -- no separate frontend, no new keymaps. qwen2.5-coder is used
   -- specifically because Ollama's `insert` (FIM/suffix) capability is
   -- model-dependent -- qwen3-coder:30b returned "does not support insert"
-  -- against the same endpoint.
+  -- against the same endpoint. Optional addon, not a dependency of this
+  -- config -- starts disabled so a machine without Ollama running is
+  -- unaffected; toggle with <leader><Right>.
   require("minuet").setup({
     provider = "openai_fim_compatible",
     n_completions = 1,
@@ -29,6 +31,7 @@ function M.setup()
       },
     },
   })
+  vim.cmd("Minuet blink disable")
 
   local blink = require("blink.cmp")
 
