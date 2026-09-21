@@ -5,8 +5,8 @@ function M.setup()
 
   require("pulse").setup({
     position = "top",
-    height = 0.90,
-    width = 0.75,
+    height = 0.8,
+    width = 0.8,
     -- cmdline = true,
     -- workspace_label = true,
     navigators = {
@@ -45,11 +45,12 @@ function M.setup()
   vim.keymap.set("n", "<leader>sr", function()
     require("grug-far").open()
   end, { desc = "Search & Replace" })
+  vim.keymap.set("n", "<C-k>", "<cmd>Pulse<cr>", { desc = "Pulse" })
   vim.keymap.set("n", "<leader>p", "<cmd>Pulse<cr>", { desc = "Pulse" })
   vim.keymap.set("n", "<leader>a", "<cmd>Pulse code_action<cr>", { desc = "Code Actions" })
+  vim.keymap.set("n", "<leader>b", "<cmd>Pulse buffers<cr>", { desc = "Open Buffers" })
   vim.keymap.set("n", "<leader>l", "<cmd>Pulse live_grep<cr>", { desc = "Live Grep" })
   vim.keymap.set("n", "<leader>f", "<cmd>Pulse fuzzy_search<cr>", { desc = "Fuzzy Search" })
-  vim.keymap.set("n", "<leader>b", "<cmd>Pulse buffers<cr>", { desc = "Open Buffers" })
   vim.keymap.set("n", "<leader>gs", "<cmd>Pulse git_status<cr>", { desc = "Status" })
   vim.keymap.set("n", "<leader>gp", "<cmd>Pulse git_project_history<cr>", { desc = "Project History" })
   vim.keymap.set("n", "<leader>gh", "<cmd>Pulse git_file_history<cr>", { desc = "File History" })

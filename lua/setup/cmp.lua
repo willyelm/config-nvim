@@ -1,7 +1,7 @@
 local M = {}
 
 -- AI completion (needs a running FIM server, see README).
-local AI_COMPLETION_ENABLED = true
+local AI_COMPLETION_ENABLED = false
 
 function M.get_lsp_capabilities()
   return require("blink.cmp").get_lsp_capabilities()
