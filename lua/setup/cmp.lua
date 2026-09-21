@@ -1,7 +1,7 @@
 local M = {}
 
 -- AI completion (needs a running FIM server, see README).
-local AI_COMPLETION_ENABLED = false
+local AI_COMPLETION_ENABLED = true
 
 function M.get_lsp_capabilities()
   return require("blink.cmp").get_lsp_capabilities()
@@ -66,7 +66,7 @@ function M.setup()
           treesitter = { "lsp" },
           columns = {
             { "kind_icon" },
-            { "label", "label_description", gap = 1 },
+            { "label",      "label_description", gap = 1 },
             { "source_name" },
           },
         },
@@ -110,7 +110,7 @@ function M.setup()
           },
         },
         minuet = {
-          name = "qwen2.5-coder",
+          name = "Q7b",
           module = "minuet.blink",
           async = true,
           timeout_ms = 3000,
