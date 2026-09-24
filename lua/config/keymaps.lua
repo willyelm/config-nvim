@@ -56,7 +56,5 @@ vim.keymap.set("n", "<leader>c", function()
   print("Copied: " .. coordinates)
 end, { desc = "Copy location" })
 
--- Toggle Comments (native gc/gcc; commentstring is resolved per-node by
--- nvim-ts-context-commentstring, so JSX comments as {/* */})
 vim.keymap.set("n", "<leader>/", "gcc", { remap = true, desc = "Toggle comment" })
 vim.keymap.set("x", "<leader>/", "gc", { remap = true, desc = "Toggle comment" })

@@ -90,7 +90,7 @@ For anything else:
 | Area        | Plugins                                                                                                                                         |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Completion  | `blink.cmp`, `minuet-ai.nvim` (see [AI completion](#ai-completion)), `friendly-snippets`                                                        |
-| Treesitter  | `nvim-treesitter` (main), `-textobjects`, `-context`, `nvim-ts-context-commentstring`                                                           |
+| Treesitter  | `nvim-treesitter` (main), `-textobjects`, `-context`                                                                                             |
 | Folding     | native `vim.treesitter.foldexpr()`, upgraded to `vim.lsp.foldexpr()` per-buffer when the server supports folding ranges; folds persist per file |
 | Editing     | `mini.surround`, `vim-matchup`, `nvim-autopairs`, `nvim-ts-autotag`                                                                              |
 | Diagnostics | native `vim.diagnostic` virtual lines (current line only)                                                                                       |
@@ -130,7 +130,7 @@ Leader is `<Space>`.
 
 | Key                                               | Action                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------- |
-| `<leader>/`                                       | Toggle comment (JSX-aware)                                    |
+| `<leader>/`                                       | Toggle comment                                                 |
 | `af`/`if` `ac`/`ic` `aa`/`ia` `ai`/`ii` `al`/`il` | function / class / parameter / conditional / loop textobjects |
 | `]f` / `[f`, `]a` / `[a`                          | Jump to next / prev function, parameter                       |
 | `<leader>rp` / `<leader>rP`                       | Swap parameter with next / prev                               |
