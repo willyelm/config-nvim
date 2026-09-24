@@ -14,7 +14,6 @@ local plugins = {
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
   { src = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring" },
   { src = "https://github.com/echasnovski/mini.surround" },
-  { src = "https://github.com/Wansmer/treesj" },
   { src = "https://github.com/andymass/vim-matchup" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
   { src = "https://github.com/willyelm/pulse.nvim" },

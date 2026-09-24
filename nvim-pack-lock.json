@@ -76,10 +76,6 @@
       "rev": "794988b1ad2a39ddaeaec82cd6ebf32a3600637e",
       "src": "https://github.com/willyelm/pulse.nvim"
     },
-    "treesj": {
-      "rev": "79aedb401bbdc7e4202f7881eab5f6feb2105b0a",
-      "src": "https://github.com/Wansmer/treesj"
-    },
     "vim-matchup": {
       "rev": "0106b1afd4a2f7e1098037b5ceb161bab7471088",
       "src": "https://github.com/andymass/vim-matchup"

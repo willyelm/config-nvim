@@ -92,7 +92,7 @@ For anything else:
 | Completion  | `blink.cmp`, `minuet-ai.nvim` (see [AI completion](#ai-completion)), `friendly-snippets`                                                        |
 | Treesitter  | `nvim-treesitter` (main), `-textobjects`, `-context`, `nvim-ts-context-commentstring`                                                           |
 | Folding     | native `vim.treesitter.foldexpr()`, upgraded to `vim.lsp.foldexpr()` per-buffer when the server supports folding ranges; folds persist per file |
-| Editing     | `mini.surround`, `treesj` (split/join), `vim-matchup`, `nvim-autopairs`, `nvim-ts-autotag`                                                      |
+| Editing     | `mini.surround`, `vim-matchup`, `nvim-autopairs`, `nvim-ts-autotag`                                                                              |
 | Diagnostics | native `vim.diagnostic` virtual lines (current line only)                                                                                       |
 | Git         | `gitsigns`, `pulse.nvim` (history / status)                                                                                                     |
 | Search      | `pulse.nvim` (files / grep / buffers), `grug-far` (search & replace)                                                                            |
@@ -135,7 +135,6 @@ Leader is `<Space>`.
 | `]f` / `[f`, `]a` / `[a`                          | Jump to next / prev function, parameter                       |
 | `<leader>rp` / `<leader>rP`                       | Swap parameter with next / prev                               |
 | `gsa` / `gsd` / `gsr`                             | Add / delete / replace surround (`gsat` for JSX tags)         |
-| `<leader>j` / `<leader>J`                         | Split-join / join the node under the cursor                   |
 | `%`                                               | Jump between matching tags / keywords                         |
 | `<M-Up>` / `<M-Down>`                             | Move line or block                                            |
 | `<leader>.` / `<leader>,`                         | Indent / dedent selection                                     |
