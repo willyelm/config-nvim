@@ -130,7 +130,6 @@ Leader is `<Space>`.
 
 | Key                                               | Action                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------- |
-| `<leader>/`                                       | Toggle comment                                                 |
 | `af`/`if` `ac`/`ic` `aa`/`ia` `ai`/`ii` `al`/`il` | function / class / parameter / conditional / loop textobjects |
 | `]f` / `[f`, `]a` / `[a`                          | Jump to next / prev function, parameter                       |
 | `<leader>rp` / `<leader>rP`                       | Swap parameter with next / prev                               |
@@ -143,7 +142,7 @@ Leader is `<Space>`.
 
 | Key                | Action                   |
 | ------------------ | ------------------------ |
-| `za` / `<leader>z` | Toggle fold under cursor |
+| `za`                | Toggle fold under cursor |
 | `zR` / `zM`        | Open / close all folds   |
 | `zr` / `zm`        | Open / close one level   |
 | `<leader>K`        | Open fold under cursor   |

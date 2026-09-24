@@ -16,8 +16,7 @@ function M.setup()
     end,
   })
 
-  -- zR/zM/zr/zm are native fold commands already; only these need mapping.
-  vim.keymap.set("n", "<leader>z", "za", { desc = "Toggle fold under cursor" })
+  -- za/zR/zM/zr/zm are native fold commands already; only this needs mapping.
   vim.keymap.set("n", "<leader>K", function()
     if vim.fn.foldclosed(".") ~= -1 then
       vim.cmd("normal! zv")

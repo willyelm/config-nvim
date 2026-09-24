@@ -56,5 +56,3 @@ vim.keymap.set("n", "<leader>c", function()
   print("Copied: " .. coordinates)
 end, { desc = "Copy location" })
 
-vim.keymap.set("n", "<leader>/", "gcc", { remap = true, desc = "Toggle comment" })
-vim.keymap.set("x", "<leader>/", "gc", { remap = true, desc = "Toggle comment" })
