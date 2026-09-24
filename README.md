@@ -1,8 +1,8 @@
 # Neovim Config
 
 Personal setup built on Neovim's built-in `vim.pack` package manager. Optimized
-for web development (TypeScript / JSX), Go, and general editing with the native
-LSP client, treesitter, folding, completion, formatting and git integration.
+for TypeScript/JSX, Go, Lua, C/C++, and Python, with the native LSP client,
+treesitter, folding, completion, formatting and git integration.
 
 ## Requirements
 
@@ -31,8 +31,9 @@ nvim-treesitter installs parsers in the background (`:TSUpdate` to refresh).
 Uses the **native LSP client**. Install the servers you need on your system:
 
 ```bash
-# Go / Lua
-brew install gopls lua-language-server marksman
+# Go, Lua, C/C++, Python, Markdown language servers + formatters
+brew install gopls lua-language-server marksman clangd pyright stylua \
+  clang-format ruff
 
 # Web (as needed)
 npm install -g @vtsls/language-server vscode-langservers-extracted \
@@ -44,12 +45,13 @@ go install golang.org/x/tools/cmd/goimports@latest
 ```
 
 Formatting runs on save via **conform.nvim**: `biome` for JS/TS/JSON,
-`prettierd` for CSS/HTML/YAML/Markdown, `goimports` for Go, `stylua` for Lua.
-SVG is also `prettierd` (prettier has no SVG parser, so it's forced through the
-HTML one, which works because real SVGs only use real SVG tag names); generic
-XML uses `xmllint --format` instead, since prettier's HTML parser doesn't know
-which arbitrary XML tags are block-level and leaves them squashed on one line.
-Needs `libxml2` (`xmllint`) — ships with macOS, `apt install libxml2-utils` on
+`prettierd` for CSS/HTML/YAML/Markdown, `goimports` for Go, `stylua` for Lua,
+`clang-format` for C/C++, `ruff` for Python. SVG is also `prettierd` (prettier
+has no SVG parser, so it's forced through the HTML one, which works because
+real SVGs only use real SVG tag names); generic XML uses `xmllint --format`
+instead, since prettier's HTML parser doesn't know which arbitrary XML tags
+are block-level and leaves them squashed on one line. Needs `libxml2`
+(`xmllint`) — ships with macOS, `apt install libxml2-utils` on
 Debian/Ubuntu.
 
 ## AI Completion

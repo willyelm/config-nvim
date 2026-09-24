@@ -209,6 +209,23 @@ function M.setup()
     capabilities = capabilities,
   })
 
+  vim.lsp.config("clangd", {
+    cmd = { "clangd", "--background-index" },
+    filetypes = { "c", "cpp", "objc", "objcpp" },
+    root_markers = { "compile_commands.json", "compile_flags.txt", ".git" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+
+  vim.lsp.config("pyright", {
+    cmd = { "pyright-langserver", "--stdio" },
+    filetypes = { "python" },
+    root_markers = { "pyproject.toml", "setup.py", "requirements.txt", ".git" },
+    single_file_support = true,
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+
   vim.lsp.enable("vtsls")
   vim.lsp.enable("lua_ls")
   vim.lsp.enable("biome")
@@ -218,6 +235,8 @@ function M.setup()
   vim.lsp.enable("yamlls")
   vim.lsp.enable("gopls")
   vim.lsp.enable("marksman")
+  vim.lsp.enable("clangd")
+  vim.lsp.enable("pyright")
 end
 
 return M
