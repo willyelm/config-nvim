@@ -10,8 +10,17 @@ treesitter, folding, completion, formatting and git integration.
 - Git, [ripgrep](https://github.com/BurntSushi/ripgrep) (`rg`)
 - Node.js >= 18 and a C compiler (`cc`/`gcc`) for treesitter parsers
 - [`tree-sitter` CLI](https://github.com/tree-sitter/tree-sitter)
-  (`npm i -g tree-sitter-cli`)
 - A Nerd Font (for completion / statusline / breadcrumb icons)
+
+```bash
+brew install neovim git ripgrep node
+npm install -g tree-sitter-cli
+brew install --cask font-hack-nerd-font   # or any other Nerd Font
+```
+
+Linux: `apt install neovim git ripgrep nodejs build-essential` (a C compiler
+ships with `build-essential`), then the `npm install -g tree-sitter-cli` line
+above and a Nerd Font of your choice.
 
 ## Installation
 
