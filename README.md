@@ -11,9 +11,11 @@ treesitter, folding, completion, formatting and git integration.
 - Node.js >= 18 and a C compiler (`cc`/`gcc`) for treesitter parsers
 - [`tree-sitter` CLI](https://github.com/tree-sitter/tree-sitter)
 - A Nerd Font (for completion / statusline / breadcrumb icons)
+- [`ast-grep`](https://ast-grep.github.io) (optional, structural search for
+  `grug-far`)
 
 ```bash
-brew install neovim git ripgrep node
+brew install neovim git ripgrep node ast-grep
 npm install -g tree-sitter-cli
 brew install --cask font-hack-nerd-font   # or any other Nerd Font
 ```
