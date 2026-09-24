@@ -89,7 +89,7 @@ For anything else:
 
 | Area        | Plugins                                                                                                                                         |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Completion  | `blink.cmp`, `minuet-ai.nvim` (see [AI completion](#ai-completion)), `friendly-snippets`                                                        |
+| Completion  | `blink.cmp`, `minuet-ai.nvim` (see [AI completion](#ai-completion))                                                                              |
 | Treesitter  | `nvim-treesitter` (main), `-textobjects`, `-context`                                                                                             |
 | Folding     | native `vim.treesitter.foldexpr()`, upgraded to `vim.lsp.foldexpr()` per-buffer when the server supports folding ranges; folds persist per file |
 | Editing     | `mini.surround`, `vim-matchup`, `nvim-autopairs`, `nvim-ts-autotag`                                                                              |

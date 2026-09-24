@@ -4,7 +4,6 @@ local plugins = {
   { src = "https://github.com/Saghen/blink.lib" },
   { src = "https://github.com/Saghen/blink.cmp" },
   { src = "https://github.com/milanglacier/minuet-ai.nvim" },
-  { src = "https://github.com/rafamadriz/friendly-snippets" },
   { src = "https://github.com/stevearc/conform.nvim" },
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
   { src = "https://github.com/windwp/nvim-autopairs" },
