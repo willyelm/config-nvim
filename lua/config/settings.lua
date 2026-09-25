@@ -31,7 +31,7 @@ vim.opt.autoread = true
 vim.opt.autochdir = false
 
 vim.opt.cursorline = true
-vim.opt.guicursor = "n:block,v-i-ci-ve:ver10-Cursor"
+vim.opt.guicursor = "n-v-ve:block,i-ci:ver10-Cursor"
 vim.opt.mouse = "a"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
