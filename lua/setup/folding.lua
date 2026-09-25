@@ -1,5 +1,14 @@
 local M = {}
 
+-- Expr folding for the current window: LSP ranges when an attached server
+-- supports them, treesitter otherwise.
+local function set_foldexpr(buf)
+  vim.wo[0][0].foldmethod = "expr"
+  vim.wo[0][0].foldexpr = #vim.lsp.get_clients({ bufnr = buf, method = "textDocument/foldingRange" }) > 0
+      and "v:lua.vim.lsp.foldexpr()"
+    or "v:lua.vim.treesitter.foldexpr()"
+end
+
 function M.setup()
   -- Native treesitter folding, upgraded to LSP folding ranges per-buffer
   -- when the attached server supports them (mirrors :h lsp.foldexpr()).
@@ -45,7 +54,8 @@ function M.persist_views()
   vim.api.nvim_create_autocmd("BufWinLeave", {
     group = group,
     callback = function(args)
-      if eligible(args.buf) then
+      -- Never persist a manual foldmethod; restoring it disables expr folding.
+      if eligible(args.buf) and vim.wo.foldmethod == "expr" then
         pcall(vim.cmd.mkview, { mods = { emsg_silent = true } })
       end
     end,
@@ -56,6 +66,10 @@ function M.persist_views()
     callback = function(args)
       if eligible(args.buf) then
         pcall(vim.cmd.loadview, { mods = { emsg_silent = true } })
+        -- Heal views saved with foldmethod=manual (e.g. before this setup).
+        if vim.wo.foldmethod ~= "expr" then
+          set_foldexpr(args.buf)
+        end
       end
     end,
   })
