@@ -53,6 +53,11 @@ local function get_semantic()
         fg_warning = color.amber_01,
         fg_positive = color.green_01,
         fg_negative = color.red_01,
+        -- Search-and-replace previews: what goes (gray), what replaces it (magenta).
+        bg_match = color.gray_07,
+        bg_replace = color.magenta_08,
+        fg_match = color.gray_04,
+        fg_replace = color.magenta_01,
         divider = color.gray_06,
       }
     or {
@@ -80,6 +85,10 @@ local function get_semantic()
       fg_warning = color.amber_08,
       fg_positive = color.green_08,
       fg_negative = color.red_08,
+      bg_match = color.gray_01,
+      bg_replace = color.magenta_01,
+      fg_match = color.gray_04,
+      fg_replace = color.magenta_08,
       divider = color.gray_04,
     }
 end

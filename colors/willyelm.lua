@@ -110,6 +110,11 @@ hi("Barbecue", { bg = color.bg_main })
 -- Pulse
 hi("PulseNormal", { bg = color.bg_action })
 hi("PulseActive", { bg = color.bg_active })
+-- Live grep replace: row text and the preview's line backgrounds
+hi("PulseReplaceOld", { fg = color.fg_match })
+hi("PulseReplaceNew", { fg = color.fg_replace })
+hi("PulseDiffMatch", { bg = color.bg_match })
+hi("PulseDiffReplace", { bg = color.bg_replace })
 
 if vim.o.background == "dark" then
   hi("PulseDiffNAdd", { bg = color.green_07, fg = color.fg_body })
