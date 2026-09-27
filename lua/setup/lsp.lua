@@ -9,8 +9,9 @@ local function on_attach(client, bufnr)
     vim.tbl_extend("force", opts, { desc = "Go to type definition" }))
   vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "Go to reference" }))
   vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
+  -- Same formatter chain as format-on-save (conform), not raw LSP formatting.
   vim.keymap.set({ "n", "x" }, "<F3>", function()
-    vim.lsp.buf.format({ async = true })
+    require("conform").format({ async = true, lsp_format = "fallback" })
   end, vim.tbl_extend("force", opts, { desc = "Format file" }))
   vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Execute code action" }))
 
@@ -21,28 +22,27 @@ local function on_attach(client, bufnr)
     vim.lsp.buf.code_action({ context = { diagnostics = vim.diagnostic.get(0) } })
   end, vim.tbl_extend("force", opts, { desc = "Code actions" }))
 
-  if client.server_capabilities.inlayHintProvider then
+  if client:supports_method("textDocument/inlayHint") then
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
 end
 
 function M.setup()
-  local capabilities = require("setup.cmp").get_lsp_capabilities()
-  capabilities.textDocument = capabilities.textDocument or {}
-  capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-  }
-  capabilities.textDocument.synchronization = {
-    didSave = true,
-    willSave = true,
-    willSaveWaitUntil = true,
-  }
-  capabilities.workspace = capabilities.workspace or {}
-  capabilities.workspace.didChangeWatchedFiles = {
-    dynamicRegistration = true,
-    relativePatternSupport = true,
-  }
+  -- Shared by every server. Neovim merges these over its own defaults, which
+  -- already advertise foldingRange, willSave/didSave and watched files.
+  vim.lsp.config("*", {
+    capabilities = require("setup.cmp").get_lsp_capabilities(),
+  })
+
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("willyelm_lsp_attach", { clear = true }),
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client then
+        on_attach(client, args.buf)
+      end
+    end,
+  })
 
   vim.lsp.config("vtsls", {
     cmd = { "vtsls", "--stdio" },
@@ -56,10 +56,23 @@ function M.setup()
     init_options = {
       hostInfo = "neovim",
     },
-    root_markers = { "package.json", "tsconfig.json", ".git" },
+    -- One tsserver per repo (lockfile), not per package.json in a monorepo;
+    -- tsserver still resolves the nearest tsconfig per file.
+    root_markers = {
+      { "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lock", "bun.lockb" },
+      ".git",
+    },
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     settings = {
+      vtsls = {
+        -- Use the repo's own TypeScript (node_modules) when present, so the
+        -- server matches what `tsc` in the project would report.
+        autoUseWorkspaceTsdk = true,
+      },
       typescript = {
+        -- One tsserver serves the whole monorepo; the 3 GB default is what
+        -- makes it die mid-session and need :LspRestart.
+        tsserver = { maxTsServerMemory = 8192 },
         updateImportsOnFileMove = { enabled = "always" },
         suggest = {
           completeFunctionCalls = true,
@@ -83,15 +96,15 @@ function M.setup()
         },
       },
     },
-    on_attach = on_attach,
-    capabilities = capabilities,
   })
 
   vim.lsp.config("lua_ls", {
     cmd = { "lua-language-server" },
     filetypes = { "lua" },
+    root_markers = { { ".luarc.json", ".luarc.jsonc", ".stylua.toml", "stylua.toml" }, ".git" },
     settings = {
       Lua = {
+        runtime = { version = "LuaJIT" },
         diagnostics = {
           globals = { "vim" },
         },
@@ -102,22 +115,20 @@ function M.setup()
         telemetry = { enable = false },
       },
     },
-    on_attach = on_attach,
-    capabilities = capabilities,
   })
 
   vim.lsp.config("biome", {
     cmd = { "biome", "lsp-proxy" },
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     root_markers = { "biome.json", "biome.jsonc" },
-    single_file_support = true,
+    -- Only in projects that configure biome; otherwise it lints every JS/TS
+    -- file with its defaults. Formatting goes through conform.
+    workspace_required = true,
     flags = { allow_incremental_sync = false },
-    on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
+    on_attach = function(client)
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
     end,
-    capabilities = capabilities,
   })
 
   vim.lsp.config("cssls", {
@@ -130,8 +141,6 @@ function M.setup()
         },
       },
     },
-    on_attach = on_attach,
-    capabilities = capabilities,
   })
 
   vim.lsp.config("tailwindcss", {
@@ -144,14 +153,13 @@ function M.setup()
       "tailwind.config.ts",
       "package.json",
     },
+    workspace_required = true,
     settings = {
       tailwindCSS = {
         validate = true,
         classFunctions = { "cva", "cx", "clsx", "cn", "tw" },
       },
     },
-    on_attach = on_attach,
-    capabilities = capabilities,
   })
 
   vim.lsp.config("jsonls", {
@@ -163,8 +171,6 @@ function M.setup()
         schemaDownload = { enable = true },
       },
     },
-    on_attach = on_attach,
-    capabilities = capabilities,
   })
 
   vim.lsp.config("yamlls", {
@@ -182,22 +188,18 @@ function M.setup()
         },
       },
     },
-    on_attach = on_attach,
-    capabilities = capabilities,
   })
 
   vim.lsp.config("marksman", {
     cmd = { "marksman", "server" },
     filetypes = { "markdown", "mdx" },
     root_markers = { ".marksman.toml", ".git" },
-    single_file_support = true,
-    on_attach = on_attach,
-    capabilities = capabilities,
   })
 
   vim.lsp.config("gopls", {
     cmd = { "gopls" },
     filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    root_markers = { { "go.work" }, { "go.mod" }, ".git" },
     flags = { allow_incremental_sync = false },
     settings = {
       gopls = {
@@ -205,38 +207,33 @@ function M.setup()
         staticcheck = true,
       },
     },
-    on_attach = on_attach,
-    capabilities = capabilities,
   })
 
   vim.lsp.config("clangd", {
     cmd = { "clangd", "--background-index" },
     filetypes = { "c", "cpp", "objc", "objcpp" },
     root_markers = { "compile_commands.json", "compile_flags.txt", ".git" },
-    on_attach = on_attach,
-    capabilities = capabilities,
   })
 
   vim.lsp.config("pyright", {
     cmd = { "pyright-langserver", "--stdio" },
     filetypes = { "python" },
     root_markers = { "pyproject.toml", "setup.py", "requirements.txt", ".git" },
-    single_file_support = true,
-    on_attach = on_attach,
-    capabilities = capabilities,
   })
 
-  vim.lsp.enable("vtsls")
-  vim.lsp.enable("lua_ls")
-  vim.lsp.enable("biome")
-  vim.lsp.enable("cssls")
-  vim.lsp.enable("tailwindcss")
-  vim.lsp.enable("jsonls")
-  vim.lsp.enable("yamlls")
-  vim.lsp.enable("gopls")
-  vim.lsp.enable("marksman")
-  vim.lsp.enable("clangd")
-  vim.lsp.enable("pyright")
+  vim.lsp.enable({
+    "vtsls",
+    "lua_ls",
+    "biome",
+    "cssls",
+    "tailwindcss",
+    "jsonls",
+    "yamlls",
+    "gopls",
+    "marksman",
+    "clangd",
+    "pyright",
+  })
 end
 
 return M

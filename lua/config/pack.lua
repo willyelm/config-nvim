@@ -23,6 +23,23 @@ local plugins = {
 }
 
 function M.setup()
+  -- Parsers are compiled against nvim-treesitter's queries; after an update the
+  -- old parsers can fail new queries (broken highlights until a restart), so
+  -- rebuild them whenever the plugin changes. Registered before add() so it
+  -- also covers the first install.
+  vim.api.nvim_create_autocmd("PackChanged", {
+    group = vim.api.nvim_create_augroup("willyelm_pack_hooks", { clear = true }),
+    callback = function(ev)
+      local data = ev.data
+      if data.spec.name == "nvim-treesitter" and data.kind == "update" then
+        if not data.active then
+          vim.cmd.packadd("nvim-treesitter")
+        end
+        require("nvim-treesitter").update()
+      end
+    end,
+  })
+
   vim.pack.add(plugins, { load = true, confirm = false })
 
   -- Local dev: load pulse.nvim directly from source
