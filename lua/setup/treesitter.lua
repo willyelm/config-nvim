@@ -48,12 +48,15 @@ function M.setup()
     end,
   })
 
-  -- install() skips parsers that are already present, so this only compiles on
-  -- a fresh checkout; it runs async and does not block startup. Buffers opened
-  -- before their parser finished would otherwise stay unhighlighted until :e.
-  local ok, task = pcall(ts.install, ensure_installed)
-  if ok and task then
-    task:await(vim.schedule_wrap(function()
+  -- Only compile what's missing (fresh checkout / new entry); parsers built
+  -- on a plugin update are handled by the PackChanged hook in config/pack.lua.
+  -- Buffers opened before their parser finished get started once it lands.
+  local installed = ts.get_installed()
+  local missing = vim.tbl_filter(function(lang)
+    return not vim.list_contains(installed, lang)
+  end, ensure_installed)
+  if #missing > 0 then
+    ts.install(missing):await(vim.schedule_wrap(function()
       for _, buf in ipairs(vim.api.nvim_list_bufs()) do
         local ft = vim.bo[buf].filetype
         if vim.api.nvim_buf_is_loaded(buf) and ft ~= "" and not vim.treesitter.highlighter.active[buf] then
