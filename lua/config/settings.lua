@@ -25,7 +25,7 @@ vim.opt.incsearch = true
 vim.opt.backspace = "indent,eol,start"
 vim.opt.selection = "exclusive"
 vim.opt.clipboard = "unnamedplus"
-vim.opt.updatetime = 50
+vim.opt.updatetime = 250
 vim.opt.termguicolors = true
 vim.opt.autoread = true
 vim.opt.autochdir = false
@@ -57,7 +57,9 @@ vim.opt.fillchars = {
   fold = " ",
 }
 
-vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained", "FileChangedShellPost" }, {
+-- Pick up external changes when returning to a buffer or idling in normal mode
+-- (not in insert, where a reload would fight the edit).
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "FocusGained" }, {
   callback = function()
     if vim.fn.mode() ~= "c" then
       vim.cmd("checktime")
