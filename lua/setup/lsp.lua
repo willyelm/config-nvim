@@ -1,5 +1,27 @@
 local M = {}
 
+-- Tailwind only where a project uses it: a tailwind config (v3) or a
+-- package.json that depends on tailwindcss (v4 has no config file).
+-- A bare package.json marker started the server in every JS repo.
+local function tailwind_root(bufnr, on_dir)
+  local root = vim.fs.root(bufnr, {
+    "tailwind.config.js",
+    "tailwind.config.cjs",
+    "tailwind.config.mjs",
+    "tailwind.config.ts",
+  })
+  if root then
+    return on_dir(root)
+  end
+  local path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
+  for _, pkg in ipairs(vim.fs.find("package.json", { path = path, upward = true, limit = math.huge })) do
+    local ok, lines = pcall(vim.fn.readfile, pkg)
+    if ok and table.concat(lines, "\n"):find('"tailwindcss"', 1, true) then
+      return on_dir(vim.fs.dirname(pkg))
+    end
+  end
+end
+
 local function on_attach(client, bufnr)
   local opts = { buffer = bufnr, silent = true }
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
@@ -33,6 +55,11 @@ function M.setup()
   vim.lsp.config("*", {
     capabilities = require("setup.cmp").get_lsp_capabilities(),
   })
+
+  -- Treesitter owns highlighting (the colorscheme has no @lsp.* groups).
+  -- Semantic tokens arrived after attach and on every edit, repainting the
+  -- treesitter colors, so the buffer looked like it loaded twice.
+  vim.lsp.semantic_tokens.enable(false)
 
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("willyelm_lsp_attach", { clear = true }),
@@ -108,9 +135,11 @@ function M.setup()
         diagnostics = {
           globals = { "vim" },
         },
+        -- Just the Neovim runtime + luv types. Indexing every plugin on the
+        -- runtimepath kept lua_ls busy for seconds on each start.
         workspace = {
           checkThirdParty = false,
-          library = vim.api.nvim_get_runtime_file("", true),
+          library = { vim.env.VIMRUNTIME, "${3rd}/luv/library" },
         },
         telemetry = { enable = false },
       },
@@ -146,14 +175,7 @@ function M.setup()
   vim.lsp.config("tailwindcss", {
     cmd = { "tailwindcss-language-server", "--stdio" },
     filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact" },
-    root_markers = {
-      "tailwind.config.js",
-      "tailwind.config.cjs",
-      "tailwind.config.mjs",
-      "tailwind.config.ts",
-      "package.json",
-    },
-    workspace_required = true,
+    root_dir = tailwind_root,
     settings = {
       tailwindCSS = {
         validate = true,
