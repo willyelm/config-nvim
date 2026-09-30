@@ -70,7 +70,6 @@ function M.setup()
         selection = { preselect = false, auto_insert = true },
       },
       menu = {
-        border = "rounded",
         winblend = 15,
         draw = {
           treesitter = { "lsp" },
@@ -88,21 +87,23 @@ function M.setup()
       },
       documentation = {
         auto_show = true,
-        auto_show_delay_ms = 500,
+        auto_show_delay_ms = 200,
         window = {
-          border = "rounded",
           winblend = 15,
         },
       },
     },
     signature = {
       enabled = true,
-      window = { border = "rounded" },
     },
     appearance = {
       nerd_font_variant = "mono",
     },
     snippets = { preset = "default" },
+    fuzzy = {
+      -- A fully typed name ranks first, ahead of looser fuzzy matches.
+      sorts = { "exact", "score", "sort_text" },
+    },
     sources = {
       default = sources,
       providers = {
@@ -110,15 +111,6 @@ function M.setup()
         buffer = {
           min_keyword_length = 4,
           max_items = 5,
-          opts = {
-            get_bufnrs = function()
-              local bufs = {}
-              for _, win in ipairs(vim.api.nvim_list_wins()) do
-                bufs[vim.api.nvim_win_get_buf(win)] = true
-              end
-              return vim.tbl_keys(bufs)
-            end,
-          },
         },
         minuet = {
           name = "FIM",
@@ -153,7 +145,12 @@ function M.setup()
       enabled = true,
       keymap = { preset = "cmdline" },
       completion = {
-        menu = { auto_show = true },
+        -- Only for `:` commands; `/` and `?` searches keep a quiet cmdline.
+        menu = {
+          auto_show = function()
+            return vim.fn.getcmdtype() == ":"
+          end,
+        },
         list = { selection = { preselect = false } },
       },
     },
