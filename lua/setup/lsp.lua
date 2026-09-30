@@ -132,9 +132,6 @@ function M.setup()
     settings = {
       Lua = {
         runtime = { version = "LuaJIT" },
-        diagnostics = {
-          globals = { "vim" },
-        },
         -- Just the Neovim runtime + luv types. Indexing every plugin on the
         -- runtimepath kept lua_ls busy for seconds on each start.
         workspace = {
