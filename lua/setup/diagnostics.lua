@@ -9,7 +9,6 @@ function M.setup()
     update_in_insert = false,
     severity_sort = true,
     float = {
-      border = "rounded",
       source = "if_many",
     },
   })

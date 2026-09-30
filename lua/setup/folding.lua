@@ -49,7 +49,7 @@ function M.setup()
     if vim.fn.foldclosed(".") ~= -1 then
       vim.cmd("normal! zv")
     else
-      vim.lsp.buf.hover({ border = "rounded" })
+      vim.lsp.buf.hover()
     end
   end, { desc = "Open fold / hover" })
 end

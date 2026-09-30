@@ -47,6 +47,9 @@ vim.opt.foldenable = true
 
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
+-- Default border for every float that does not set its own (hover,
+-- diagnostics, completion menus).
+vim.o.winborder = "rounded"
 vim.opt.fillchars = {
   vert = "│",
   horiz = "─",

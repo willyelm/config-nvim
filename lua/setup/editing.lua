@@ -3,7 +3,8 @@ local M = {}
 function M.setup()
   -- `%` matches JSX open/close tags, if/end, etc.; show the match target in a
   -- popup when its opening line is off screen.
-  vim.g.matchup_matchparen_offscreen = { method = "popup" }
+  -- Explicit border: the popup would otherwise pick up 'winborder'.
+  vim.g.matchup_matchparen_offscreen = { method = "popup", border = "none" }
   vim.g.matchup_matchparen_deferred = 1
 
   -- Surround on a `gs` prefix so bare `s` keeps its native "substitute"

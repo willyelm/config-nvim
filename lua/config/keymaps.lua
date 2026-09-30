@@ -20,18 +20,8 @@ vim.keymap.set("n", "<M-Up>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
 vim.keymap.set("v", "<M-Down>", ":m '>+1<cr>gv=gv", { desc = "Move block down" })
 vim.keymap.set("v", "<M-Up>", ":m '<-2<cr>gv=gv", { desc = "Move block up" })
 
--- Hovers
-vim.keymap.set("n", "K", function()
-  vim.lsp.buf.hover({
-    border = "rounded",
-    wrap = true,
-    max_width = 60,
-  })
-end, {
-  noremap = true,
-  desc = "Hover Documentation",
-  silent = true,
-})
+-- Hover: native `K` (LSP hover where a server is attached, keywordprg
+-- elsewhere); its border comes from 'winborder'.
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, {
   desc = "Show line diagnostics",
   silent = true,
