@@ -23,7 +23,9 @@ end
 local function setup_prompts()
   vim.ui.input = function(opts, on_confirm)
     opts = opts or {}
-    local prompt = (opts.prompt or "Input") .. ": "
+    -- Callers usually end their prompt with ": " already (LSP rename passes
+    -- "New Name: "); normalize so the colon is never doubled.
+    local prompt = (opts.prompt or "Input"):gsub("[:%s]+$", "") .. ": "
 
     local buf = vim.api.nvim_create_buf(false, true)
     vim.bo[buf].buftype = "prompt"
