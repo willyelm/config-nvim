@@ -36,8 +36,10 @@ vim.opt.mouse = "a"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- Folding (native treesitter/LSP foldexpr; see lua/setup/folding.lua)
-vim.opt.foldcolumn = "auto:3"
-vim.opt.signcolumn = "auto:1"
+-- Fixed widths: "auto" columns appeared/grew as signs and folds loaded,
+-- shifting the text sideways right after a file opened.
+vim.opt.foldcolumn = "1"
+vim.opt.signcolumn = "yes"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldnestmax = 20
