@@ -206,7 +206,6 @@ function M.setup()
         format = { enable = true },
         schemaStore = {
           enable = true,
-          url = "",
         },
       },
     },
