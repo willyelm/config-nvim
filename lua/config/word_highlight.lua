@@ -29,7 +29,7 @@ local function update_word_highlight()
   vim.w.word_highlight_match = vim.fn.matchadd("WordHighlight", [[\V\<]] .. vim.fn.escape(word, [[\]]) .. [[\>]])
 end
 
-vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "BufEnter", "WinEnter" }, {
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "BufEnter", "WinEnter" }, {
   group = word_highlight_group,
   callback = update_word_highlight,
 })
