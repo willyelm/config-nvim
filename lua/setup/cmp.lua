@@ -8,32 +8,37 @@ function M.get_lsp_capabilities()
 end
 
 function M.setup()
-  require("minuet").setup({
-    provider = "openai_fim_compatible",
-    n_completions = 1,
-    context_window = 512,
-    throttle = 1000,
-    debounce = 400,
-    -- Both default to 0 for this provider, which disables minuet's own
-    -- dedup filter -- lets the model re-echo code already before/after
-    -- the cursor as part of the completion.
-    after_cursor_filter_length = 15,
-    before_cursor_filter_length = 15,
-    provider_options = {
-      openai_fim_compatible = {
-        api_key = "TERM",
-        name = "Ollama",
-        end_point = "http://localhost:11434/v1/completions",
-        model = "qwen2.5-coder:7b",
-        optional = {
-          max_tokens = 56,
-          top_p = 0.9,
+  -- minuet is only loaded (and only a completion source) when enabled.
+  if AI_COMPLETION_ENABLED then
+    require("minuet").setup({
+      provider = "openai_fim_compatible",
+      n_completions = 1,
+      context_window = 512,
+      throttle = 1000,
+      debounce = 400,
+      -- Both default to 0 for this provider, which disables minuet's own
+      -- dedup filter -- lets the model re-echo code already before/after
+      -- the cursor as part of the completion.
+      after_cursor_filter_length = 15,
+      before_cursor_filter_length = 15,
+      provider_options = {
+        openai_fim_compatible = {
+          api_key = "TERM",
+          name = "Ollama",
+          end_point = "http://localhost:11434/v1/completions",
+          model = "qwen2.5-coder:7b",
+          optional = {
+            max_tokens = 56,
+            top_p = 0.9,
+          },
         },
       },
-    },
-  })
-  if not AI_COMPLETION_ENABLED then
-    vim.cmd("Minuet blink disable")
+    })
+  end
+
+  local sources = { "lsp", "snippets", "path", "buffer" }
+  if AI_COMPLETION_ENABLED then
+    table.insert(sources, "minuet")
   end
 
   local blink = require("blink.cmp")
@@ -99,7 +104,7 @@ function M.setup()
     },
     snippets = { preset = "default" },
     sources = {
-      default = { "lsp", "snippets", "path", "buffer", "minuet" },
+      default = sources,
       providers = {
         lsp = { max_items = 20 },
         buffer = {
