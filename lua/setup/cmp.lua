@@ -107,7 +107,23 @@ function M.setup()
     sources = {
       default = sources,
       providers = {
-        lsp = { max_items = 20 },
+        lsp = {
+          max_items = 20,
+          -- cssls and css_variables both offer the current file's custom
+          -- properties; keep one entry per `--name` (css_variables', which
+          -- knows the whole repo).
+          transform_items = function(_, items)
+            local workspace = {}
+            for _, item in ipairs(items) do
+              if item.client_name == "css_variables" then
+                workspace[item.label] = true
+              end
+            end
+            return vim.tbl_filter(function(item)
+              return item.client_name ~= "cssls" or not workspace[item.label]
+            end, items)
+          end,
+        },
         buffer = {
           min_keyword_length = 4,
           max_items = 5,
