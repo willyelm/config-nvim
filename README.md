@@ -49,7 +49,7 @@ brew install gopls lua-language-server marksman clangd pyright stylua \
 # Web (as needed)
 npm install -g @vtsls/language-server vscode-langservers-extracted \
   yaml-language-server @tailwindcss/language-server @biomejs/biome \
-  prettier @fsouza/prettierd
+  css-variables-language-server prettier @fsouza/prettierd
 
 # Go formatter
 go install golang.org/x/tools/cmd/goimports@latest
