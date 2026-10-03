@@ -18,7 +18,7 @@ function M.setup()
       follow_files = true,
     },
   })
-
+  -- keymaps
   vim.keymap.set("n", "<leader>gd", "<cmd>Gitsigns diffthis<cr>", { desc = "Diff File" })
   vim.keymap.set("n", "<leader>gr", "<cmd>Gitsigns reset_buffer<cr>", { desc = "Reset File" })
 end
