@@ -11,11 +11,9 @@ treesitter, folding, completion, formatting and git integration.
 - Node.js >= 18 and a C compiler (`cc`/`gcc`) for treesitter parsers
 - [`tree-sitter` CLI](https://github.com/tree-sitter/tree-sitter)
 - A Nerd Font (for completion / statusline / breadcrumb icons)
-- [`ast-grep`](https://ast-grep.github.io) (optional, structural search for
-  `grug-far`)
 
 ```bash
-brew install neovim git ripgrep node ast-grep
+brew install neovim git ripgrep node
 npm install -g tree-sitter-cli
 brew install --cask font-hack-nerd-font   # or any other Nerd Font
 ```
@@ -106,7 +104,7 @@ For anything else:
 | Editing     | `mini.surround`, `vim-matchup`, `nvim-autopairs`, `nvim-ts-autotag`                                                                              |
 | Diagnostics | native `vim.diagnostic` virtual lines (current line only)                                                                                       |
 | Git         | `gitsigns`, `pulse.nvim` (history / status)                                                                                                     |
-| Search      | `pulse.nvim` (files / grep / buffers), `grug-far` (search & replace)                                                                            |
+| Search      | `pulse.nvim` (files / grep / buffers / search & replace)                                                                                        |
 | UI          | `lualine`, `dropbar` (breadcrumbs), `nvim-colorizer`, `which-key`, custom `willyelm` colorscheme                                                |
 
 ## Keymaps
@@ -121,7 +119,6 @@ Leader is `<Space>`.
 | `<leader>f`     | Fuzzy search in buffer      |
 | `<leader>l`     | Live grep                   |
 | `<leader>b`     | Open buffers                |
-| `<leader>sr`    | Search & replace (grug-far) |
 | `<leader><Tab>` | Next window                 |
 
 ### LSP (buffer-local)
