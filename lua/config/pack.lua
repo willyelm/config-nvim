@@ -8,7 +8,6 @@ local plugins = {
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
   { src = "https://github.com/windwp/nvim-autopairs" },
   { src = "https://github.com/windwp/nvim-ts-autotag" },
-  { src = "https://github.com/MagicDuck/grug-far.nvim" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
   { src = "https://github.com/echasnovski/mini.surround" },
