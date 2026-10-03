@@ -1,12 +1,6 @@
 local M = {}
 
 function M.setup()
-  -- `%` matches JSX open/close tags, if/end, etc.; show the match target in a
-  -- popup when its opening line is off screen.
-  -- Explicit border: the popup would otherwise pick up 'winborder'.
-  vim.g.matchup_matchparen_offscreen = { method = "popup", border = "none" }
-  vim.g.matchup_matchparen_deferred = 1
-
   -- Surround on a `gs` prefix so bare `s` keeps its native "substitute"
   -- meaning (mini.surround maps `s` to <Nop> if its mappings start with `s`).
   -- gsa add (takes a motion / visual), gsd delete, gsr replace, gsf/gsF find.

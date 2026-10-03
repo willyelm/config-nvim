@@ -101,7 +101,7 @@ For anything else:
 | Completion  | `blink.cmp`, `minuet-ai.nvim` (see [AI completion](#ai-completion))                                                                              |
 | Treesitter  | `nvim-treesitter` (main), `-textobjects`, `-context`                                                                                             |
 | Folding     | native `vim.treesitter.foldexpr()`, upgraded to `vim.lsp.foldexpr()` per-buffer when the server supports folding ranges; folds persist per file |
-| Editing     | `mini.surround`, `vim-matchup`, `nvim-autopairs`, `nvim-ts-autotag`                                                                              |
+| Editing     | `mini.surround`, `nvim-autopairs`, `nvim-ts-autotag`                                                                                             |
 | Diagnostics | native `vim.diagnostic` virtual lines (current line only)                                                                                       |
 | Git         | `gitsigns`, `pulse.nvim` (history / status)                                                                                                     |
 | Search      | `pulse.nvim` (files / grep / buffers / search & replace)                                                                                        |
@@ -142,7 +142,7 @@ Leader is `<Space>`.
 | `]f` / `[f`, `]a` / `[a`                          | Jump to next / prev function, parameter                       |
 | `<leader>rp` / `<leader>rP`                       | Swap parameter with next / prev                               |
 | `gsa` / `gsd` / `gsr`                             | Add / delete / replace surround (`gsat` for JSX tags)         |
-| `%`                                               | Jump between matching tags / keywords                         |
+| `%`                                               | Jump between matching pairs (native matchit)                  |
 | `<M-Up>` / `<M-Down>`                             | Move line or block                                            |
 | `<leader>.` / `<leader>,`                         | Indent / dedent selection                                     |
 

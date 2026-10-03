@@ -64,10 +64,6 @@
       "rev": "102b2ca81edb465050e98cbea18af932b8f17fa9",
       "src": "https://github.com/willyelm/pulse.nvim"
     },
-    "vim-matchup": {
-      "rev": "0106b1afd4a2f7e1098037b5ceb161bab7471088",
-      "src": "https://github.com/andymass/vim-matchup"
-    },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "https://github.com/folke/which-key.nvim"
