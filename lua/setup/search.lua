@@ -1,8 +1,6 @@
 local M = {}
 
 function M.setup()
-  require("grug-far").setup({ headerMaxWidth = 80 })
-
   require("pulse").setup({
     position = "top",
     height = 0.8,
@@ -37,14 +35,10 @@ function M.setup()
     },
   })
   wk.add({
-    { "<leader>s", group = "Search & Replace" },
     { "<leader>g", group = "Git" },
     { "<leader>r", group = "Refactor" },
   })
 
-  vim.keymap.set("n", "<leader>sr", function()
-    require("grug-far").open()
-  end, { desc = "Search & Replace" })
   vim.keymap.set("n", "<C-k>", "<cmd>Pulse<cr>", { desc = "Pulse" })
   vim.keymap.set("n", "<leader>p", "<cmd>Pulse<cr>", { desc = "Pulse" })
   vim.keymap.set("n", "<leader>a", "<cmd>Pulse code_action<cr>", { desc = "Code Actions" })
