@@ -72,17 +72,6 @@ function M.setup()
     line_numbers = true,
     multiline_threshold = 1,
   })
-
-  -- `main` nvim-ts-autotag keys off the treesitter parser, so the old
-  -- top-level `filetypes` list is ignored; the default set already covers
-  -- html / xml / (t|j)sx.
-  require("nvim-ts-autotag").setup({
-    opts = {
-      enable_rename = true,
-      enable_close = true,
-      enable_close_on_slash = true,
-    },
-  })
 end
 
 return M

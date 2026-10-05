@@ -172,8 +172,6 @@ function M.setup()
     },
     term = { enabled = false },
   })
-
-  require("nvim-autopairs").setup({})
 end
 
 return M
