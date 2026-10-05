@@ -38,6 +38,8 @@ hi("CursorLineNr", { bg = color.bg_active })
 hi("Visual", { fg = color.fg_inverse, bg = color.bg_visual })
 hi("Search", { fg = color.fg_inverse, bg = color.bg_search })
 hi("WordHighlight", { bg = color.bg_active })
+-- Matching bracket (native matchparen) and matching tag name (clasp).
+hi("MatchParen", { bg = color.bg_match, bold = true })
 hi("Folded", { fg = color.fg_muted, bg = color.bg_action })
 hi("UfoFoldedEllipsis", { fg = color.fg_muted, italic = true })
 hi("VertSplit", { fg = color.divider, bg = color.bg_main })
