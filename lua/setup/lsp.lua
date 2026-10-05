@@ -61,6 +61,10 @@ function M.setup()
   -- treesitter colors, so the buffer looked like it loaded twice.
   vim.lsp.semantic_tokens.enable(false)
 
+  -- Typing in an open or close tag renames its pair (vtsls for JSX/TSX, html
+  -- for HTML); applies to every server that advertises linkedEditingRange.
+  vim.lsp.linked_editing_range.enable(true)
+
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("willyelm_lsp_attach", { clear = true }),
     callback = function(args)
@@ -74,11 +78,11 @@ function M.setup()
   vim.lsp.config("vtsls", {
     cmd = { "vtsls", "--stdio" },
     -- Force full-document sync instead of incremental: nvim-ts-autotag and
-    -- autopairs fire several small edits per keystroke on JSX tags, which is
-    -- a known trigger for incremental-sync desync between the buffer and
-    -- tsserver's copy — that desync shows up as bogus "parsing" diagnostics
-    -- that only clear on a full restart. Full sync resends the whole buffer
-    -- each time, so there's nothing to desync.
+    -- autopairs fired several small edits per keystroke on JSX tags, a known
+    -- trigger for incremental-sync desync between the buffer and tsserver's
+    -- copy — bogus "parsing" diagnostics that only cleared on a restart.
+    -- clasp makes one edit per keystroke, so incremental sync may be safe
+    -- again; full sync resends the whole buffer, so there's nothing to desync.
     flags = { allow_incremental_sync = false },
     init_options = {
       hostInfo = "neovim",
@@ -155,6 +159,15 @@ function M.setup()
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
     end,
+  })
+
+  -- Formatting stays with conform (prettier); html only provides completion,
+  -- hover and linked tag editing.
+  vim.lsp.config("html", {
+    cmd = { "vscode-html-language-server", "--stdio" },
+    filetypes = { "html" },
+    root_markers = { "package.json", ".git" },
+    init_options = { provideFormatter = false },
   })
 
   vim.lsp.config("cssls", {
@@ -276,6 +289,7 @@ function M.setup()
     "vtsls",
     "lua_ls",
     "biome",
+    "html",
     "cssls",
     "css_variables",
     "tailwindcss",
