@@ -184,4 +184,8 @@ find ~/.local/share/nvim/site/pack/ -name "index.lock" -delete
 
 ```
 :lua vim.pack.update()
+:TSUpdate
 ```
+
+Run `:TSUpdate` after any update that touches nvim-treesitter: its queries only
+work with matching parser versions, and nothing rebuilds them automatically.
