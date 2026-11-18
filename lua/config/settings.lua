@@ -55,17 +55,8 @@ vim.opt.fillchars = {
   fold = " ",
 }
 
--- Pick up external changes when returning to a buffer or idling in normal mode
--- (not in insert, where a reload would fight the edit).
-vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "FocusGained" }, {
-  group = vim.api.nvim_create_augroup("willyelm_checktime", { clear = true }),
-  callback = function()
-    if vim.fn.mode() ~= "c" then
-      vim.cmd("checktime")
-    end
-  end,
-  pattern = { "*" },
-})
+vim.opt.autoread = true
+-- External changes reload instantly: see config/autoreload.lua.
 
 vim.filetype.add({
   extension = {
