@@ -125,10 +125,12 @@ Leader is `<Space>`.
 
 | Key                                 | Action                                                        |
 | ----------------------------------- | ------------------------------------------------------------- |
-| `gd` / `gD` / `gi` / `go` / `gr`    | Definition / declaration / implementation / type / references |
+| `gd` / `gD`                         | Definition / declaration                                      |
+| `gri` / `grt` / `grr`               | Implementation / type definition / references (native)        |
 | `K`                                 | Hover docs · `<leader>K` open fold, else hover                |
-| `<leader>ra` / `<F4>` / `<leader>a` | Code actions (native / native / Pulse)                        |
-| `<leader>rs` / `<F2>`               | Rename symbol                                                 |
+| `gra` / `<leader>a`                 | Code actions (native / Pulse)                                 |
+| `grn`                               | Rename symbol (native)                                        |
+| `gO`                                | Document symbols (native)                                     |
 | `<F3>`                              | Format buffer                                                 |
 | `gl`                                | Line diagnostics float                                        |
 | `]d` / `[d`                         | Next / prev diagnostic                                        |
