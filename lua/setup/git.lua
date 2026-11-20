@@ -19,7 +19,10 @@ function M.setup()
     },
   })
   -- keymaps
-  vim.keymap.set("n", "<leader>gd", "<cmd>Gitsigns diffthis<cr>", { desc = "Diff File" })
+  vim.keymap.set("n", "<leader>gd", function()
+    require("setup.review_diff").open()
+  end, { desc = "Diff File" })
+  vim.keymap.set("n", "<leader>gD", "<cmd>Gitsigns diffthis<cr>", { desc = "Diff File (split)" })
   vim.keymap.set("n", "<leader>gr", "<cmd>Gitsigns reset_buffer<cr>", { desc = "Reset File" })
 end
 
