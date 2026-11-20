@@ -3,7 +3,7 @@ local M = {}
 -- Only real files get a saved view (folds + cursor).
 local function has_view(buf)
   local name = vim.api.nvim_buf_get_name(buf)
-  return vim.bo[buf].buftype == "" and vim.bo[buf].filetype ~= "" and vim.fn.filereadable(name) == 1
+  return vim.bo[buf].buftype == "" and not vim.list_contains({ "", "bigfile" }, vim.bo[buf].filetype) and vim.fn.filereadable(name) == 1
 end
 
 function M.setup()

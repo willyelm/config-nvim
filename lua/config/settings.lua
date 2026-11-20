@@ -58,11 +58,31 @@ vim.opt.fillchars = {
 vim.opt.autoread = true
 -- External changes reload instantly: see config/autoreload.lua.
 
+-- Files over 1 MB (minified bundles, generated JSON) get filetype "bigfile":
+-- no treesitter, no LSP and no fold expression, which is where they freeze.
+local BIGFILE = 1024 * 1024
 vim.filetype.add({
+  pattern = {
+    [".*"] = {
+      function(path, buf)
+        return buf and vim.bo[buf].buftype == "" and vim.fn.getfsize(path) > BIGFILE and "bigfile" or nil
+      end,
+      { priority = math.huge },
+    },
+  },
   extension = {
     mdx = "mdx",
     gotmpl = "gotmpl",
   },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("willyelm_bigfile", { clear = true }),
+  pattern = "bigfile",
+  callback = function()
+    vim.wo.foldmethod = "manual"
+    vim.wo.foldenable = false
+  end,
 })
 
 vim.cmd("colorscheme willyelm")
