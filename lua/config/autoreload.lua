@@ -115,6 +115,26 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
   end,
 })
 
+-- Never stop on the "File changed / [O]K, (L)oad" prompt. A clean buffer
+-- takes the disk version (still undoable with `u`, see 'undoreload'); a
+-- buffer with unsaved edits keeps them and says how to take the disk version.
+vim.api.nvim_create_autocmd("FileChangedShell", {
+  group = group,
+  callback = function(args)
+    local name = vim.fn.fnamemodify(args.file, ":~:.")
+    local reason = vim.v.fcs_reason
+    if reason == "deleted" then
+      vim.v.fcs_choice = ""
+      vim.notify(name .. " was deleted on disk", vim.log.levels.WARN)
+    elseif vim.bo[args.buf].modified then
+      vim.v.fcs_choice = ""
+      vim.notify(name .. " changed on disk; kept your unsaved edits (:e! to load disk)", vim.log.levels.WARN)
+    else
+      vim.v.fcs_choice = "reload"
+    end
+  end,
+})
+
 -- Make the reload visible instead of silent.
 vim.api.nvim_create_autocmd("FileChangedShellPost", {
   group = group,
