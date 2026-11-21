@@ -1,5 +1,3 @@
-local M = {}
-
 -- Native LSP keys cover the rest (0.12): K hover, grn rename, gra code
 -- action, grr references, gri implementation, grt type definition, gO symbols.
 local function on_attach(client, bufnr)
@@ -52,49 +50,45 @@ local function on_crash(code, signal, client_id)
   end, 500)
 end
 
-function M.setup()
-  -- Shared by every server. Neovim merges these over its own defaults, which
-  -- already advertise foldingRange, willSave/didSave and watched files.
-  vim.lsp.config("*", {
-    capabilities = require("setup.cmp").get_lsp_capabilities(),
-    on_exit = on_crash,
-  })
+-- Shared by every server. Neovim merges these over its own defaults, which
+-- already advertise foldingRange, willSave/didSave and watched files.
+vim.lsp.config("*", {
+  capabilities = require("blink.cmp").get_lsp_capabilities(),
+  on_exit = on_crash,
+})
 
-  -- Treesitter owns highlighting (the colorscheme has no @lsp.* groups).
-  -- Semantic tokens arrived after attach and on every edit, repainting the
-  -- treesitter colors, so the buffer looked like it loaded twice.
-  vim.lsp.semantic_tokens.enable(false)
+-- Treesitter owns highlighting (the colorscheme has no @lsp.* groups).
+-- Semantic tokens arrived after attach and on every edit, repainting the
+-- treesitter colors, so the buffer looked like it loaded twice.
+vim.lsp.semantic_tokens.enable(false)
 
-  -- Typing in an open or close tag renames its pair (vtsls for JSX/TSX, html
-  -- for HTML); applies to every server that advertises linkedEditingRange.
-  vim.lsp.linked_editing_range.enable(true)
+-- Typing in an open or close tag renames its pair (vtsls for JSX/TSX, html
+-- for HTML); applies to every server that advertises linkedEditingRange.
+vim.lsp.linked_editing_range.enable(true)
 
-  vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("willyelm_lsp_attach", { clear = true }),
-    callback = function(args)
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if client then
-        on_attach(client, args.buf)
-      end
-    end,
-  })
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("willyelm_lsp_attach", { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client then
+      on_attach(client, args.buf)
+    end
+  end,
+})
 
-  -- Server configs live in lsp/<name>.lua (picked up from the runtimepath).
-  vim.lsp.enable({
-    "vtsls",
-    "lua_ls",
-    "biome",
-    "html",
-    "cssls",
-    "css_variables",
-    "tailwindcss",
-    "jsonls",
-    "yamlls",
-    "gopls",
-    "marksman",
-    "clangd",
-    "pyright",
-  })
-end
-
-return M
+-- Server configs live in lsp/<name>.lua (picked up from the runtimepath).
+vim.lsp.enable({
+  "vtsls",
+  "lua_ls",
+  "biome",
+  "html",
+  "cssls",
+  "css_variables",
+  "tailwindcss",
+  "jsonls",
+  "yamlls",
+  "gopls",
+  "marksman",
+  "clangd",
+  "pyright",
+})

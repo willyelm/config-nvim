@@ -1,6 +1,3 @@
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 vim.opt.nu = true
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
@@ -30,7 +27,7 @@ vim.opt.guicursor = "n-v-ve:block,i-ci:ver10-Cursor"
 vim.opt.mouse = "a"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
--- Folding (native treesitter foldexpr; see lua/setup/folding.lua)
+-- Folding (native treesitter foldexpr; see plugin/folding.lua)
 -- Fixed widths: "auto" columns appeared/grew as signs and folds loaded,
 -- shifting the text sideways right after a file opened.
 vim.opt.foldcolumn = "1"
@@ -56,7 +53,7 @@ vim.opt.fillchars = {
 }
 
 vim.opt.autoread = true
--- External changes reload instantly: see config/autoreload.lua.
+-- External changes reload instantly: see plugin/autoreload.lua.
 
 -- Files over 1 MB (minified bundles, generated JSON) get filetype "bigfile":
 -- no treesitter, no LSP and no fold expression, which is where they freeze.

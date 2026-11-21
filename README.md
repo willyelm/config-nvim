@@ -66,7 +66,7 @@ Debian/Ubuntu.
 ## AI Completion
 
 Off by default. Set `AI_COMPLETION_ENABLED = true` at the top of
-`lua/setup/cmp.lua` to turn it on. `minuet-ai.nvim` feeds an
+`plugin/cmp.lua` to turn it on. `minuet-ai.nvim` feeds an
 `openai_fim_compatible` source into `blink.cmp`. works with any
 OpenAI-`/v1/completions`-compatible server (Ollama, llama.cpp, vLLM, LM Studio,
 hosted). Requires a running server; nothing else in this config depends on it.
@@ -87,7 +87,7 @@ Multiple `provider_options` entries can coexist; switch at runtime with
 
 ## Treesitter
 
-Parsers install automatically for the languages in `lua/setup/treesitter.lua`.
+Parsers install automatically for the languages in `plugin/treesitter.lua`.
 For anything else:
 
 ```

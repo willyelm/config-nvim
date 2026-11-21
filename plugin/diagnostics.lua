@@ -1,0 +1,11 @@
+vim.diagnostic.config({
+  virtual_text = false,
+  virtual_lines = { current_line = true },
+  underline = true,
+  signs = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    source = "if_many",
+  },
+})
