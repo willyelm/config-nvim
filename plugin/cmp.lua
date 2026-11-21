@@ -36,20 +36,6 @@ end
 
 local blink = require("blink.cmp")
 
--- Compiles blink.cmp's fuzzy matcher on first install / after updates.
-if not blink.library_available() then
-  vim.notify("blink.cmp: building native fuzzy matcher (one-time)…", vim.log.levels.INFO)
-  local ok, err = pcall(function()
-    blink.build():wait(120000)
-  end)
-  if not ok then
-    vim.notify(
-      "blink.cmp: native build failed, falling back to Lua matcher (" .. tostring(err) .. ")",
-      vim.log.levels.WARN
-    )
-  end
-end
-
 blink.setup({
   keymap = {
     preset = "default",
@@ -94,6 +80,9 @@ blink.setup({
   },
   snippets = { preset = "default" },
   fuzzy = {
+    -- Rust matcher when built (see the PackChanged hook in init.lua), the Lua
+    -- one meanwhile; never blocks startup or warns.
+    implementation = "prefer_rust",
     -- A fully typed name ranks first, ahead of looser fuzzy matches.
     sorts = { "exact", "score", "sort_text" },
   },
