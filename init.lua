@@ -24,11 +24,12 @@ local plugins = {
   { src = "https://github.com/catgoose/nvim-colorizer.lua" },
 }
 
-vim.pack.add(plugins, { load = true, confirm = false })
-
--- Local dev: load plugins directly from source
+-- Local dev: load plugins directly from source. Must come before vim.pack.add,
+-- or vim.loader resolves the installed copy instead.
 -- vim.opt.rtp:prepend("/Users/willyelm/Git/pulse.nvim")
 -- vim.opt.rtp:prepend("/Users/willyelm/Git/clasp.nvim")
+
+vim.pack.add(plugins, { load = true, confirm = false })
 
 -- Everything else lives in plugin/*.lua, sourced automatically after this
 -- file (alphabetically); lsp/*.lua holds the language server configs.
