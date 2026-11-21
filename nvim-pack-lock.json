@@ -1,12 +1,9 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "3d3631f641e6e9b60066f269f435d23c524ceeb0",
-      "src": "https://github.com/Saghen/blink.cmp"
-    },
-    "blink.lib": {
-      "rev": "fd9a48ebbe6ec30d5dfcc5b42c243941ccdca1aa",
-      "src": "https://github.com/Saghen/blink.lib"
+      "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
+      "src": "https://github.com/Saghen/blink.cmp",
+      "version": "1.0.0 - 2.0.0"
     },
     "clasp": {
       "rev": "71fed6b683ef9a882edf569e44edfe53c2c6e953",

@@ -80,9 +80,6 @@ blink.setup({
   },
   snippets = { preset = "default" },
   fuzzy = {
-    -- Rust matcher when built (see the PackChanged hook in init.lua), the Lua
-    -- one meanwhile; never blocks startup or warns.
-    implementation = "prefer_rust",
     -- A fully typed name ranks first, ahead of looser fuzzy matches.
     sorts = { "exact", "score", "sort_text" },
   },
