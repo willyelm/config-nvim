@@ -161,8 +161,6 @@ Leader is `<Space>`.
 
 | Key                         | Action                 |
 | --------------------------- | ---------------------- |
-| `<leader>gd`                | Diff current file      |
-| `<leader>gr`                | Reset file             |
 | `<leader>gs`                | Git status (Pulse)     |
 | `<leader>gh` / `<leader>gp` | File / project history |
 
