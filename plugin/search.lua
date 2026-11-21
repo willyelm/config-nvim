@@ -42,6 +42,7 @@ vim.keymap.set("n", "<leader>a", "<cmd>Pulse code_action<cr>", { desc = "Code Ac
 vim.keymap.set("n", "<leader>b", "<cmd>Pulse buffers<cr>", { desc = "Open Buffers" })
 vim.keymap.set("n", "<leader>l", "<cmd>Pulse live_grep<cr>", { desc = "Live Grep" })
 vim.keymap.set("n", "<leader>f", "<cmd>Pulse fuzzy_search<cr>", { desc = "Fuzzy Search" })
+vim.keymap.set("n", "<leader>gd", "<cmd>Pulse git_review<cr>", { desc = "Review Diff" })
 vim.keymap.set("n", "<leader>gs", "<cmd>Pulse git_status<cr>", { desc = "Status" })
 vim.keymap.set("n", "<leader>gp", "<cmd>Pulse git_project_history<cr>", { desc = "Project History" })
 vim.keymap.set("n", "<leader>gh", "<cmd>Pulse git_file_history<cr>", { desc = "File History" })
