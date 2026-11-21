@@ -1,7 +1,7 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "8219b58f1c11a2fb1644d3c7116c509fa8348ec0",
+      "rev": "3d3631f641e6e9b60066f269f435d23c524ceeb0",
       "src": "https://github.com/Saghen/blink.cmp"
     },
     "blink.lib": {
@@ -17,11 +17,11 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "dropbar": {
-      "rev": "f7c6fa21e2a7c32576e7a1791774a3736987f467",
+      "rev": "75df03973f3a06a85300bc8ca1f9f68e935cb78e",
       "src": "https://github.com/Bekaboo/dropbar.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "070a5d7b985546cc57e1fc61e5bc507fecac6045",
+      "rev": "c0862d382a35b7b45757d8d151a6a634c09bf3ce",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "lualine.nvim": {
@@ -29,7 +29,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "minuet-ai.nvim": {
-      "rev": "3b0a4c5f97b7124d94302c608fbe01c0270d4fbe",
+      "rev": "50bf63b031c0391e926fdf0b3d044d37846e6e34",
       "src": "https://github.com/milanglacier/minuet-ai.nvim"
     },
     "nvim-colorizer.lua": {
@@ -37,11 +37,11 @@
       "src": "https://github.com/catgoose/nvim-colorizer.lua"
     },
     "nvim-treesitter": {
-      "rev": "728e031f6b11d03d1f0708b7dc4fb0f1d9c8a137",
+      "rev": "37e52c733ada9d8d544d53a763140ef1ba404353",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
-      "rev": "f3061339b8eaf9fda873600bc425b8d2d8502533",
+      "rev": "8decd73460d26ef0a0befb745d022dd1fc2c38b8",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
@@ -49,11 +49,11 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-web-devicons": {
-      "rev": "58447c1fca354bbf184425e4a8d01deecbd6f3c4",
+      "rev": "0dc0cfb0c6858041174a53c7aa4adaf65e994b3c",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "pulse.nvim": {
-      "rev": "102b2ca81edb465050e98cbea18af932b8f17fa9",
+      "rev": "77f2414fd2279e3f6cc300f86bc8d0a718a52472",
       "src": "https://github.com/willyelm/pulse.nvim"
     },
     "which-key.nvim": {
